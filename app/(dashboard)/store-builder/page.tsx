@@ -128,12 +128,12 @@ export default function StoreBuilderPage() {
             } else if (msg.type === "error") {
               throw new Error(msg.message);
             }
-          } catch (parseErr) {
+          } catch {
             // skip non-JSON lines
           }
         }
       }
-    } catch (err) {
+    } catch {
       setError("Generation failed. Please try again.");
       toast.error("Store generation failed. Please try again.");
       setStep(2);

@@ -66,7 +66,7 @@ export default function KeywordResearchPage() {
   function toggleSave(kw: string) {
     setSavedKws((prev) => {
       const next = new Set(prev);
-      next.has(kw) ? next.delete(kw) : next.add(kw);
+      if (next.has(kw)) { next.delete(kw); } else { next.add(kw); }
       return next;
     });
   }
