@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --bg: #0c0c0e;
+    --surface: #15151a;
+    --surface2: #1d1d24;
+    --surface3: #1f1f26;
+    --border-color: #2a2a33;
+    --accent: #a07840;
+    --accent-hover: #8a6530;
+    --accent-light: #c49a5a;
+    --accent-glow: rgba(160, 120, 64, 0.12);
+    --secondary: #8b8da0;
+    --green: #5eb89a;
+    --red: #d4685f;
+    --yellow: #d4b572;
+    --text: #f5f3ee;
+    --muted: #8a8a94;
+    --disabled-bg: #3a3a42;
+    --disabled-text: #5c5c64;
+    --focus-ring: rgba(160, 120, 64, 0.38);
+    --error-bg: rgba(212, 104, 95, 0.10);
+    --success-bg: rgba(94, 184, 154, 0.10);
+
+    /* shadcn/ui CSS variables */
+    --background: 240 5% 6%;
+    --foreground: 40 14% 95%;
+    --card: 240 6% 9%;
+    --card-foreground: 40 14% 95%;
+    --popover: 240 6% 10%;
+    --popover-foreground: 40 14% 95%;
+    --primary: 33 36% 44%;
+    --primary-foreground: 40 14% 95%;
+    --secondary: 240 6% 12%;
+    --secondary-foreground: 40 14% 60%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 2% 58%;
+    --accent: 33 36% 44%;
+    --accent-foreground: 40 14% 95%;
+    --destructive: 3 60% 60%;
+    --destructive-foreground: 40 14% 95%;
+    --border: 240 5% 17%;
+    --input: 240 6% 12%;
+    --ring: 33 36% 44%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #0c0c0e;
+    color: #f5f3ee;
+  }
+
+  body {
+    background-color: #0c0c0e;
+    color: #f5f3ee;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #15151a; }
+  ::-webkit-scrollbar-thumb { background: #2a2a33; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #8b8da0; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}
