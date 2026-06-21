@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Copy, ArrowRight, Check } from "lucide-react";
 import { TRENDING_ADS } from "@/lib/mock-data";
@@ -14,14 +14,44 @@ const PLATFORM_COLORS: Record<string, string> = {
   TikTok: "#5eb89a", Facebook: "#4a7fc1", Instagram: "#c49a5a",
   YouTube: "#d4685f", Google: "#8b8da0",
 };
+const NICHE_EMOJI: Record<string, string> = {
+  Beauty: "🧴", Pets: "🦮", "Home & Garden": "💡", Sports: "🏋️", Fashion: "🎒",
+  "Health & Wellness": "🧍", Automotive: "🚗", Kids: "🌟", "Food & Beverage": "☕", Electronics: "🎧",
+};
+
+interface AdRow { id: string; emoji: string; product: string; platform: string; hook: string; engagement: number; days: number; est_spend: number }
+
+const daysAgo = (iso: string) => Math.max(1, Math.round((Date.now() - new Date(iso).getTime()) / 86_400_000));
 
 export function TrendingAdsWidget() {
   const [platform, setPlatform] = useState<Platform>("All");
   const [copied, setCopied] = useState<string | null>(null);
+  const [ads, setAds] = useState<AdRow[]>(TRENDING_ADS as AdRow[]);
 
-  const ads = platform === "All"
-    ? TRENDING_ADS
-    : TRENDING_ADS.filter((a) => a.platform === platform);
+  useEffect(() => {
+    let active = true;
+    const params = new URLSearchParams();
+    if (platform !== "All") params.set("platform", platform);
+    fetch(`/api/ads?${params.toString()}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (!active || !Array.isArray(data.ads)) return;
+        setAds(
+          data.ads.slice(0, 6).map((a: Record<string, unknown>) => ({
+            id: String(a.ad_id),
+            emoji: NICHE_EMOJI[String(a.niche)] ?? "🛍️",
+            product: String(a.product_name),
+            platform: String(a.platform),
+            hook: String(a.hook_text),
+            engagement: Number(a.engagement_rate) || 0,
+            days: daysAgo(String(a.first_seen)),
+            est_spend: Number(a.ad_spend_est) || 0,
+          }))
+        );
+      })
+      .catch(() => { /* keep current/mock data */ });
+    return () => { active = false; };
+  }, [platform]);
 
   function copyHook(id: string, hook: string) {
     navigator.clipboard.writeText(hook).catch(() => {});

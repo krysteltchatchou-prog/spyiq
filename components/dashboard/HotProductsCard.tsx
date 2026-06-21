@@ -5,7 +5,18 @@ import { IQScoreBadge } from "@/components/products/IQScoreBadge";
 import { HOT_PRODUCTS } from "@/lib/mock-data";
 import { formatNumber } from "@/lib/utils";
 
-export function HotProductsCard() {
+interface HotProduct {
+  id: string;
+  emoji?: string;
+  name: string;
+  niche: string;
+  daily_sales: number;
+  iq_score: number;
+  margin_pct: number;
+}
+
+export function HotProductsCard({ products }: { products?: HotProduct[] }) {
+  const items: HotProduct[] = products?.length ? products : HOT_PRODUCTS;
   return (
     <div
       className="rounded-xl flex flex-col"
@@ -21,7 +32,7 @@ export function HotProductsCard() {
           <span style={{ color: "#f5f3ee", fontWeight: 600, fontSize: 13 }}>Hot Products Now</span>
         </div>
         <Link
-          href="/products"
+          href="/resources/top-products"
           className="flex items-center gap-1 text-xs font-medium transition-colors hover:text-[#c49a5a]"
           style={{ color: "#a07840" }}
         >
@@ -31,13 +42,13 @@ export function HotProductsCard() {
 
       {/* Product rows */}
       <div className="flex-1">
-        {HOT_PRODUCTS.map((product, i) => (
+        {items.map((product, i) => (
           <Link
             key={product.id}
-            href={`/products/${product.id}`}
+            href={`/resources/top-products/${product.id}`}
             className="flex items-center gap-3 px-5 py-3 transition-colors group"
             style={{
-              borderBottom: i < HOT_PRODUCTS.length - 1 ? "1px solid #1a1a20" : undefined,
+              borderBottom: i < items.length - 1 ? "1px solid #1a1a20" : undefined,
             }}
             onMouseEnter={(e) => (e.currentTarget.style.background = "#1d1d24")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}

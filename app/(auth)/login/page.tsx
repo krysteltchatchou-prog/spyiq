@@ -24,7 +24,7 @@ export default function LoginPage() {
     setLoading(false);
     if (err) {
       if (err.message.includes("Invalid login credentials")) {
-        setError("Email or password is incorrect. Make sure you've confirmed your email after signing up.");
+        setError("Email or password is incorrect. Double-check them and try again, or create an account if you don't have one yet.");
       } else if (err.message.includes("Email not confirmed")) {
         setError("Please check your inbox and click the confirmation link before signing in.");
       } else {

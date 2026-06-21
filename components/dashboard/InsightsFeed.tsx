@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { RefreshCw } from "lucide-react";
 import { AI_INSIGHTS } from "@/lib/mock-data";
+import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
 
 type InsightType = "Opportunity" | "Warning" | "Insight" | "Alert";
 
@@ -54,6 +55,7 @@ export function InsightsFeed() {
       </div>
 
       {/* 2×2 insight grid */}
+      <AiEstimateBadge variant="banner" className="mx-4 mt-4" />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4">
         {AI_INSIGHTS.map((insight) => {
           const colors = TYPE_COLORS[insight.type];

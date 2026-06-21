@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { MOCK_PRODUCTS } from "@/lib/mock-data";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export async function GET(req: NextRequest) {
+  const fallbackId = req.headers.get("x-forwarded-for") ?? "anonymous";
+  const { success, plan, limit } = await checkRateLimit("searches", fallbackId);
+  if (!success) {
+    return NextResponse.json(
+      { error: `You've hit your daily search limit (${limit}/day on the ${plan} plan). Upgrade for more searches.` },
+      { status: 429 }
+    );
+  }
+
   const { searchParams } = new URL(req.url);
   const query   = searchParams.get("q")?.toLowerCase() ?? "";
   const niche   = searchParams.get("niche") ?? "";

@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { User, CreditCard, Bell, Key, Shield, Save, Eye, EyeOff, Loader2, ExternalLink } from "lucide-react";
+import { useState, useEffect } from "react";
+import { User, CreditCard, Bell, Key, Shield, Save, Eye, EyeOff, Loader2, ExternalLink, Store, Check, AlertCircle } from "lucide-react";
 
 async function startCheckout(plan: string, setLoading: (v: boolean) => void) {
   setLoading(true);
@@ -32,7 +32,7 @@ async function openPortal(setLoading: (v: boolean) => void) {
   }
 }
 
-const TABS = ["Profile", "Billing", "Notifications", "API"] as const;
+const TABS = ["Profile", "Billing", "Integrations", "Notifications", "API"] as const;
 type Tab = typeof TABS[number];
 
 export default function SettingsPage() {
@@ -41,6 +41,61 @@ export default function SettingsPage() {
   const [saved, setSaved] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [portalLoading, setPortalLoading] = useState(false);
+
+  // Shopify connection state
+  const [shopInput, setShopInput] = useState("");
+  const [shopify, setShopify] = useState<{ connected: boolean; shop: string | null; configured: boolean } | null>(null);
+  const [shopifyNotice, setShopifyNotice] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
+  // Token-based connect (custom app)
+  const [tokenShop, setTokenShop] = useState("");
+  const [tokenValue, setTokenValue] = useState("");
+  const [tokenConnecting, setTokenConnecting] = useState(false);
+  const [showTokenForm, setShowTokenForm] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/shopify/status")
+      .then((r) => r.json())
+      .then(setShopify)
+      .catch(() => setShopify({ connected: false, shop: null, configured: false }));
+
+    // Surface the result of an OAuth round-trip (?shopify=connected|error)
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get("shopify");
+    if (s === "connected") { setActiveTab("Integrations"); setShopifyNotice({ kind: "ok", text: "Shopify store connected successfully." }); }
+    else if (s === "error") { setActiveTab("Integrations"); setShopifyNotice({ kind: "error", text: `Could not connect Shopify (${params.get("reason") || "unknown error"}).` }); }
+  }, []);
+
+  function connectShopify() {
+    const shop = shopInput.trim();
+    if (!shop) return;
+    window.location.href = `/api/shopify/install?shop=${encodeURIComponent(shop)}`;
+  }
+
+  async function connectWithToken() {
+    if (!tokenShop.trim() || !tokenValue.trim() || tokenConnecting) return;
+    setTokenConnecting(true);
+    setShopifyNotice(null);
+    try {
+      const res = await fetch("/api/shopify/connect-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ shop: tokenShop.trim(), token: tokenValue.trim() }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setShopify({ connected: true, shop: data.shop, configured: true });
+        setShopifyNotice({ kind: "ok", text: "Shopify store connected with full theme access." });
+        setShowTokenForm(false);
+        setTokenValue("");
+      } else {
+        setShopifyNotice({ kind: "error", text: data.error || "Could not connect with that token." });
+      }
+    } catch {
+      setShopifyNotice({ kind: "error", text: "Could not connect. Please try again." });
+    } finally {
+      setTokenConnecting(false);
+    }
+  }
 
   function handleSave() {
     setSaved(true);
@@ -205,6 +260,134 @@ export default function SettingsPage() {
               {portalLoading ? <Loader2 size={12} className="animate-spin" /> : <ExternalLink size={12} />}
               Open Portal
             </button>
+          </div>
+        </div>
+      )}
+
+      {activeTab === "Integrations" && (
+        <div className="space-y-5">
+          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+            <div className="flex items-center gap-2 mb-1">
+              <Store size={15} color="#a07840" />
+              <h2 className="font-semibold text-sm" style={{ color: "#f5f3ee" }}>Shopify</h2>
+            </div>
+            <p className="text-xs mb-5" style={{ color: "#8a8a94" }}>
+              Connect your Shopify store so the AI Store Builder can push generated products straight into it.
+            </p>
+
+            {shopifyNotice && (
+              <div className="flex items-center gap-2 rounded-xl px-4 py-3 mb-4 text-sm"
+                style={{
+                  background: shopifyNotice.kind === "ok" ? "rgba(94,184,154,0.10)" : "rgba(212,104,95,0.10)",
+                  border: `1px solid ${shopifyNotice.kind === "ok" ? "rgba(94,184,154,0.3)" : "rgba(212,104,95,0.3)"}`,
+                  color: shopifyNotice.kind === "ok" ? "#5eb89a" : "#d4685f",
+                }}>
+                {shopifyNotice.kind === "ok" ? <Check size={14} /> : <AlertCircle size={14} />} {shopifyNotice.text}
+              </div>
+            )}
+
+            {shopify === null ? (
+              <div className="flex items-center gap-2 text-sm" style={{ color: "#5c5c64" }}>
+                <Loader2 size={14} className="animate-spin" /> Checking connection…
+              </div>
+            ) : shopify.connected ? (
+              <div className="flex items-center justify-between p-4 rounded-xl"
+                style={{ background: "rgba(94,184,154,0.08)", border: "1px solid rgba(94,184,154,0.25)" }}>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: "rgba(94,184,154,0.15)" }}>
+                    <Check size={16} color="#5eb89a" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>Connected</p>
+                    <p className="text-xs" style={{ color: "#8a8a94" }}>{shopify.shop}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShopInput("")}
+                  className="text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+                  style={{ color: "#a07840" }}>
+                  Reconnect
+                </button>
+              </div>
+            ) : !shopify.configured ? (
+              <div className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm"
+                style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}>
+                <AlertCircle size={14} color="#d4b572" /> Shopify integration isn&apos;t configured on the server yet (API credentials missing).
+              </div>
+            ) : (
+              <div className="flex gap-3">
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    value={shopInput}
+                    onChange={(e) => setShopInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && connectShopify()}
+                    placeholder="your-store.myshopify.com"
+                    className="w-full rounded-xl px-3.5 py-2.5 text-sm"
+                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
+                    onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
+                  />
+                </div>
+                <button
+                  onClick={connectShopify}
+                  disabled={!shopInput.trim()}
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                  style={{
+                    background: shopInput.trim() ? "#a07840" : "#2a2a33",
+                    color:      shopInput.trim() ? "#f5f3ee" : "#5c5c64",
+                    cursor:     shopInput.trim() ? "pointer" : "not-allowed",
+                  }}>
+                  <Store size={14} /> Connect
+                </button>
+              </div>
+            )}
+
+            {/* Token-based connect — needed for full-store (theme) publishing */}
+            <div className="mt-5 pt-5" style={{ borderTop: "1px solid #2a2a33" }}>
+              <button
+                onClick={() => setShowTokenForm((v) => !v)}
+                className="text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+                style={{ color: "#a07840" }}>
+                {showTokenForm ? "▾" : "▸"} Connect with Admin API token (enables full-store publishing)
+              </button>
+              {showTokenForm && (
+                <div className="mt-3 space-y-3">
+                  <p className="text-xs" style={{ color: "#8a8a94", lineHeight: 1.6 }}>
+                    In your Shopify admin: <strong style={{ color: "#c49a5a" }}>Settings → Apps and sales channels → Develop apps → Create an app</strong>.
+                    Under <strong style={{ color: "#c49a5a" }}>Admin API scopes</strong> tick <code style={{ color: "#f5f3ee" }}>read_products, write_products, read_themes, write_themes</code>, install it, then copy the <strong style={{ color: "#c49a5a" }}>Admin API access token</strong> (starts with <code style={{ color: "#f5f3ee" }}>shpat_</code>).
+                  </p>
+                  <input
+                    type="text"
+                    value={tokenShop}
+                    onChange={(e) => setTokenShop(e.target.value)}
+                    placeholder="your-store.myshopify.com"
+                    className="w-full rounded-xl px-3.5 py-2.5 text-sm"
+                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                  />
+                  <input
+                    type="password"
+                    value={tokenValue}
+                    onChange={(e) => setTokenValue(e.target.value)}
+                    placeholder="shpat_… (Admin API access token)"
+                    className="w-full rounded-xl px-3.5 py-2.5 text-sm"
+                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                  />
+                  <button
+                    onClick={connectWithToken}
+                    disabled={!tokenShop.trim() || !tokenValue.trim() || tokenConnecting}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
+                    style={{
+                      background: tokenShop.trim() && tokenValue.trim() ? "#a07840" : "#2a2a33",
+                      color:      tokenShop.trim() && tokenValue.trim() ? "#f5f3ee" : "#5c5c64",
+                      cursor:     tokenShop.trim() && tokenValue.trim() && !tokenConnecting ? "pointer" : "not-allowed",
+                    }}>
+                    {tokenConnecting ? <Loader2 size={14} className="animate-spin" /> : <Store size={14} />}
+                    {tokenConnecting ? "Connecting…" : "Connect with token"}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Loader2, RefreshCw, Bookmark } from "lucide-react";
 import { toast } from "sonner";
+import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
 
 interface Message {
   role: "user" | "assistant";
@@ -177,6 +178,7 @@ export default function AIAnalyzerPage() {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-5">
+          <AiEstimateBadge variant="banner" className="mb-4" />
           {messages.map((msg, i) => (
             <MessageBubble key={i} msg={msg} />
           ))}

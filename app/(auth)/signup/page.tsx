@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Eye, EyeOff, Loader2, Chrome, Check } from "lucide-react";
 
@@ -11,7 +12,25 @@ const PERKS = [
   "AI-powered store & ad analysis",
 ];
 
+const PLAN_LABELS: Record<string, string> = {
+  free:    "Free plan",
+  starter: "Starter plan — $29/mo",
+  pro:     "Pro plan — $79/mo",
+  agency:  "Agency plan",
+};
+
 export default function SignupPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen" style={{ background: "#0c0c0e" }} />}>
+      <SignupForm />
+    </Suspense>
+  );
+}
+
+function SignupForm() {
+  const searchParams = useSearchParams();
+  const plan = (searchParams.get("plan") || "pro").toLowerCase();
+  const planLabel = PLAN_LABELS[plan] ?? PLAN_LABELS.pro;
   const [name, setName]         = useState("");
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +49,7 @@ export default function SignupPage() {
     const { error: err } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: name } },
+      options: { data: { full_name: name, selected_plan: plan } },
     });
     setLoading(false);
     if (err) { setError(err.message); return; }
@@ -90,8 +109,8 @@ export default function SignupPage() {
         {/* Card */}
         <div className="rounded-2xl p-8" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
           <div className="mb-2 inline-block rounded-full px-3 py-1 text-xs font-semibold"
-            style={{ background: "rgba(94,184,154,0.12)", border: "1px solid rgba(94,184,154,0.25)", color: "#5eb89a" }}>
-            5-day free Pro trial
+            style={{ background: "rgba(160,120,64,0.12)", border: "1px solid rgba(160,120,64,0.25)", color: "#c49a5a" }}>
+            {planLabel} · 5-day free trial
           </div>
           <h1 className="font-bold mb-1 mt-2" style={{ fontSize: 22, color: "#f5f3ee", letterSpacing: "-0.3px" }}>
             Create your account
@@ -216,9 +235,9 @@ export default function SignupPage() {
 
           <p className="text-center text-xs mt-4" style={{ color: "#5c5c64" }}>
             By signing up you agree to our{" "}
-            <Link href="#" className="underline hover:text-[#8a8a94] transition-colors">Terms</Link>
+            <Link href="/terms" className="underline hover:text-[#8a8a94] transition-colors">Terms</Link>
             {" "}and{" "}
-            <Link href="#" className="underline hover:text-[#8a8a94] transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="underline hover:text-[#8a8a94] transition-colors">Privacy Policy</Link>
           </p>
         </div>
 

@@ -5,6 +5,7 @@ import { ArrowLeft, Bookmark, Share2, Download, Info, ExternalLink } from "lucid
 import { MOCK_PRODUCTS } from "@/lib/mock-data";
 import { IQScoreBadge } from "@/components/products/IQScoreBadge";
 import { TrendChart } from "@/components/products/TrendChart";
+import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -94,6 +95,8 @@ export default function ProductDetailPage({ params }: Props) {
           </div>
         </div>
       </div>
+
+      <AiEstimateBadge variant="banner" className="mb-6" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left — 2/3 */}

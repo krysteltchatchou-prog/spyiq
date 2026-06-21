@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Bookmark, Bot, TrendingUp } from "lucide-react";
 import { IQScoreBadge } from "./IQScoreBadge";
+import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
 import type { Product } from "@/types/product";
 import { formatNumber } from "@/lib/utils";
 
@@ -54,7 +55,10 @@ export function ProductCard({ product: p }: Props) {
               {p.niche}
             </span>
           </div>
-          <IQScoreBadge score={p.iq_score} size={42} strokeWidth={3.5} />
+          <div className="flex flex-col items-center gap-1">
+            <IQScoreBadge score={p.iq_score} size={42} strokeWidth={3.5} />
+            <AiEstimateBadge />
+          </div>
         </div>
 
         {/* Stats row */}

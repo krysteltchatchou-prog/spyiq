@@ -1,3 +1,26 @@
+> At the start of each session, also read PROGRESS.md for the latest progress log.
+> At the end of each session, update PROGRESS.md.
+
+---
+
+## 👋 HOW TO WORK WITH ME (read this first)
+
+I'm a newbie / beginner programmer. Please keep this in mind for everything you do in this project:
+
+1. Assume I don't know technical or coding terms — if you must use one, briefly explain it in plain language the first time.
+2. Before making changes, briefly tell me WHAT you're about to do and WHY, in plain language.
+3. Give me step-by-step explanations, not just code dumps — walk me through what each important part/line does.
+4. Tell me exactly WHERE things are happening — which file, which folder, which command, and what to type and where (e.g. terminal vs. editor).
+5. After you make a change or run a command, tell me what success looks like — what I should see if it worked, and what an error might look like.
+6. If something could go wrong or is a common beginner mistake (e.g. forgetting to save, wrong folder, missing dependency), give me a heads-up.
+7. Don't assume I have things installed or configured — check first, or tell me how to check.
+8. Keep changes small and explain them one at a time when possible, rather than making many changes at once without explanation.
+9. If my request is ambiguous or could be done multiple ways, ask me one simple clarifying question instead of guessing.
+
+Keep this approach for the whole project, unless I tell you I'm comfortable and want shorter, more technical answers.
+
+---
+
 # SpyIQ — AI Ecommerce Intelligence Platform
 ## CLAUDE.md — Project Blueprint for Claude Code
 
@@ -328,6 +351,104 @@ CREATE POLICY "Users see own profile" ON profiles FOR ALL USING (auth.uid() = id
 CREATE POLICY "Users see own saved items" ON saved_items FOR ALL USING (auth.uid() = user_id);
 CREATE POLICY "Users see own alerts" ON alerts FOR ALL USING (auth.uid() = user_id);
 CREATE POLICY "Users see own chat" ON chat_sessions FOR ALL USING (auth.uid() = user_id);
+```
+
+### Public catalog tables (added in build — migrations 006–009)
+
+These power the public boards (Winner Products, Top Shops, Ad Intelligence, Viral Videos)
+and the dashboard widgets. They hold **public, read-only catalog data** (not user-scoped),
+so RLS is intentionally **off** — writes happen via the Supabase service role from the
+scan/sync APIs and Vercel Cron.
+
+```sql
+-- Migration 006: extends the existing `products` table for the Winner Products Board
+ALTER TABLE products ADD COLUMN IF NOT EXISTS product_id          TEXT UNIQUE;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS image_url           TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS price_usd           NUMERIC;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS cogs_est            NUMERIC;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS stores_count        INT DEFAULT 0;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS monthly_revenue_est NUMERIC;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS search_volume       INT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS search_growth       NUMERIC;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS ad_count            INT DEFAULT 0;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS competition_level   TEXT CHECK (competition_level IN ('low','medium','high'));
+ALTER TABLE products ADD COLUMN IF NOT EXISTS trend_direction     TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS suppliers           JSONB DEFAULT '[]';
+ALTER TABLE products ADD COLUMN IF NOT EXISTS top_stores          JSONB DEFAULT '[]';
+ALTER TABLE products ADD COLUMN IF NOT EXISTS first_seen          TIMESTAMPTZ DEFAULT now();
+ALTER TABLE products ADD COLUMN IF NOT EXISTS is_featured         BOOLEAN DEFAULT false;
+
+-- Migration 007: Store Spy scans + Top Shops directory
+CREATE TABLE shops (
+  id                   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  store_id             TEXT UNIQUE NOT NULL,   -- slug, e.g. "allbirds-com"
+  store_url            TEXT NOT NULL,
+  store_name           TEXT,
+  niche                TEXT,
+  country              TEXT,
+  monthly_revenue_est  NUMERIC,
+  monthly_traffic_est  INT,
+  monthly_ad_spend_est NUMERIC,
+  top_products         JSONB DEFAULT '[]',
+  installed_apps       JSONB DEFAULT '[]',
+  theme_name           TEXT,
+  social_links         JSONB DEFAULT '{}',
+  avg_product_price    NUMERIC,
+  product_count        INT,
+  store_age_days       INT,
+  revenue_growth       NUMERIC,
+  spyiq_rank           INT,
+  last_scanned         TIMESTAMPTZ DEFAULT now()
+);
+
+-- Migration 008: Ad Intelligence (synced via Vercel Cron → lib/syncAds)
+CREATE TABLE ads (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  ad_id           TEXT UNIQUE NOT NULL,
+  platform        TEXT CHECK (platform IN ('TikTok','Facebook','Instagram','YouTube','Google')),
+  product_name    TEXT,
+  niche           TEXT,
+  hook_text       TEXT,
+  video_url       TEXT,
+  likes           INT DEFAULT 0,
+  comments        INT DEFAULT 0,
+  shares          INT DEFAULT 0,
+  views           INT DEFAULT 0,
+  engagement_rate NUMERIC,
+  ad_spend_est    NUMERIC,
+  first_seen      TIMESTAMPTZ DEFAULT now(),
+  last_seen       TIMESTAMPTZ DEFAULT now(),
+  is_active       BOOLEAN DEFAULT true,
+  country         TEXT,
+  shop_url        TEXT,
+  cta_text        TEXT
+);
+
+-- Migration 009: Viral Video Tracker
+CREATE TABLE viral_videos (
+  id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  video_id          TEXT UNIQUE NOT NULL,
+  platform          TEXT CHECK (platform IN ('TikTok','Instagram','YouTube')),
+  creator_handle    TEXT,
+  creator_followers INT,
+  product_name      TEXT,
+  product_url       TEXT,
+  views_total       BIGINT,
+  views_24h         BIGINT,
+  view_velocity     NUMERIC,
+  likes             INT,
+  comments          INT,
+  shares            INT,
+  saves             INT,
+  caption           TEXT,
+  hashtags          TEXT[],
+  audio_name        TEXT,
+  thumbnail_url     TEXT,
+  posted_at         TIMESTAMPTZ,
+  niche             TEXT,
+  viral_score       INT CHECK (viral_score BETWEEN 0 AND 100),
+  last_updated      TIMESTAMPTZ DEFAULT now()
+);
 ```
 
 ---

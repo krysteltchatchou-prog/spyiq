@@ -1,7 +1,20 @@
 import { NextRequest } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { cacheGet, cacheSet } from "@/lib/redis";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+// Generated stores are deterministic enough to reuse for an hour
+const STORE_CACHE_TTL = 60 * 60;
+
+const PROGRESS_STEPS = [
+  "Fetching product data",
+  "Generating brand identity",
+  "Writing product copy",
+  "Building home page",
+  "Creating ad hooks",
+  "Packaging for Shopify",
+];
 
 export async function POST(req: NextRequest) {
   const { product, style, storeName, language } = await req.json();
@@ -67,29 +80,41 @@ Return ONLY valid JSON (no markdown, no code fences):
   const encoder = new TextEncoder();
   let buffer = "";
 
+  const cacheKey = `storebuild:${String(product ?? "").toLowerCase()}:${String(style ?? "").toLowerCase()}:${String(storeName ?? "").toLowerCase()}:${String(language ?? "").toLowerCase()}`;
+
   const readable = new ReadableStream({
     async start(controller) {
+      const sendStep = (step: string) =>
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "step", step })}\n\n`));
+      const sendResult = (data: unknown) => {
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "result", data })}\n\n`));
+        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+        controller.close();
+      };
+
       try {
+        // Cache hit — replay the progress steps quickly, then return the stored store
+        const cached = await cacheGet<unknown>(cacheKey);
+        if (cached) {
+          for (const step of PROGRESS_STEPS) {
+            sendStep(step);
+            await new Promise((r) => setTimeout(r, 120));
+          }
+          sendResult(cached);
+          return;
+        }
+
         const stream = await anthropic.messages.create({
           model: "claude-sonnet-4-6",
-          max_tokens: 2048,
+          max_tokens: 4096,
           system: "Return ONLY valid JSON. No markdown code fences, no explanation, just the JSON object.",
           messages: [{ role: "user", content: prompt }],
           stream: true,
         });
 
         // Stream progress events first, then accumulate the actual content
-        const steps = [
-          "Fetching product data",
-          "Generating brand identity",
-          "Writing product copy",
-          "Building home page",
-          "Creating ad hooks",
-          "Packaging for Shopify",
-        ];
-
-        for (const step of steps) {
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "step", step })}\n\n`));
+        for (const step of PROGRESS_STEPS) {
+          sendStep(step);
           await new Promise((r) => setTimeout(r, 300));
         }
 
@@ -99,12 +124,15 @@ Return ONLY valid JSON (no markdown, no code fences):
           }
         }
 
-        // Parse and send the result
-        const jsonText = buffer.replace(/^```json\s*/i, "").replace(/```\s*$/i, "").trim();
+        // Parse, cache, and send the result. Strip any code fences, then slice
+        // to the outer braces so stray prose before/after the JSON can't break it.
+        let jsonText = buffer.replace(/^```json\s*/i, "").replace(/```\s*$/i, "").trim();
+        const firstBrace = jsonText.indexOf("{");
+        const lastBrace = jsonText.lastIndexOf("}");
+        if (firstBrace !== -1 && lastBrace !== -1) jsonText = jsonText.slice(firstBrace, lastBrace + 1);
         const parsed = JSON.parse(jsonText);
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "result", data: parsed })}\n\n`));
-        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-        controller.close();
+        await cacheSet(cacheKey, parsed, STORE_CACHE_TTL);
+        sendResult(parsed);
       } catch (err) {
         controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: "error", message: String(err) })}\n\n`));
         controller.close();

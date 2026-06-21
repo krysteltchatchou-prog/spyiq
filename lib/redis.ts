@@ -13,6 +13,31 @@ export const RATE_LIMITS = {
   agency:  { searches: 999, stores: 999, ai: 9999 },
 } as const;
 
+export type Plan = keyof typeof RATE_LIMITS;
+export type RateKind = keyof (typeof RATE_LIMITS)["free"];
+
+// Plan-tiered sliding-window limiters (daily). Instances are cached per
+// kind+plan so we don't rebuild a Ratelimit on every request.
+const planLimiterCache = new Map<string, Ratelimit>();
+
+export function planRatelimit(kind: RateKind, plan: Plan): Ratelimit {
+  const key = `${kind}:${plan}`;
+  let limiter = planLimiterCache.get(key);
+  if (!limiter) {
+    // slidingWindow needs a limit >= 1; the only 0 in the table is free.ai,
+    // which is gated by the credit system, not these search/store limiters.
+    const limit = Math.max(1, RATE_LIMITS[plan][kind]);
+    limiter = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(limit, "1 d"),
+      analytics: true,
+      prefix: `rl:${kind}:${plan}`,
+    });
+    planLimiterCache.set(key, limiter);
+  }
+  return limiter;
+}
+
 // Sliding-window rate limiters per endpoint type
 export const searchRatelimit = new Ratelimit({
   redis,
