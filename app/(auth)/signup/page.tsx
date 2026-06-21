@@ -1,16 +1,10 @@
 "use client";
 import { useState, Suspense } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Eye, EyeOff, Loader2, Chrome, Check } from "lucide-react";
-
-const PERKS = [
-  "5-day full Pro trial — no credit card",
-  "12,000+ winning products tracked daily",
-  "AI-powered store & ad analysis",
-];
+import { Eye, EyeOff, Loader2, Chrome, Check, Link2 } from "lucide-react";
+import AuthShell from "@/components/auth/AuthShell";
 
 const PLAN_LABELS: Record<string, string> = {
   free:    "Free plan",
@@ -19,9 +13,12 @@ const PLAN_LABELS: Record<string, string> = {
   agency:  "Agency plan",
 };
 
+const FIELD = "w-full rounded-xl px-3.5 py-2.5 text-sm transition-colors";
+const fieldStyle = { background: "#ffffff", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" } as const;
+
 export default function SignupPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen" style={{ background: "#0c0c0e" }} />}>
+    <Suspense fallback={<div className="min-h-screen" style={{ background: "#f4f2ec" }} />}>
       <SignupForm />
     </Suspense>
   );
@@ -31,6 +28,7 @@ function SignupForm() {
   const searchParams = useSearchParams();
   const plan = (searchParams.get("plan") || "pro").toLowerCase();
   const planLabel = PLAN_LABELS[plan] ?? PLAN_LABELS.pro;
+  const productUrl = searchParams.get("url") || "";
   const [name, setName]         = useState("");
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
@@ -49,7 +47,7 @@ function SignupForm() {
     const { error: err } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: name, selected_plan: plan } },
+      options: { data: { full_name: name, selected_plan: plan, pending_product_url: productUrl } },
     });
     setLoading(false);
     if (err) { setError(err.message); return; }
@@ -60,9 +58,10 @@ function SignupForm() {
     setOauthLoading(true);
     setError("");
     const supabase = createClient();
+    const next = productUrl ? `/store-builder?url=${encodeURIComponent(productUrl)}` : "/dashboard";
     const { error: err } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback?next=/dashboard` },
+      options: { redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}` },
     });
     if (err) {
       setError("Google sign-in isn't configured yet. Please use email and password.");
@@ -72,183 +71,156 @@ function SignupForm() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "#0c0c0e" }}>
-        <div className="w-full max-w-[400px] text-center">
-          <div className="flex justify-center mb-8">
-            <Image src="/SpyIQ_Logo.png" alt="SpyIQ" width={120} height={40} style={{ height: "auto" }} />
+      <AuthShell>
+        <div className="text-center">
+          <div className="flex items-center justify-center w-14 h-14 rounded-full mx-auto mb-4"
+            style={{ background: "rgba(94,184,154,0.14)", border: "1px solid rgba(94,184,154,0.3)" }}>
+            <Check size={24} color="#3e8f72" />
           </div>
-          <div className="rounded-2xl p-8" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-            <div className="flex items-center justify-center w-14 h-14 rounded-full mx-auto mb-4"
-              style={{ background: "rgba(94,184,154,0.12)", border: "1px solid rgba(94,184,154,0.3)" }}>
-              <Check size={24} color="#5eb89a" />
-            </div>
-            <h2 className="font-bold mb-2" style={{ fontSize: 20, color: "#f5f3ee" }}>Check your email</h2>
-            <p className="text-sm" style={{ color: "#8a8a94" }}>
-              We sent a confirmation link to <span style={{ color: "#f5f3ee" }}>{email}</span>.
-              Click it to activate your account and start your free trial.
-            </p>
-            <Link href="/login"
-              className="inline-block mt-6 text-sm font-semibold transition-colors hover:text-[#c49a5a]"
-              style={{ color: "#a07840" }}>
-              Back to sign in →
-            </Link>
-          </div>
+          <h2 className="font-bold mb-2" style={{ fontSize: 22, color: "#23221f", letterSpacing: "-0.3px" }}>Check your email</h2>
+          <p className="text-sm" style={{ color: "#4d4b44" }}>
+            We sent a confirmation link to <span style={{ color: "#23221f", fontWeight: 600 }}>{email}</span>.
+            Click it to activate your account and start your free trial.
+          </p>
+          <Link href="/login"
+            className="inline-block mt-6 text-sm font-semibold transition-colors hover:text-[#8a6530]"
+            style={{ color: "#a07840" }}>
+            Back to sign in →
+          </Link>
         </div>
-      </div>
+      </AuthShell>
     );
   }
 
+  const disabled = loading || !name || !email || password.length < 8;
+
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12" style={{ background: "#0c0c0e" }}>
-      <div className="w-full max-w-[400px]">
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <Image src="/SpyIQ_Logo.png" alt="SpyIQ" width={120} height={40} style={{ height: "auto" }} />
+    <AuthShell>
+      <div className="mb-3 inline-block rounded-full px-3 py-1 text-xs font-semibold"
+        style={{ background: "rgba(160,120,64,0.10)", border: "1px solid rgba(160,120,64,0.28)", color: "#8a6530" }}>
+        {planLabel} · 5-day free trial
+      </div>
+      <h1 className="font-bold mb-1" style={{ fontSize: 26, color: "#23221f", letterSpacing: "-0.5px" }}>
+        Create your account
+      </h1>
+      <p className="text-sm mb-5" style={{ color: "#4d4b44" }}>
+        No credit card required
+      </p>
+
+      {/* Product URL continuity from the landing CTA */}
+      {productUrl && (
+        <div className="flex items-start gap-2 rounded-xl px-3.5 py-2.5 mb-5"
+          style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+          <Link2 size={14} color="#a07840" className="mt-0.5 shrink-0" />
+          <div className="min-w-0">
+            <p className="text-[11px] font-semibold" style={{ color: "#8a6530" }}>Ready to build from</p>
+            <p className="text-xs truncate" style={{ color: "#4d4b44" }}>{productUrl}</p>
+          </div>
         </div>
+      )}
 
-        {/* Card */}
-        <div className="rounded-2xl p-8" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-          <div className="mb-2 inline-block rounded-full px-3 py-1 text-xs font-semibold"
-            style={{ background: "rgba(160,120,64,0.12)", border: "1px solid rgba(160,120,64,0.25)", color: "#c49a5a" }}>
-            {planLabel} · 5-day free trial
+      {/* Google OAuth */}
+      <button
+        onClick={handleGoogle}
+        disabled={oauthLoading}
+        className="w-full flex items-center justify-center gap-2.5 rounded-xl py-2.5 text-sm font-semibold transition-all mb-4"
+        style={{ background: "#ffffff", border: "1px solid #e4e1d8", color: "#23221f" }}
+        onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#cfcabd")}
+        onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#e4e1d8")}
+      >
+        {oauthLoading ? <Loader2 size={16} className="animate-spin" /> : <Chrome size={16} color="#4d4b44" />}
+        Continue with Google
+      </button>
+
+      {/* Divider */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex-1 h-px" style={{ background: "#e4e1d8" }} />
+        <span className="text-xs" style={{ color: "#73716a" }}>or</span>
+        <div className="flex-1 h-px" style={{ background: "#e4e1d8" }} />
+      </div>
+
+      {error && (
+        <div className="rounded-xl px-4 py-3 mb-4 text-sm"
+          style={{ background: "rgba(212,104,95,0.10)", border: "1px solid rgba(212,104,95,0.3)", color: "#bd463d" }}>
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSignup} className="space-y-4">
+        <div>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Full name</label>
+          <input
+            type="text" value={name} onChange={(e) => setName(e.target.value)}
+            placeholder="Your name" required
+            className={FIELD} style={fieldStyle}
+            onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
+            onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Email</label>
+          <input
+            type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com" required
+            className={FIELD} style={fieldStyle}
+            onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
+            onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Password</label>
+          <div className="relative">
+            <input
+              type={showPw ? "text" : "password"} value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Min. 8 characters" required minLength={8}
+              className={`${FIELD} pr-10`} style={fieldStyle}
+              onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
+              onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
+            />
+            <button type="button" onClick={() => setShowPw((v) => !v)}
+              className="absolute right-3 top-1/2 -translate-y-1/2" style={{ color: "#9b988e" }}>
+              {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
+            </button>
           </div>
-          <h1 className="font-bold mb-1 mt-2" style={{ fontSize: 22, color: "#f5f3ee", letterSpacing: "-0.3px" }}>
-            Create your account
-          </h1>
-          <p className="text-sm mb-4" style={{ color: "#8a8a94" }}>
-            No credit card required
-          </p>
-
-          {/* Perks */}
-          <div className="space-y-1.5 mb-5">
-            {PERKS.map((p) => (
-              <div key={p} className="flex items-center gap-2">
-                <Check size={12} color="#5eb89a" />
-                <span className="text-xs" style={{ color: "#8a8a94" }}>{p}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Google OAuth */}
-          <button
-            onClick={handleGoogle}
-            disabled={oauthLoading}
-            className="w-full flex items-center justify-center gap-2.5 rounded-xl py-2.5 text-sm font-semibold transition-all mb-4"
-            style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee" }}
-            onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3a3a42")}
-            onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a2a33")}
-          >
-            {oauthLoading ? <Loader2 size={16} className="animate-spin" /> : <Chrome size={16} color="#8a8a94" />}
-            Continue with Google
-          </button>
-
-          {/* Divider */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex-1 h-px" style={{ background: "#2a2a33" }} />
-            <span className="text-xs" style={{ color: "#5c5c64" }}>or</span>
-            <div className="flex-1 h-px" style={{ background: "#2a2a33" }} />
-          </div>
-
-          {/* Error */}
-          {error && (
-            <div className="rounded-xl px-4 py-3 mb-4 text-sm"
-              style={{ background: "rgba(212,104,95,0.10)", border: "1px solid rgba(212,104,95,0.25)", color: "#d4685f" }}>
-              {error}
+          {password && (
+            <div className="flex gap-1 mt-1.5">
+              {[8, 12, 16].map((len) => (
+                <div key={len} className="flex-1 rounded-full h-1 transition-colors"
+                  style={{ background: password.length >= len ? "#3e8f72" : "#e4e1d8" }} />
+              ))}
             </div>
           )}
-
-          {/* Form */}
-          <form onSubmit={handleSignup} className="space-y-4">
-            <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Full name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
-                required
-                className="w-full rounded-xl px-3.5 py-2.5 text-sm transition-colors"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                className="w-full rounded-xl px-3.5 py-2.5 text-sm transition-colors"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Password</label>
-              <div className="relative">
-                <input
-                  type={showPw ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Min. 8 characters"
-                  required
-                  minLength={8}
-                  className="w-full rounded-xl px-3.5 py-2.5 text-sm pr-10 transition-colors"
-                  style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                  onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
-                />
-                <button type="button" onClick={() => setShowPw((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2" style={{ color: "#5c5c64" }}>
-                  {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
-                </button>
-              </div>
-              {/* Password strength */}
-              {password && (
-                <div className="flex gap-1 mt-1.5">
-                  {[8, 12, 16].map((len) => (
-                    <div key={len} className="flex-1 rounded-full h-1 transition-colors"
-                      style={{ background: password.length >= len ? "#5eb89a" : "#2a2a33" }} />
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading || !name || !email || password.length < 8}
-              className="w-full rounded-xl py-2.5 text-sm font-semibold transition-all flex items-center justify-center gap-2"
-              style={{
-                background: loading || !name || !email || password.length < 8 ? "#2a2a33" : "#a07840",
-                color:      loading || !name || !email || password.length < 8 ? "#5c5c64"  : "#f5f3ee",
-                cursor:     loading || !name || !email || password.length < 8 ? "not-allowed" : "pointer",
-              }}
-            >
-              {loading && <Loader2 size={15} className="animate-spin" />}
-              {loading ? "Creating account…" : "Start free trial"}
-            </button>
-          </form>
-
-          <p className="text-center text-xs mt-4" style={{ color: "#5c5c64" }}>
-            By signing up you agree to our{" "}
-            <Link href="/terms" className="underline hover:text-[#8a8a94] transition-colors">Terms</Link>
-            {" "}and{" "}
-            <Link href="/privacy" className="underline hover:text-[#8a8a94] transition-colors">Privacy Policy</Link>
-          </p>
         </div>
 
-        {/* Footer */}
-        <p className="text-center text-sm mt-5" style={{ color: "#8a8a94" }}>
-          Already have an account?{" "}
-          <Link href="/login" className="font-semibold transition-colors hover:text-[#c49a5a]" style={{ color: "#a07840" }}>
-            Sign in
-          </Link>
-        </p>
-      </div>
-    </div>
+        <button
+          type="submit" disabled={disabled}
+          className="w-full rounded-xl py-2.5 text-sm font-semibold transition-all flex items-center justify-center gap-2"
+          style={{
+            background: disabled ? "#e4e1d8" : "#a07840",
+            color:      disabled ? "#9b988e" : "#fdfbf6",
+            cursor:     disabled ? "not-allowed" : "pointer",
+            boxShadow:  disabled ? "none" : "0 8px 20px -8px rgba(160,120,64,0.55)",
+          }}
+        >
+          {loading && <Loader2 size={15} className="animate-spin" />}
+          {loading ? "Creating account…" : "Start free trial"}
+        </button>
+      </form>
+
+      <p className="text-center text-xs mt-4" style={{ color: "#73716a" }}>
+        By signing up you agree to our{" "}
+        <Link href="/terms" className="underline hover:text-[#4d4b44] transition-colors">Terms</Link>
+        {" "}and{" "}
+        <Link href="/privacy" className="underline hover:text-[#4d4b44] transition-colors">Privacy Policy</Link>
+      </p>
+
+      <p className="text-center text-sm mt-5" style={{ color: "#4d4b44" }}>
+        Already have an account?{" "}
+        <Link href="/login" className="font-semibold transition-colors hover:text-[#8a6530]" style={{ color: "#a07840" }}>
+          Sign in
+        </Link>
+      </p>
+    </AuthShell>
   );
 }

@@ -92,8 +92,13 @@ main prompt again. Everything important lives in PROGRESS.md, so clearing costs 
 - Kept Inter, gold accent (#a07840), and the "Other tools" (never-name-competitors) convention.
 - **Light theme on the landing page (user request).** Switched the marketing page from the dark `#0c0c0e` base to an elegant warm off-white (`#f4f2ec` base, `#ebe8e0` bands, `#ffffff` cards, text `#23221f`, muted `#6e6c64`, borders `#e4e1d8`). Deliberately **kept the hero demo browser + the before/after "after" store dark** as premium product mockups on the light page. Updated `globals.css` (`sq-gold-text` deepened, `sq-aurora` softened), `FaqAccordion.tsx` + `BeforeAfter.tsx` border to light. **This is a deliberate deviation from CLAUDE.md's locked dark palette, scoped to the public landing page only — the dashboard/app stays dark.**
 
+**✅ Auth flow redesign (verified live, desktop + mobile, no errors):**
+- New `components/auth/AuthShell.tsx` — premium split-screen: left = dark branded showcase panel reusing the landing's live `StoreBuilderDemo` + 3 trust points (desktop only); right = clean light form area. Mobile collapses to the form with the logo on top.
+- Rewrote `login`, `signup`, `forgot-password` (`app/(auth)/*`) onto the shell in the light theme (white fields, `#a07840` focus, darkened labels/text, light Google button + dividers, success/check-email states). Logic preserved.
+- **Funnel continuity:** the landing "Build my store" URL input routes to `/signup?url=…`; signup now shows a "Ready to build from <url>" chip, stores it in signUp metadata (`pending_product_url`), and Google OAuth `next` deep-links to `/store-builder?url=…` when a URL is present.
+
 **🟡 Not done / next quality passes (same premium bar, not yet applied):**
-- Dashboard shell + widgets, AI Store Builder visual editor, Store Spy / Ad Intelligence, auth pages — all functional but still at the old polish level. These are the next surfaces to elevate.
+- Dashboard shell + widgets, AI Store Builder visual editor, Store Spy / Ad Intelligence — all functional but still at the old DARK polish level. **Open decision:** the public funnel (landing + auth) is now light; the logged-in app is still dark. Either keep the split (marketing light / app dark) or relight the app — confirm with user before the dashboard pass. Note: `pending_product_url` is captured at signup but the dashboard/store-builder doesn't yet auto-consume it — wire that during the dashboard pass.
 
 **⚠️ Remember / decisions made:**
 - User asked me to **stop asking permission / stop delegating tasks back to them** and work as a senior who makes judgment calls and shows working results. Saved to memory.
