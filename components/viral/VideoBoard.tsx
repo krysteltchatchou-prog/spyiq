@@ -30,9 +30,9 @@ export default function VideoBoard({ videos }: { videos: ViralVideo[] }) {
           <button key={n} onClick={() => setNiche(n)}
             className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
             style={{
-              background: niche === n ? "#a07840" : "#15151a",
-              border: `1px solid ${niche === n ? "#a07840" : "#2a2a33"}`,
-              color: niche === n ? "#f5f3ee" : "#8a8a94",
+              background: niche === n ? "#a07840" : "#ffffff",
+              border: `1px solid ${niche === n ? "#a07840" : "#e4e1d8"}`,
+              color: niche === n ? "#fdfbf6" : "#4d4b44",
             }}>{n}</button>
         ))}
       </div>
@@ -41,9 +41,9 @@ export default function VideoBoard({ videos }: { videos: ViralVideo[] }) {
           <button key={p} onClick={() => setPlatform(p)}
             className="rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all"
             style={{
-              background: platform === p ? "#1d1d24" : "transparent",
-              border: `1px solid ${platform === p ? "#3a3a42" : "#2a2a33"}`,
-              color: platform === p ? "#f5f3ee" : "#5c5c64",
+              background: platform === p ? "#f3f1ea" : "transparent",
+              border: `1px solid ${platform === p ? "#d4cfc2" : "#e4e1d8"}`,
+              color: platform === p ? "#23221f" : "#5d5b54",
             }}>{p === "All" ? "All platforms" : `${PLATFORM_ICON[p]} ${p}`}</button>
         ))}
       </div>
@@ -52,12 +52,12 @@ export default function VideoBoard({ videos }: { videos: ViralVideo[] }) {
         {filtered.map((v) => {
           const band = viralBand(v.viral_score);
           return (
-            <div key={v.video_id} className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+            <div key={v.video_id} className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
               {/* Thumb */}
-              <div className="relative h-44 flex items-center justify-center" style={{ background: "#1d1d24" }}>
+              <div className="relative h-44 flex items-center justify-center" style={{ background: "#f3f1ea" }}>
                 <span className="text-5xl opacity-40">{PLATFORM_ICON[v.platform]}</span>
                 <span className="absolute top-3 left-3 flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold"
-                  style={{ background: "rgba(12,12,14,0.7)", color: "#f5f3ee" }}>
+                  style={{ background: "rgba(12,12,14,0.7)", color: "#fdfbf6" }}>
                   {PLATFORM_ICON[v.platform]} {v.platform}
                 </span>
                 <span className="absolute top-3 right-3 rounded-full px-2.5 py-1 text-xs font-bold"
@@ -69,10 +69,10 @@ export default function VideoBoard({ videos }: { videos: ViralVideo[] }) {
               <div className="p-4 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-semibold" style={{ color: band.color }}>{band.label}</span>
-                  <span className="text-xs" style={{ color: "#5c5c64" }}>{daysAgo(v.posted_at)}d ago</span>
+                  <span className="text-xs" style={{ color: "#5d5b54" }}>{daysAgo(v.posted_at)}d ago</span>
                 </div>
-                <p className="font-bold text-sm" style={{ color: "#f5f3ee" }}>{v.product_name}</p>
-                <p className="text-xs mb-2" style={{ color: "#8a8a94" }}>
+                <p className="font-bold text-sm" style={{ color: "#23221f" }}>{v.product_name}</p>
+                <p className="text-xs mb-2" style={{ color: "#4d4b44" }}>
                   {v.creator_handle} · {compact(v.creator_followers)} followers
                 </p>
                 <p className="text-xs italic leading-relaxed mb-3 flex-1" style={{ color: "#c9c7c0" }}>&ldquo;{v.caption}&rdquo;</p>
@@ -84,16 +84,16 @@ export default function VideoBoard({ videos }: { videos: ViralVideo[] }) {
                     { label: "Shares", value: compact(v.shares) },
                     { label: "Saves", value: compact(v.saves) },
                   ].map((s) => (
-                    <div key={s.label} className="rounded-lg py-1.5" style={{ background: "#1d1d24" }}>
-                      <p className="font-bold text-[11px]" style={{ color: "#f5f3ee" }}>{s.value}</p>
-                      <p className="text-[9px]" style={{ color: "#5c5c64" }}>{s.label}</p>
+                    <div key={s.label} className="rounded-lg py-1.5" style={{ background: "#f3f1ea" }}>
+                      <p className="font-bold text-[11px]" style={{ color: "#23221f" }}>{s.value}</p>
+                      <p className="text-[9px]" style={{ color: "#5d5b54" }}>{s.label}</p>
                     </div>
                   ))}
                 </div>
 
                 <a href={v.product_url} target="_blank" rel="noopener noreferrer"
                   className="w-full text-center rounded-xl py-2 text-xs font-bold transition-all"
-                  style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#c49a5a" }}>
+                  style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#8a6530" }}>
                   🔎 Find this product
                 </a>
               </div>

@@ -72,12 +72,12 @@ function EditField({ label, value, onChange, textarea, rows }: {
   rows?: number;
 }) {
   const cls = "w-full rounded-lg px-3 py-2 text-sm";
-  const style = { background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" };
+  const style = { background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" };
   const onFocus = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => { e.currentTarget.style.borderColor = "#a07840"; };
-  const onBlur = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => { e.currentTarget.style.borderColor = "#2a2a33"; };
+  const onBlur = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => { e.currentTarget.style.borderColor = "#e4e1d8"; };
   return (
     <label className="block">
-      <span className="block text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: "#5c5c64" }}>{label}</span>
+      <span className="block text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: "#5d5b54" }}>{label}</span>
       {textarea ? (
         <textarea rows={rows ?? 3} value={value} onChange={(e) => onChange(e.target.value)} className={cls} style={style} onFocus={onFocus} onBlur={onBlur} />
       ) : (
@@ -90,8 +90,8 @@ function EditField({ label, value, onChange, textarea, rows }: {
 // A collapsible section card for grouping related fields in the editor.
 function EditSection({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <details open className="rounded-xl overflow-hidden" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-      <summary className="cursor-pointer px-4 py-3 text-sm font-semibold select-none list-none" style={{ color: "#f5f3ee" }}>
+    <details open className="rounded-xl overflow-hidden" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+      <summary className="cursor-pointer px-4 py-3 text-sm font-semibold select-none list-none" style={{ color: "#23221f" }}>
         {title}
       </summary>
       <div className="px-4 pb-4 space-y-3">{children}</div>
@@ -123,7 +123,7 @@ function ImageUploader({ images, onChange, max }: {
       {images.map((src, i) => (
         <div key={i} className="relative" style={{ width: 56, height: 56 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt="" className="w-full h-full object-cover rounded-md" style={{ border: "1px solid #2a2a33" }} />
+          <img src={src} alt="" className="w-full h-full object-cover rounded-md" style={{ border: "1px solid #e4e1d8" }} />
           <button onClick={() => onChange(images.filter((_, j) => j !== i))}
             className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full flex items-center justify-center text-[10px] font-bold"
             style={{ background: "#d4685f", color: "#fff" }}>×</button>
@@ -131,7 +131,7 @@ function ImageUploader({ images, onChange, max }: {
       ))}
       {canAdd && (
         <label className="flex items-center justify-center cursor-pointer rounded-md text-lg"
-          style={{ width: 56, height: 56, border: "1px dashed #3a3a42", color: "#8a8a94" }}>
+          style={{ width: 56, height: 56, border: "1px dashed #d4cfc2", color: "#4d4b44" }}>
           +
           <input type="file" accept="image/*" className="hidden"
             onChange={async (e) => {
@@ -347,14 +347,14 @@ export default function StoreBuilderPage() {
     <div className={step === 4 ? "max-w-[1200px]" : "max-w-[900px]"}>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#f5f3ee", letterSpacing: "-0.4px" }}>AI Store Builder</h1>
-        <p className="text-sm" style={{ color: "#8a8a94" }}>From any product to a launch-ready Shopify store — powered by Claude Sonnet 4.6.</p>
+        <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>AI Store Builder</h1>
+        <p className="text-sm" style={{ color: "#4d4b44" }}>From any product to a launch-ready Shopify store — powered by Claude Sonnet 4.6.</p>
       </div>
 
       {/* Hero card (steps 1–2 only) */}
       {step <= 2 && (
         <div className="rounded-2xl p-8 mb-8" style={{
-          background: "linear-gradient(135deg, #15151a 0%, #1d1d24 100%)",
+          background: "linear-gradient(135deg, #ffffff 0%, #f3f1ea 100%)",
           border: "1px solid #a07840",
         }}>
           <div className="flex items-start gap-4 mb-6">
@@ -363,10 +363,10 @@ export default function StoreBuilderPage() {
               ⚡
             </div>
             <div>
-              <h2 className="font-bold text-lg mb-1" style={{ color: "#f5f3ee" }}>
+              <h2 className="font-bold text-lg mb-1" style={{ color: "#23221f" }}>
                 From any link to a store ready to sell — in 60 seconds
               </h2>
-              <p className="text-sm" style={{ color: "#8a8a94" }}>
+              <p className="text-sm" style={{ color: "#4d4b44" }}>
                 Paste any product link or type a product name. SpyIQ AI retrieves data, writes all the copy, builds conversion-optimised pages, and generates a complete store.
               </p>
             </div>
@@ -376,8 +376,8 @@ export default function StoreBuilderPage() {
               <div key={f.label} className="rounded-xl p-3 text-center"
                 style={{ background: "rgba(160,120,64,0.06)", border: "1px solid rgba(160,120,64,0.15)" }}>
                 <div className="text-xl mb-1">{f.emoji}</div>
-                <p className="text-xs font-semibold" style={{ color: "#f5f3ee" }}>{f.label}</p>
-                <p className="text-[10px] mt-0.5" style={{ color: "#8a8a94" }}>{f.desc}</p>
+                <p className="text-xs font-semibold" style={{ color: "#23221f" }}>{f.label}</p>
+                <p className="text-[10px] mt-0.5" style={{ color: "#4d4b44" }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -390,13 +390,13 @@ export default function StoreBuilderPage() {
           {([1, 2] as const).map((s) => (
             <div key={s} className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-                style={{ background: step >= s ? "#a07840" : "#2a2a33", color: step >= s ? "#f5f3ee" : "#5c5c64" }}>
+                style={{ background: step >= s ? "#a07840" : "#e4e1d8", color: step >= s ? "#23221f" : "#5d5b54" }}>
                 {s}
               </div>
-              <span className="text-xs font-medium" style={{ color: step === s ? "#f5f3ee" : "#5c5c64" }}>
+              <span className="text-xs font-medium" style={{ color: step === s ? "#23221f" : "#5d5b54" }}>
                 {s === 1 ? "Pick Product" : "Store Style"}
               </span>
-              {s < 2 && <ChevronRight size={14} color="#3a3a42" />}
+              {s < 2 && <ChevronRight size={14} color="#d4cfc2" />}
             </div>
           ))}
         </div>
@@ -412,11 +412,11 @@ export default function StoreBuilderPage() {
 
       {/* Step 1 — Pick Product */}
       {step === 1 && (
-        <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-          <h2 className="font-semibold mb-4" style={{ color: "#f5f3ee" }}>Step 1 — Pick Your Product</h2>
+        <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+          <h2 className="font-semibold mb-4" style={{ color: "#23221f" }}>Step 1 — Pick Your Product</h2>
           <div className="flex gap-3 mb-5">
             <div className="flex-1 relative">
-              <Search size={15} color="#5c5c64" className="absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search size={15} color="#5d5b54" className="absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={productInput}
@@ -424,13 +424,13 @@ export default function StoreBuilderPage() {
                 onKeyDown={(e) => e.key === "Enter" && productInput.trim() && setStep(2)}
                 placeholder="Paste AliExpress/Amazon link, or type a product name"
                 className="w-full rounded-xl pl-10 pr-4 py-3 text-sm"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
+                onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
               />
             </div>
           </div>
-          <p className="text-xs mb-3" style={{ color: "#5c5c64" }}>Or pick a popular product:</p>
+          <p className="text-xs mb-3" style={{ color: "#5d5b54" }}>Or pick a popular product:</p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
             {[
               { emoji: "🧴", name: "Hydro-Boost Face Serum",  niche: "Beauty",  score: 94 },
@@ -441,13 +441,13 @@ export default function StoreBuilderPage() {
                 onClick={() => setProductInput(p.name)}
                 className="flex items-center gap-3 p-3 rounded-xl text-left transition-all"
                 style={{
-                  background: productInput === p.name ? "rgba(160,120,64,0.12)" : "#1d1d24",
-                  border: `1px solid ${productInput === p.name ? "#a07840" : "#2a2a33"}`,
+                  background: productInput === p.name ? "rgba(160,120,64,0.12)" : "#f3f1ea",
+                  border: `1px solid ${productInput === p.name ? "#a07840" : "#e4e1d8"}`,
                 }}>
                 <span className="text-2xl">{p.emoji}</span>
                 <div>
-                  <p className="text-xs font-semibold" style={{ color: "#f5f3ee" }}>{p.name}</p>
-                  <p className="text-[10px]" style={{ color: "#5c5c64" }}>{p.niche} · IQ {p.score}</p>
+                  <p className="text-xs font-semibold" style={{ color: "#23221f" }}>{p.name}</p>
+                  <p className="text-[10px]" style={{ color: "#5d5b54" }}>{p.niche} · IQ {p.score}</p>
                 </div>
               </button>
             ))}
@@ -458,8 +458,8 @@ export default function StoreBuilderPage() {
               disabled={!productInput.trim()}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
               style={{
-                background: productInput.trim() ? "#a07840" : "#2a2a33",
-                color:      productInput.trim() ? "#f5f3ee" : "#5c5c64",
+                background: productInput.trim() ? "#a07840" : "#e4e1d8",
+                color:      productInput.trim() ? "#23221f" : "#5d5b54",
                 cursor:     productInput.trim() ? "pointer" : "not-allowed",
               }}>
               Next: Choose Style <ChevronRight size={14} />
@@ -470,36 +470,36 @@ export default function StoreBuilderPage() {
 
       {/* Step 2 — Store Style */}
       {step === 2 && (
-        <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-          <h2 className="font-semibold mb-5" style={{ color: "#f5f3ee" }}>Step 2 — Choose Your Store Style</h2>
+        <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+          <h2 className="font-semibold mb-5" style={{ color: "#23221f" }}>Step 2 — Choose Your Store Style</h2>
           <div className="space-y-5">
             <div>
-              <label className="block text-xs font-medium mb-2" style={{ color: "#8a8a94" }}>Store Name <span style={{ color: "#5c5c64" }}>(optional — AI will generate one)</span></label>
+              <label className="block text-xs font-medium mb-2" style={{ color: "#4d4b44" }}>Store Name <span style={{ color: "#5d5b54" }}>(optional — AI will generate one)</span></label>
               <input
                 type="text"
                 value={storeName}
                 onChange={(e) => setStoreName(e.target.value)}
                 placeholder='e.g. "GlowDrop" — leave blank for AI suggestion'
                 className="w-full rounded-xl px-3.5 py-2.5 text-sm"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                 onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
+                onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
               />
             </div>
             <div>
-              <label className="block text-xs font-medium mb-2" style={{ color: "#8a8a94" }}>Visual Style</label>
+              <label className="block text-xs font-medium mb-2" style={{ color: "#4d4b44" }}>Visual Style</label>
               <div className="grid grid-cols-4 gap-2">
                 {STYLES.map((s) => (
                   <button key={s.id}
                     onClick={() => setSelectedStyle(s.id)}
                     className="flex flex-col items-center gap-1 p-3 rounded-xl transition-all"
                     style={{
-                      background: selectedStyle === s.id ? "rgba(160,120,64,0.12)" : "#1d1d24",
-                      border: `1px solid ${selectedStyle === s.id ? "#a07840" : "#2a2a33"}`,
+                      background: selectedStyle === s.id ? "rgba(160,120,64,0.12)" : "#f3f1ea",
+                      border: `1px solid ${selectedStyle === s.id ? "#a07840" : "#e4e1d8"}`,
                     }}>
                     <span className="text-xl">{s.emoji}</span>
                     <span className="text-[10px] font-medium text-center"
-                      style={{ color: selectedStyle === s.id ? "#c49a5a" : "#8a8a94" }}>
+                      style={{ color: selectedStyle === s.id ? "#8a6530" : "#4d4b44" }}>
                       {s.label}
                     </span>
                   </button>
@@ -507,16 +507,16 @@ export default function StoreBuilderPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium mb-2" style={{ color: "#8a8a94" }}>Language</label>
+              <label className="block text-xs font-medium mb-2" style={{ color: "#4d4b44" }}>Language</label>
               <div className="flex gap-2 flex-wrap">
                 {LANGUAGES.map((l) => (
                   <button key={l}
                     onClick={() => setLanguage(l)}
                     className="px-3 py-1.5 rounded-lg text-xs transition-all"
                     style={{
-                      background: language === l ? "rgba(160,120,64,0.15)" : "#1d1d24",
-                      border: `1px solid ${language === l ? "#a07840" : "#2a2a33"}`,
-                      color: language === l ? "#c49a5a" : "#8a8a94",
+                      background: language === l ? "rgba(160,120,64,0.15)" : "#f3f1ea",
+                      border: `1px solid ${language === l ? "#a07840" : "#e4e1d8"}`,
+                      color: language === l ? "#8a6530" : "#4d4b44",
                     }}>
                     {l}
                   </button>
@@ -526,14 +526,14 @@ export default function StoreBuilderPage() {
           </div>
           <div className="flex items-center justify-between mt-6">
             <button onClick={() => setStep(1)}
-              className="text-sm font-medium transition-colors hover:text-[#c49a5a]"
-              style={{ color: "#8a8a94" }}>
+              className="text-sm font-medium transition-colors hover:text-[#8a6530]"
+              style={{ color: "#4d4b44" }}>
               ← Back
             </button>
             <button
               onClick={startGeneration}
               className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold"
-              style={{ background: "#a07840", color: "#f5f3ee" }}>
+              style={{ background: "#a07840", color: "#fdfbf6" }}>
               <Zap size={15} /> Generate Store with AI
             </button>
           </div>
@@ -542,13 +542,13 @@ export default function StoreBuilderPage() {
 
       {/* Step 3 — Generation progress */}
       {step === 3 && (
-        <div className="rounded-2xl p-8 text-center" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+        <div className="rounded-2xl p-8 text-center" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4"
             style={{ background: "rgba(160,120,64,0.15)", border: "1px solid rgba(160,120,64,0.3)" }}>
             ⚡
           </div>
-          <h2 className="font-bold text-lg mb-1" style={{ color: "#f5f3ee" }}>Building your store with AI…</h2>
-          <p className="text-sm mb-8" style={{ color: "#8a8a94" }}>Claude Sonnet 4.6 is generating your complete store. Usually takes 30–60 seconds.</p>
+          <h2 className="font-bold text-lg mb-1" style={{ color: "#23221f" }}>Building your store with AI…</h2>
+          <p className="text-sm mb-8" style={{ color: "#4d4b44" }}>Claude Sonnet 4.6 is generating your complete store. Usually takes 30–60 seconds.</p>
           <div className="max-w-[360px] mx-auto space-y-3 text-left">
             {GENERATION_STEPS.map((label, i) => {
               const done = completedSteps.includes(i);
@@ -557,14 +557,14 @@ export default function StoreBuilderPage() {
                 <div key={label} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
                     style={{
-                      background: done ? "#5eb89a" : active ? "rgba(160,120,64,0.2)" : "#2a2a33",
-                      border: `1px solid ${done ? "#5eb89a" : active ? "#a07840" : "#2a2a33"}`,
+                      background: done ? "#3e8f72" : active ? "rgba(160,120,64,0.2)" : "#e4e1d8",
+                      border: `1px solid ${done ? "#3e8f72" : active ? "#a07840" : "#e4e1d8"}`,
                     }}>
                     {done   ? <Check size={11} color="#fff" />
                     : active ? <Loader2 size={10} color="#a07840" className="animate-spin" />
                     : null}
                   </div>
-                  <span className="text-sm" style={{ color: done ? "#f5f3ee" : active ? "#c49a5a" : "#5c5c64" }}>
+                  <span className="text-sm" style={{ color: done ? "#23221f" : active ? "#8a6530" : "#5d5b54" }}>
                     {label}
                   </span>
                 </div>
@@ -579,12 +579,12 @@ export default function StoreBuilderPage() {
         <div>
           <div className="flex items-center justify-between mb-5">
             <div>
-              <h2 className="font-bold text-xl" style={{ color: "#f5f3ee" }}>{result.brand.store_name} is ready!</h2>
-              <p className="text-sm" style={{ color: "#8a8a94" }}>Your complete store copy, branding, and ads — generated by Claude.</p>
+              <h2 className="font-bold text-xl" style={{ color: "#23221f" }}>{result.brand.store_name} is ready!</h2>
+              <p className="text-sm" style={{ color: "#4d4b44" }}>Your complete store copy, branding, and ads — generated by Claude.</p>
             </div>
             <button
               onClick={() => { setStep(1); setResult(null); setProductInput(""); setStoreName(""); }}
-              className="text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+              className="text-xs font-semibold hover:text-[#8a6530] transition-colors"
               style={{ color: "#a07840" }}>
               ← Build Another
             </button>
@@ -594,14 +594,14 @@ export default function StoreBuilderPage() {
 
           {/* Result tabs */}
           <div className="flex gap-1 mb-5 p-1 rounded-xl flex-wrap"
-            style={{ background: "#15151a", border: "1px solid #2a2a33", width: "fit-content" }}>
+            style={{ background: "#ffffff", border: "1px solid #e4e1d8", width: "fit-content" }}>
             {["Editor", "Brand", "Product Page", "Home Page", "Ads", "Export"].map((t) => (
               <button key={t}
                 onClick={() => setActiveResultTab(t)}
                 className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
                 style={{
                   background: activeResultTab === t ? "#a07840" : "transparent",
-                  color:      activeResultTab === t ? "#f5f3ee" : "#8a8a94",
+                  color:      activeResultTab === t ? "#fdfbf6" : "#4d4b44",
                 }}>
                 {t}
               </button>
@@ -627,14 +627,14 @@ export default function StoreBuilderPage() {
             return (
               <div>
                 {/* Page switcher — edit the Home page or the Product page */}
-                <div className="flex gap-1 mb-4 p-1 rounded-xl" style={{ background: "#15151a", border: "1px solid #2a2a33", width: "fit-content" }}>
+                <div className="flex gap-1 mb-4 p-1 rounded-xl" style={{ background: "#ffffff", border: "1px solid #e4e1d8", width: "fit-content" }}>
                   {([["home", "🏠 Home Page"], ["product", "🛍️ Product Page"]] as const).map(([id, label]) => (
                     <button key={id}
                       onClick={() => setActivePage(id)}
                       className="px-4 py-2 rounded-lg text-xs font-semibold transition-all"
                       style={{
                         background: activePage === id ? "#a07840" : "transparent",
-                        color:      activePage === id ? "#f5f3ee" : "#8a8a94",
+                        color:      activePage === id ? "#fdfbf6" : "#4d4b44",
                       }}>
                       {label}
                     </button>
@@ -662,7 +662,7 @@ export default function StoreBuilderPage() {
                     <EditField label="Secondary button" value={result.home_page.cta_secondary} onChange={(v) => updateResult((d) => { d.home_page.cta_secondary = v; })} />
                     <EditField label="Social proof bar" value={result.home_page.social_proof} onChange={(v) => updateResult((d) => { d.home_page.social_proof = v; })} />
                     <div>
-                      <span className="block text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: "#5c5c64" }}>Hero image (optional)</span>
+                      <span className="block text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: "#5d5b54" }}>Hero image (optional)</span>
                       <ImageUploader max={1} images={result.home_page.hero_image ? [result.home_page.hero_image] : []} onChange={(next) => updateResult((d) => { d.home_page.hero_image = next[0]; })} />
                     </div>
                   </EditSection>
@@ -673,7 +673,7 @@ export default function StoreBuilderPage() {
                       <div className="flex-1"><EditField label="# of reviews" value={result.home_page.review_count ?? ""} onChange={(v) => updateResult((d) => { d.home_page.review_count = v; })} /></div>
                     </div>
                     {(result.home_page.reviews ?? []).map((r, i) => (
-                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < (result.home_page.reviews?.length ?? 0) - 1 ? "1px solid #2a2a33" : "none" }}>
+                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < (result.home_page.reviews?.length ?? 0) - 1 ? "1px solid #e4e1d8" : "none" }}>
                         <EditField label={`Review ${i + 1} — name`} value={r.name} onChange={(v) => updateResult((d) => { if (d.home_page.reviews) d.home_page.reviews[i].name = v; })} />
                         <EditField label="Text" textarea value={r.text} onChange={(v) => updateResult((d) => { if (d.home_page.reviews) d.home_page.reviews[i].text = v; })} />
                       </div>
@@ -682,7 +682,7 @@ export default function StoreBuilderPage() {
 
                   <EditSection title="🔧 How It Works">
                     {(result.home_page.steps ?? []).map((s, i) => (
-                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < (result.home_page.steps?.length ?? 0) - 1 ? "1px solid #2a2a33" : "none" }}>
+                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < (result.home_page.steps?.length ?? 0) - 1 ? "1px solid #e4e1d8" : "none" }}>
                         <EditField label={`Step ${i + 1} — title`} value={s.title} onChange={(v) => updateResult((d) => { if (d.home_page.steps) d.home_page.steps[i].title = v; })} />
                         <EditField label="Body" textarea value={s.body} onChange={(v) => updateResult((d) => { if (d.home_page.steps) d.home_page.steps[i].body = v; })} />
                       </div>
@@ -691,7 +691,7 @@ export default function StoreBuilderPage() {
 
                   <EditSection title="✨ Features">
                     {result.home_page.features.map((f, i) => (
-                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < result.home_page.features.length - 1 ? "1px solid #2a2a33" : "none" }}>
+                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < result.home_page.features.length - 1 ? "1px solid #e4e1d8" : "none" }}>
                         <EditField label={`Feature ${i + 1} — icon (emoji)`} value={f.icon} onChange={(v) => updateResult((d) => { d.home_page.features[i].icon = v; })} />
                         <EditField label="Title" value={f.title} onChange={(v) => updateResult((d) => { d.home_page.features[i].title = v; })} />
                         <EditField label="Body" textarea value={f.body} onChange={(v) => updateResult((d) => { d.home_page.features[i].body = v; })} />
@@ -720,7 +720,7 @@ export default function StoreBuilderPage() {
                   <>
                   <EditSection title="🛍️ Product">
                     <div>
-                      <span className="block text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: "#5c5c64" }}>Product images (upload from Creative Fabrica)</span>
+                      <span className="block text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: "#5d5b54" }}>Product images (upload from Creative Fabrica)</span>
                       <ImageUploader images={result.product_page.images ?? []} onChange={(next) => updateResult((d) => { d.product_page.images = next; })} />
                     </div>
                     <EditField label="Headline" value={result.product_page.headline} onChange={(v) => updateResult((d) => { d.product_page.headline = v; })} />
@@ -736,7 +736,7 @@ export default function StoreBuilderPage() {
 
                   <EditSection title="❓ FAQ">
                     {result.product_page.faq.map((item, i) => (
-                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < result.product_page.faq.length - 1 ? "1px solid #2a2a33" : "none" }}>
+                      <div key={i} className="space-y-2 pb-3" style={{ borderBottom: i < result.product_page.faq.length - 1 ? "1px solid #e4e1d8" : "none" }}>
                         <EditField label={`Question ${i + 1}`} value={item.q} onChange={(v) => updateResult((d) => { d.product_page.faq[i].q = v; })} />
                         <EditField label="Answer" textarea value={item.a} onChange={(v) => updateResult((d) => { d.product_page.faq[i].a = v; })} />
                       </div>
@@ -748,31 +748,31 @@ export default function StoreBuilderPage() {
 
                 {/* RIGHT — live preview */}
                 <div className="flex-1 min-w-0">
-                <p className="text-xs mb-3" style={{ color: "#5c5c64" }}>
-                  Edit any field on the left — the preview updates live. This is a preview inside SpyIQ; use the <strong style={{ color: "#8a8a94" }}>Export</strong> tab to put it on a real Shopify site.
+                <p className="text-xs mb-3" style={{ color: "#5d5b54" }}>
+                  Edit any field on the left — the preview updates live. This is a preview inside SpyIQ; use the <strong style={{ color: "#4d4b44" }}>Export</strong> tab to put it on a real Shopify site.
                 </p>
                 {/* Device toggle — switch the preview between desktop and phone width */}
-                <div className="flex items-center gap-1 mb-3 p-1 rounded-lg" style={{ background: "#15151a", border: "1px solid #2a2a33", width: "fit-content" }}>
+                <div className="flex items-center gap-1 mb-3 p-1 rounded-lg" style={{ background: "#ffffff", border: "1px solid #e4e1d8", width: "fit-content" }}>
                   {(["desktop", "mobile"] as const).map((d) => (
                     <button key={d}
                       onClick={() => setPreviewDevice(d)}
                       className="px-3 py-1.5 rounded-md text-xs font-semibold capitalize transition-all"
                       style={{
                         background: previewDevice === d ? "#a07840" : "transparent",
-                        color:      previewDevice === d ? "#f5f3ee" : "#8a8a94",
+                        color:      previewDevice === d ? "#fdfbf6" : "#4d4b44",
                       }}>
                       {d}
                     </button>
                   ))}
                 </div>
                 {/* Browser-window mockup */}
-                <div className="rounded-2xl overflow-hidden mx-auto transition-all" style={{ border: "1px solid #2a2a33", background: "#ffffff", maxWidth: previewDevice === "mobile" ? 390 : "100%" }}>
+                <div className="rounded-2xl overflow-hidden mx-auto transition-all" style={{ border: "1px solid #e4e1d8", background: "#ffffff", maxWidth: previewDevice === "mobile" ? 390 : "100%" }}>
                   {/* Fake browser chrome */}
                   <div className="flex items-center gap-2 px-4 py-2.5" style={{ background: "#e9e9ee", borderBottom: "1px solid #d4d4dc" }}>
                     <span className="w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
                     <span className="w-3 h-3 rounded-full" style={{ background: "#febc2e" }} />
                     <span className="w-3 h-3 rounded-full" style={{ background: "#28c840" }} />
-                    <div className="flex-1 mx-3 px-3 py-1 rounded-md text-xs text-center" style={{ background: "#ffffff", color: "#8a8a94" }}>
+                    <div className="flex-1 mx-3 px-3 py-1 rounded-md text-xs text-center" style={{ background: "#ffffff", color: "#4d4b44" }}>
                       www.{slug}.com
                     </div>
                   </div>
@@ -991,14 +991,14 @@ export default function StoreBuilderPage() {
 
           {activeResultTab === "Brand" && (
             <div className="space-y-4">
-              <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+              <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h2 className="font-bold text-2xl" style={{ color: "#f5f3ee" }}>{result.brand.store_name}</h2>
-                    <p className="text-sm italic mt-1" style={{ color: "#8a8a94" }}>&ldquo;{result.brand.tagline}&rdquo;</p>
+                    <h2 className="font-bold text-2xl" style={{ color: "#23221f" }}>{result.brand.store_name}</h2>
+                    <p className="text-sm italic mt-1" style={{ color: "#4d4b44" }}>&ldquo;{result.brand.tagline}&rdquo;</p>
                   </div>
                   <button onClick={() => copyText("brand", `${result.brand.store_name}\n"${result.brand.tagline}"`)}
-                    className="p-2 rounded-lg" style={{ color: copiedKey === "brand" ? "#5eb89a" : "#5c5c64" }}>
+                    className="p-2 rounded-lg" style={{ color: copiedKey === "brand" ? "#3e8f72" : "#5d5b54" }}>
                     {copiedKey === "brand" ? <Check size={14} /> : <Copy size={14} />}
                   </button>
                 </div>
@@ -1007,21 +1007,21 @@ export default function StoreBuilderPage() {
                     <div key={i} className="w-8 h-8 rounded-lg" title={c}
                       style={{ background: c, border: "1px solid rgba(255,255,255,0.1)" }} />
                   ))}
-                  <span className="text-xs ml-2" style={{ color: "#5c5c64" }}>Brand palette</span>
+                  <span className="text-xs ml-2" style={{ color: "#5d5b54" }}>Brand palette</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-3">
-                  <div className="p-3 rounded-xl" style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                    <p className="text-xs" style={{ color: "#5c5c64" }}>Display Font</p>
-                    <p className="text-sm font-semibold mt-0.5" style={{ color: "#f5f3ee" }}>{result.brand.font_display}</p>
+                  <div className="p-3 rounded-xl" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                    <p className="text-xs" style={{ color: "#5d5b54" }}>Display Font</p>
+                    <p className="text-sm font-semibold mt-0.5" style={{ color: "#23221f" }}>{result.brand.font_display}</p>
                   </div>
-                  <div className="p-3 rounded-xl" style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                    <p className="text-xs" style={{ color: "#5c5c64" }}>Body Font</p>
-                    <p className="text-sm font-semibold mt-0.5" style={{ color: "#f5f3ee" }}>{result.brand.font_body}</p>
+                  <div className="p-3 rounded-xl" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                    <p className="text-xs" style={{ color: "#5d5b54" }}>Body Font</p>
+                    <p className="text-sm font-semibold mt-0.5" style={{ color: "#23221f" }}>{result.brand.font_body}</p>
                   </div>
                 </div>
-                <div className="p-3 rounded-xl" style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                  <p className="text-xs mb-1" style={{ color: "#5c5c64" }}>Brand Voice</p>
-                  <p className="text-sm" style={{ color: "#f5f3ee" }}>{result.brand.brand_voice}</p>
+                <div className="p-3 rounded-xl" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                  <p className="text-xs mb-1" style={{ color: "#5d5b54" }}>Brand Voice</p>
+                  <p className="text-sm" style={{ color: "#23221f" }}>{result.brand.brand_voice}</p>
                 </div>
               </div>
             </div>
@@ -1037,40 +1037,40 @@ export default function StoreBuilderPage() {
                 { label: "Description (p2)", key: "d2",   text: result.product_page.description_p2 },
                 { label: "Description (p3)", key: "d3",   text: result.product_page.description_p3 },
               ].map((item) => (
-                <div key={item.key} className="rounded-2xl p-5" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+                <div key={item.key} className="rounded-2xl p-5" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#5c5c64" }}>{item.label}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#5d5b54" }}>{item.label}</p>
                     <button onClick={() => copyText(item.key, item.text)}
-                      className="p-1.5 rounded-lg" style={{ color: copiedKey === item.key ? "#5eb89a" : "#5c5c64" }}>
+                      className="p-1.5 rounded-lg" style={{ color: copiedKey === item.key ? "#3e8f72" : "#5d5b54" }}>
                       {copiedKey === item.key ? <Check size={12} /> : <Copy size={12} />}
                     </button>
                   </div>
-                  <p className="text-sm leading-relaxed" style={{ color: "#f5f3ee" }}>{item.text}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#23221f" }}>{item.text}</p>
                 </div>
               ))}
-              <div className="rounded-2xl p-5" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+              <div className="rounded-2xl p-5" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
                 <div className="flex items-center justify-between mb-3">
-                  <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#5c5c64" }}>Bullet Points</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#5d5b54" }}>Bullet Points</p>
                   <button onClick={() => copyText("bullets", result.product_page.bullets.map((b) => `• ${b}`).join("\n"))}
-                    className="p-1.5 rounded-lg" style={{ color: copiedKey === "bullets" ? "#5eb89a" : "#5c5c64" }}>
+                    className="p-1.5 rounded-lg" style={{ color: copiedKey === "bullets" ? "#3e8f72" : "#5d5b54" }}>
                     {copiedKey === "bullets" ? <Check size={12} /> : <Copy size={12} />}
                   </button>
                 </div>
                 <ul className="space-y-2">
                   {result.product_page.bullets.map((b, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "#f5f3ee" }}>
-                      <span style={{ color: "#5eb89a" }}>✓</span> {b}
+                    <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "#23221f" }}>
+                      <span style={{ color: "#3e8f72" }}>✓</span> {b}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="rounded-2xl p-5" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5c5c64" }}>FAQ (5 Q&As)</p>
+              <div className="rounded-2xl p-5" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5d5b54" }}>FAQ (5 Q&As)</p>
                 <div className="space-y-3">
                   {result.product_page.faq.map((item, i) => (
-                    <div key={i} className="p-3 rounded-xl" style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                      <p className="text-xs font-semibold mb-1" style={{ color: "#c49a5a" }}>Q: {item.q}</p>
-                      <p className="text-xs leading-relaxed" style={{ color: "#8a8a94" }}>A: {item.a}</p>
+                    <div key={i} className="p-3 rounded-xl" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                      <p className="text-xs font-semibold mb-1" style={{ color: "#8a6530" }}>Q: {item.q}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: "#4d4b44" }}>A: {item.a}</p>
                     </div>
                   ))}
                 </div>
@@ -1079,7 +1079,7 @@ export default function StoreBuilderPage() {
           )}
 
           {activeResultTab === "Home Page" && (
-            <div className="rounded-2xl p-6 space-y-4" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+            <div className="rounded-2xl p-6 space-y-4" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
               {[
                 { label: "Hero Headline",    key: "hh",   text: result.home_page.hero_headline },
                 { label: "Hero Sub",         key: "hs",   text: result.home_page.hero_sub },
@@ -1088,26 +1088,26 @@ export default function StoreBuilderPage() {
                 { label: "Secondary CTA",    key: "cta2", text: result.home_page.cta_secondary },
               ].map((item) => (
                 <div key={item.key} className="flex items-start justify-between gap-3 p-3 rounded-xl"
-                  style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
+                  style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-1" style={{ color: "#5c5c64" }}>{item.label}</p>
-                    <p className="text-sm" style={{ color: "#f5f3ee" }}>{item.text}</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider mb-1" style={{ color: "#5d5b54" }}>{item.label}</p>
+                    <p className="text-sm" style={{ color: "#23221f" }}>{item.text}</p>
                   </div>
                   <button onClick={() => copyText(item.key, item.text)}
-                    className="p-1.5 flex-shrink-0" style={{ color: copiedKey === item.key ? "#5eb89a" : "#5c5c64" }}>
+                    className="p-1.5 flex-shrink-0" style={{ color: copiedKey === item.key ? "#3e8f72" : "#5d5b54" }}>
                     {copiedKey === item.key ? <Check size={12} /> : <Copy size={12} />}
                   </button>
                 </div>
               ))}
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5c5c64" }}>Feature Blocks</p>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5d5b54" }}>Feature Blocks</p>
                 {result.home_page.features.map((f, i) => (
                   <div key={i} className="flex items-start gap-3 p-3 rounded-xl mb-2"
-                    style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
+                    style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
                     <span className="text-xl">{f.icon}</span>
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{f.title}</p>
-                      <p className="text-xs mt-0.5" style={{ color: "#8a8a94" }}>{f.body}</p>
+                      <p className="text-sm font-semibold" style={{ color: "#23221f" }}>{f.title}</p>
+                      <p className="text-xs mt-0.5" style={{ color: "#4d4b44" }}>{f.body}</p>
                     </div>
                   </div>
                 ))}
@@ -1122,15 +1122,15 @@ export default function StoreBuilderPage() {
                 { platform: "TikTok Hooks",   key: "tt", hooks: result.ads.tiktok },
                 { platform: "Email Subjects",  key: "em", hooks: result.ads.email_subjects },
               ].map((section) => (
-                <div key={section.key} className="rounded-2xl p-5" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5c5c64" }}>{section.platform}</p>
+                <div key={section.key} className="rounded-2xl p-5" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+                  <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5d5b54" }}>{section.platform}</p>
                   <div className="space-y-2">
                     {section.hooks.map((hook, i) => (
                       <div key={i} className="flex items-start gap-3 p-3 rounded-xl"
-                        style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                        <p className="text-sm flex-1 leading-relaxed" style={{ color: "#f5f3ee" }}>&ldquo;{hook}&rdquo;</p>
+                        style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                        <p className="text-sm flex-1 leading-relaxed" style={{ color: "#23221f" }}>&ldquo;{hook}&rdquo;</p>
                         <button onClick={() => copyText(`${section.key}-${i}`, hook)}
-                          className="p-1.5 flex-shrink-0" style={{ color: copiedKey === `${section.key}-${i}` ? "#5eb89a" : "#5c5c64" }}>
+                          className="p-1.5 flex-shrink-0" style={{ color: copiedKey === `${section.key}-${i}` ? "#3e8f72" : "#5d5b54" }}>
                           {copiedKey === `${section.key}-${i}` ? <Check size={12} /> : <Copy size={12} />}
                         </button>
                       </div>
@@ -1142,21 +1142,21 @@ export default function StoreBuilderPage() {
           )}
 
           {activeResultTab === "Export" && (
-            <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-              <h2 className="font-semibold mb-4" style={{ color: "#f5f3ee" }}>Export Your Store</h2>
+            <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+              <h2 className="font-semibold mb-4" style={{ color: "#23221f" }}>Export Your Store</h2>
 
               {/* Full-store publish — writes the homepage into the live Shopify theme */}
               <div className="rounded-xl p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(160,120,64,0.12), rgba(160,120,64,0.04))", border: "1px solid #a07840" }}>
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-sm font-semibold flex items-center gap-1.5" style={{ color: "#f5f3ee" }}>🚀 Publish full store to Shopify</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#8a8a94" }}>Creates the product AND makes your live storefront homepage become this design.</p>
+                    <p className="text-sm font-semibold flex items-center gap-1.5" style={{ color: "#23221f" }}>🚀 Publish full store to Shopify</p>
+                    <p className="text-xs mt-0.5" style={{ color: "#4d4b44" }}>Creates the product AND makes your live storefront homepage become this design.</p>
                   </div>
                   <button
                     disabled={publishingStore}
                     onClick={publishFullStore}
                     className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-xs font-semibold flex-shrink-0"
-                    style={{ background: "#a07840", color: "#f5f3ee", cursor: publishingStore ? "wait" : "pointer", opacity: publishingStore ? 0.7 : 1 }}>
+                    style={{ background: "#a07840", color: "#fdfbf6", cursor: publishingStore ? "wait" : "pointer", opacity: publishingStore ? 0.7 : 1 }}>
                     {publishingStore ? <Loader2 size={13} className="animate-spin" /> : <Store size={13} />}
                     {publishingStore ? "Publishing…" : "Publish store"}
                   </button>
@@ -1173,12 +1173,12 @@ export default function StoreBuilderPage() {
                   const busy = isPush && pushing;
                   return (
                     <div key={opt.label} className="flex items-center justify-between p-4 rounded-xl"
-                      style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
+                      style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
                       <div className="flex items-center gap-3">
                         <span className="text-2xl">{opt.emoji}</span>
                         <div>
-                          <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{opt.label}</p>
-                          <p className="text-xs" style={{ color: "#5c5c64" }}>{opt.desc}</p>
+                          <p className="text-sm font-semibold" style={{ color: "#23221f" }}>{opt.label}</p>
+                          <p className="text-xs" style={{ color: "#5d5b54" }}>{opt.desc}</p>
                         </div>
                       </div>
                       <button
@@ -1189,7 +1189,7 @@ export default function StoreBuilderPage() {
                           else if (opt.action === "shopify") pushToShopify();
                         }}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
-                        style={{ background: "#a07840", color: "#f5f3ee", cursor: busy ? "wait" : "pointer", opacity: busy ? 0.7 : 1 }}>
+                        style={{ background: "#a07840", color: "#fdfbf6", cursor: busy ? "wait" : "pointer", opacity: busy ? 0.7 : 1 }}>
                         {busy ? <Loader2 size={12} className="animate-spin" />
                           : opt.action === "copy" && copiedKey === "all" ? <Check size={12} />
                           : isPush ? <Store size={12} />

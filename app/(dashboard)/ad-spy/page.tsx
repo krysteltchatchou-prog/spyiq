@@ -77,13 +77,13 @@ export default function AdSpyPage() {
     <div>
       {/* Page header */}
       <div className="mb-6">
-        <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#f5f3ee", letterSpacing: "-0.4px" }}>Ad Intelligence</h1>
-        <p className="text-sm" style={{ color: "#8a8a94" }}>Spy on winning ads across Facebook, TikTok, Instagram, YouTube and Google.</p>
+        <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>Ad Intelligence</h1>
+        <p className="text-sm" style={{ color: "#4d4b44" }}>Spy on winning ads across Facebook, TikTok, Instagram, YouTube and Google.</p>
       </div>
 
       {/* Sticky filter bar */}
       <div className="sticky top-[58px] z-20 -mx-7 px-7 py-3 mb-6"
-        style={{ background: "#0c0c0e", borderBottom: "1px solid #2a2a33" }}>
+        style={{ background: "#f4f2ec", borderBottom: "1px solid #e4e1d8" }}>
         {/* Platform pills */}
         <div className="flex items-center gap-2 mb-3 flex-wrap">
           {PLATFORMS.map((p) => (
@@ -91,9 +91,9 @@ export default function AdSpyPage() {
               onClick={() => setActivePlatform(p)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
               style={{
-                background: activePlatform === p ? "#a07840" : "#15151a",
-                border:     `1px solid ${activePlatform === p ? "#a07840" : "#2a2a33"}`,
-                color:      activePlatform === p ? "#f5f3ee" : "#8a8a94",
+                background: activePlatform === p ? "#a07840" : "#ffffff",
+                border:     `1px solid ${activePlatform === p ? "#a07840" : "#e4e1d8"}`,
+                color:      activePlatform === p ? "#fdfbf6" : "#4d4b44",
               }}>
               {p !== "All" && PLATFORM_ICONS[p]} {p}
             </button>
@@ -103,16 +103,16 @@ export default function AdSpyPage() {
         {/* Second row: search, niche, sort */}
         <div className="flex items-center gap-3 flex-wrap">
           <div className="relative">
-            <Search size={13} color="#5c5c64" className="absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search size={13} color="#5d5b54" className="absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search ads…"
               className="rounded-lg pl-8 pr-3 py-2 text-xs transition-colors"
-              style={{ background: "#15151a", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none", width: 180 }}
+              style={{ background: "#ffffff", border: "1px solid #e4e1d8", color: "#23221f", outline: "none", width: 180 }}
               onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-              onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
+              onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
             />
           </div>
 
@@ -123,8 +123,8 @@ export default function AdSpyPage() {
                 className="px-2.5 py-1.5 rounded-lg text-xs transition-all"
                 style={{
                   background: activeNiche === n ? "rgba(160,120,64,0.15)" : "transparent",
-                  border:     `1px solid ${activeNiche === n ? "#a07840" : "#2a2a33"}`,
-                  color:      activeNiche === n ? "#c49a5a" : "#8a8a94",
+                  border:     `1px solid ${activeNiche === n ? "#a07840" : "#e4e1d8"}`,
+                  color:      activeNiche === n ? "#8a6530" : "#4d4b44",
                 }}>
                 {n}
               </button>
@@ -132,15 +132,15 @@ export default function AdSpyPage() {
           </div>
 
           <div className="ml-auto flex items-center gap-2">
-            <span className="text-xs" style={{ color: "#5c5c64" }}>Sort:</span>
+            <span className="text-xs" style={{ color: "#5d5b54" }}>Sort:</span>
             {(["engagement", "days", "spend"] as const).map((s) => (
               <button key={s}
                 onClick={() => setSortBy(s)}
                 className="px-2.5 py-1.5 rounded-lg text-xs capitalize transition-all"
                 style={{
-                  background: sortBy === s ? "rgba(160,120,64,0.15)" : "#15151a",
-                  border:     `1px solid ${sortBy === s ? "#a07840" : "#2a2a33"}`,
-                  color:      sortBy === s ? "#c49a5a" : "#8a8a94",
+                  background: sortBy === s ? "rgba(160,120,64,0.15)" : "#ffffff",
+                  border:     `1px solid ${sortBy === s ? "#a07840" : "#e4e1d8"}`,
+                  color:      sortBy === s ? "#8a6530" : "#4d4b44",
                 }}>
                 {s === "spend" ? "Est. Spend" : s === "days" ? "Longest Running" : "Most Engaging"}
               </button>
@@ -151,16 +151,16 @@ export default function AdSpyPage() {
 
       {/* Results count */}
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm" style={{ color: "#8a8a94" }}>
-          <span style={{ color: "#f5f3ee", fontWeight: 600 }}>{filtered.length}</span> ads
+        <p className="text-sm" style={{ color: "#4d4b44" }}>
+          <span style={{ color: "#23221f", fontWeight: 600 }}>{filtered.length}</span> ads
         </p>
       </div>
 
       {/* Ad grid */}
       {filtered.length === 0 ? (
-        <div className="text-center py-20" style={{ color: "#5c5c64" }}>
+        <div className="text-center py-20" style={{ color: "#5d5b54" }}>
           <p className="text-4xl mb-3">📭</p>
-          <p className="font-semibold" style={{ color: "#8a8a94" }}>No ads match your filters</p>
+          <p className="font-semibold" style={{ color: "#4d4b44" }}>No ads match your filters</p>
           <p className="text-sm mt-1">Try adjusting the platform or niche filter</p>
         </div>
       ) : (
@@ -175,13 +175,13 @@ export default function AdSpyPage() {
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">{ad.emoji}</span>
                   <div>
-                    <p className="text-sm font-semibold leading-tight" style={{ color: "#f5f3ee" }}>{ad.product}</p>
+                    <p className="text-sm font-semibold leading-tight" style={{ color: "#23221f" }}>{ad.product}</p>
                     <div className="flex items-center gap-1.5 mt-0.5">
                       <span className="text-[10px]">{PLATFORM_ICONS[ad.platform]}</span>
-                      <span className="text-[10px]" style={{ color: "#5c5c64" }}>{ad.platform}</span>
-                      <span style={{ color: "#3a3a42" }}>·</span>
+                      <span className="text-[10px]" style={{ color: "#5d5b54" }}>{ad.platform}</span>
+                      <span style={{ color: "#d4cfc2" }}>·</span>
                       <span className="text-[10px] rounded-full px-1.5 py-0.5"
-                        style={{ background: "#1d1d24", color: "#8a8a94" }}>
+                        style={{ background: "#f3f1ea", color: "#4d4b44" }}>
                         {ad.niche}
                       </span>
                     </div>
@@ -190,29 +190,29 @@ export default function AdSpyPage() {
                 <button
                   onClick={(e) => { e.stopPropagation(); toggleSave(ad.id); }}
                   className="p-1.5 rounded-lg transition-all"
-                  style={{ color: savedIds.has(ad.id) ? "#a07840" : "#5c5c64" }}>
+                  style={{ color: savedIds.has(ad.id) ? "#a07840" : "#5d5b54" }}>
                   <Bookmark size={14} fill={savedIds.has(ad.id) ? "#a07840" : "none"} />
                 </button>
               </div>
 
               {/* Hook preview */}
               <p className="text-xs italic leading-relaxed mb-4 line-clamp-3"
-                style={{ color: "#8a8a94" }}>
+                style={{ color: "#4d4b44" }}>
                 &ldquo;{ad.hook}&rdquo;
               </p>
 
               {/* Stats */}
-              <div className="flex items-center gap-4 mb-4 pt-3" style={{ borderTop: "1px solid #1d1d24" }}>
+              <div className="flex items-center gap-4 mb-4 pt-3" style={{ borderTop: "1px solid #f3f1ea" }}>
                 <div>
-                  <p className="text-[10px]" style={{ color: "#5c5c64" }}>Engagement</p>
-                  <p className="text-sm font-bold" style={{ color: "#5eb89a" }}>{ad.engagement}%</p>
+                  <p className="text-[10px]" style={{ color: "#5d5b54" }}>Engagement</p>
+                  <p className="text-sm font-bold" style={{ color: "#3e8f72" }}>{ad.engagement}%</p>
                 </div>
                 <div>
-                  <p className="text-[10px]" style={{ color: "#5c5c64" }}>Days Running</p>
-                  <p className="text-sm font-bold" style={{ color: "#f5f3ee" }}>{ad.days}d</p>
+                  <p className="text-[10px]" style={{ color: "#5d5b54" }}>Days Running</p>
+                  <p className="text-sm font-bold" style={{ color: "#23221f" }}>{ad.days}d</p>
                 </div>
                 <div>
-                  <p className="text-[10px]" style={{ color: "#5c5c64" }}>Est. Spend</p>
+                  <p className="text-[10px]" style={{ color: "#5d5b54" }}>Est. Spend</p>
                   <p className="text-sm font-bold" style={{ color: "#a07840" }}>{fmtSpend(ad.est_spend)}</p>
                 </div>
               </div>
@@ -223,9 +223,9 @@ export default function AdSpyPage() {
                   onClick={(e) => { e.stopPropagation(); copyHook(ad.id, ad.hook); }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold flex-1 justify-center transition-all"
                   style={{
-                    background: copiedId === ad.id ? "rgba(94,184,154,0.12)" : "#1d1d24",
-                    border:     `1px solid ${copiedId === ad.id ? "rgba(94,184,154,0.3)" : "#2a2a33"}`,
-                    color:      copiedId === ad.id ? "#5eb89a" : "#8a8a94",
+                    background: copiedId === ad.id ? "rgba(94,184,154,0.12)" : "#f3f1ea",
+                    border:     `1px solid ${copiedId === ad.id ? "rgba(94,184,154,0.3)" : "#e4e1d8"}`,
+                    color:      copiedId === ad.id ? "#3e8f72" : "#4d4b44",
                   }}>
                   {copiedId === ad.id ? <Check size={11} /> : <Copy size={11} />}
                   {copiedId === ad.id ? "Copied!" : "Copy Hook"}
@@ -233,7 +233,7 @@ export default function AdSpyPage() {
                 <button
                   onClick={(e) => { e.stopPropagation(); setDrawer(ad); }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-                  style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}>
+                  style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
                   <ArrowRight size={11} /> Details
                 </button>
               </div>
@@ -248,27 +248,27 @@ export default function AdSpyPage() {
           <div className="fixed inset-0 z-40" style={{ background: "rgba(0,0,0,0.5)" }}
             onClick={() => setDrawer(null)} />
           <div className="fixed right-0 top-0 h-full w-full max-w-[440px] z-50 overflow-y-auto"
-            style={{ background: "#15151a", borderLeft: "1px solid #2a2a33" }}>
+            style={{ background: "#ffffff", borderLeft: "1px solid #e4e1d8" }}>
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="font-bold" style={{ color: "#f5f3ee", fontSize: 18 }}>Ad Details</h2>
+                <h2 className="font-bold" style={{ color: "#23221f", fontSize: 18 }}>Ad Details</h2>
                 <button onClick={() => setDrawer(null)}
                   className="p-2 rounded-lg transition-all"
-                  style={{ background: "#1d1d24", color: "#8a8a94" }}>
+                  style={{ background: "#f3f1ea", color: "#4d4b44" }}>
                   <X size={16} />
                 </button>
               </div>
 
               {/* Ad preview */}
-              <div className="rounded-2xl p-5 mb-5" style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
+              <div className="rounded-2xl p-5 mb-5" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">{drawer.emoji}</span>
                   <div>
-                    <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{drawer.product}</p>
-                    <p className="text-xs" style={{ color: "#5c5c64" }}>{drawer.platform} · {drawer.niche}</p>
+                    <p className="text-sm font-semibold" style={{ color: "#23221f" }}>{drawer.product}</p>
+                    <p className="text-xs" style={{ color: "#5d5b54" }}>{drawer.platform} · {drawer.niche}</p>
                   </div>
                 </div>
-                <p className="text-sm italic leading-relaxed" style={{ color: "#8a8a94" }}>
+                <p className="text-sm italic leading-relaxed" style={{ color: "#4d4b44" }}>
                   &ldquo;{drawer.hook}&rdquo;
                 </p>
               </div>
@@ -276,34 +276,34 @@ export default function AdSpyPage() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-3 mb-5">
                 {[
-                  { label: "Engagement", value: `${drawer.engagement}%`, color: "#5eb89a" },
-                  { label: "Days Running", value: `${drawer.days}d`, color: "#f5f3ee" },
+                  { label: "Engagement", value: `${drawer.engagement}%`, color: "#3e8f72" },
+                  { label: "Days Running", value: `${drawer.days}d`, color: "#23221f" },
                   { label: "Est. Spend", value: fmtSpend(drawer.est_spend), color: "#a07840" },
                 ].map((s) => (
                   <div key={s.label} className="rounded-xl p-3 text-center"
-                    style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                    <p className="text-xs mb-1" style={{ color: "#5c5c64" }}>{s.label}</p>
+                    style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                    <p className="text-xs mb-1" style={{ color: "#5d5b54" }}>{s.label}</p>
                     <p className="text-sm font-bold" style={{ color: s.color }}>{s.value}</p>
                   </div>
                 ))}
               </div>
 
               {/* AI analysis */}
-              <div className="rounded-2xl p-4 mb-5" style={{ background: "#1d1d24", border: "1px solid #2a2a33", borderLeft: "2px solid #a07840" }}>
+              <div className="rounded-2xl p-4 mb-5" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", borderLeft: "2px solid #a07840" }}>
                 <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: "#a07840" }}>
                   🤖 Why This Ad Works
                 </p>
-                <p className="text-xs leading-relaxed" style={{ color: "#8a8a94" }}>
-                  This ad leverages a <strong style={{ color: "#f5f3ee" }}>POV/relatable hook</strong> — one of the highest-performing TikTok formats.
+                <p className="text-xs leading-relaxed" style={{ color: "#4d4b44" }}>
+                  This ad leverages a <strong style={{ color: "#23221f" }}>POV/relatable hook</strong> — one of the highest-performing TikTok formats.
                   It immediately addresses a pain point (&ldquo;that actually works&rdquo;) and creates curiosity.
-                  The <strong style={{ color: "#f5f3ee" }}>{drawer.days}-day run</strong> with {drawer.engagement}% engagement confirms it&apos;s a proven winner.
+                  The <strong style={{ color: "#23221f" }}>{drawer.days}-day run</strong> with {drawer.engagement}% engagement confirms it&apos;s a proven winner.
                   Estimated {fmtSpend(drawer.est_spend)} spent means this is scaling profitably.
                 </p>
               </div>
 
               {/* Similar hooks */}
               <div className="mb-5">
-                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5c5c64" }}>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "#5d5b54" }}>
                   Generate Similar Hooks
                 </p>
                 <div className="space-y-2">
@@ -313,11 +313,11 @@ export default function AdSpyPage() {
                     `The ${drawer.product} hack nobody is talking about (but should be)`,
                   ].map((h, i) => (
                     <div key={i} className="flex items-start gap-2 p-3 rounded-xl"
-                      style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                      <p className="text-xs flex-1 italic leading-relaxed" style={{ color: "#8a8a94" }}>&ldquo;{h}&rdquo;</p>
+                      style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                      <p className="text-xs flex-1 italic leading-relaxed" style={{ color: "#4d4b44" }}>&ldquo;{h}&rdquo;</p>
                       <button onClick={() => copyHook(`drawer-${i}`, h)}
                         className="flex-shrink-0 p-1 rounded"
-                        style={{ color: copiedId === `drawer-${i}` ? "#5eb89a" : "#5c5c64" }}>
+                        style={{ color: copiedId === `drawer-${i}` ? "#3e8f72" : "#5d5b54" }}>
                         {copiedId === `drawer-${i}` ? <Check size={12} /> : <Copy size={12} />}
                       </button>
                     </div>
@@ -330,16 +330,16 @@ export default function AdSpyPage() {
                 <button
                   onClick={() => copyHook(drawer.id, drawer.hook)}
                   className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold"
-                  style={{ background: "#a07840", color: "#f5f3ee" }}>
+                  style={{ background: "#a07840", color: "#fdfbf6" }}>
                   <Copy size={13} /> Copy Hook
                 </button>
                 <button
                   onClick={() => toggleSave(drawer.id)}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold"
                   style={{
-                    background: savedIds.has(drawer.id) ? "rgba(160,120,64,0.15)" : "#1d1d24",
-                    border: `1px solid ${savedIds.has(drawer.id) ? "#a07840" : "#2a2a33"}`,
-                    color: savedIds.has(drawer.id) ? "#c49a5a" : "#8a8a94",
+                    background: savedIds.has(drawer.id) ? "rgba(160,120,64,0.15)" : "#f3f1ea",
+                    border: `1px solid ${savedIds.has(drawer.id) ? "#a07840" : "#e4e1d8"}`,
+                    color: savedIds.has(drawer.id) ? "#8a6530" : "#4d4b44",
                   }}>
                   <Bookmark size={13} fill={savedIds.has(drawer.id) ? "#a07840" : "none"} />
                   {savedIds.has(drawer.id) ? "Saved" : "Save"}

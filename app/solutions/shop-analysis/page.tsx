@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ShopAnalysisPage() {
   return (
-    <div className="min-h-screen" style={{ background: "#0c0c0e", color: "#f5f3ee" }}>
+    <div className="min-h-screen" style={{ background: "#f4f2ec", color: "#23221f" }}>
       <PublicHeader />
       <main className="px-6 py-10 max-w-[1000px] mx-auto">
         <div className="mb-8">
@@ -17,7 +17,7 @@ export default function ShopAnalysisPage() {
           <h1 className="font-bold mb-2" style={{ fontSize: "clamp(28px,4vw,40px)", letterSpacing: "-1px" }}>
             Competitor Store Spy 🕵️
           </h1>
-          <p className="text-base max-w-[640px]" style={{ color: "#8a8a94", lineHeight: 1.6 }}>
+          <p className="text-base max-w-[640px]" style={{ color: "#4d4b44", lineHeight: 1.6 }}>
             Paste any Shopify store URL. SpyIQ reads its public product feed and homepage to estimate
             revenue, surface top products, and detect every installed app — all from public, legal data.
           </p>

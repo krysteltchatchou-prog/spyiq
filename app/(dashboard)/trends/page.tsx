@@ -26,9 +26,9 @@ const NICHES = [
 
 const MOMENTUM_STYLES: Record<string, { color: string; icon: string }> = {
   "Exploding": { color: "#d4685f", icon: "🚀" },
-  "Rising":    { color: "#5eb89a", icon: "📈" },
+  "Rising":    { color: "#3e8f72", icon: "📈" },
   "Stable":    { color: "#8b8da0", icon: "→" },
-  "Declining": { color: "#5c5c64", icon: "📉" },
+  "Declining": { color: "#5d5b54", icon: "📉" },
 };
 
 function fmtVolume(n: number) {
@@ -62,18 +62,18 @@ export default function TrendsPage() {
       {/* Page header */}
       <div className="mb-6">
         <div className="flex items-center gap-2 mb-1">
-          <h1 className="font-bold" style={{ fontSize: 24, color: "#f5f3ee", letterSpacing: "-0.4px" }}>Trend Radar</h1>
+          <h1 className="font-bold" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>Trend Radar</h1>
           <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold"
-            style={{ background: "rgba(94,184,154,0.12)", border: "1px solid rgba(94,184,154,0.3)", color: "#5eb89a" }}>
+            style={{ background: "rgba(94,184,154,0.12)", border: "1px solid rgba(94,184,154,0.3)", color: "#3e8f72" }}>
             LIVE
           </span>
         </div>
-        <p className="text-sm" style={{ color: "#8a8a94" }}>Real-time niche momentum. Set alerts to catch the next spike before everyone else.</p>
+        <p className="text-sm" style={{ color: "#4d4b44" }}>Real-time niche momentum. Set alerts to catch the next spike before everyone else.</p>
       </div>
 
       {/* Filter bar */}
       <div className="sticky top-[58px] z-20 -mx-7 px-7 py-3 mb-6"
-        style={{ background: "#0c0c0e", borderBottom: "1px solid #2a2a33" }}>
+        style={{ background: "#f4f2ec", borderBottom: "1px solid #e4e1d8" }}>
         <div className="flex items-center justify-between gap-4 flex-wrap">
           {/* Category pills */}
           <div className="flex gap-2 flex-wrap">
@@ -82,9 +82,9 @@ export default function TrendsPage() {
                 onClick={() => setActiveCategory(c)}
                 className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
                 style={{
-                  background: activeCategory === c ? "#a07840" : "#15151a",
-                  border:     `1px solid ${activeCategory === c ? "#a07840" : "#2a2a33"}`,
-                  color:      activeCategory === c ? "#f5f3ee" : "#8a8a94",
+                  background: activeCategory === c ? "#a07840" : "#ffffff",
+                  border:     `1px solid ${activeCategory === c ? "#a07840" : "#e4e1d8"}`,
+                  color:      activeCategory === c ? "#fdfbf6" : "#4d4b44",
                 }}>
                 {c}
               </button>
@@ -93,15 +93,15 @@ export default function TrendsPage() {
 
           {/* Sort */}
           <div className="flex items-center gap-2">
-            <span className="text-xs" style={{ color: "#5c5c64" }}>Sort:</span>
+            <span className="text-xs" style={{ color: "#5d5b54" }}>Sort:</span>
             {SORT_OPTIONS.map((s) => (
               <button key={s}
                 onClick={() => setSortBy(s)}
                 className="px-2.5 py-1.5 rounded-lg text-xs transition-all"
                 style={{
-                  background: sortBy === s ? "rgba(160,120,64,0.15)" : "#15151a",
-                  border:     `1px solid ${sortBy === s ? "#a07840" : "#2a2a33"}`,
-                  color:      sortBy === s ? "#c49a5a" : "#8a8a94",
+                  background: sortBy === s ? "rgba(160,120,64,0.15)" : "#ffffff",
+                  border:     `1px solid ${sortBy === s ? "#a07840" : "#e4e1d8"}`,
+                  color:      sortBy === s ? "#8a6530" : "#4d4b44",
                 }}>
                 {s}
               </button>
@@ -119,17 +119,17 @@ export default function TrendsPage() {
           return (
             <div key={niche.id}
               className="rounded-2xl p-5 transition-all"
-              style={{ background: "#15151a", border: "1px solid #2a2a33" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3a3a42")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a2a33")}>
+              style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#d4cfc2")}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#e4e1d8")}>
 
               {/* Card header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <span className="text-3xl">{niche.emoji}</span>
                   <div>
-                    <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{niche.name}</p>
-                    <p className="text-xs mt-0.5" style={{ color: "#5c5c64" }}>{niche.category}</p>
+                    <p className="text-sm font-semibold" style={{ color: "#23221f" }}>{niche.name}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "#5d5b54" }}>{niche.category}</p>
                   </div>
                 </div>
                 <button
@@ -138,8 +138,8 @@ export default function TrendsPage() {
                   title={isAlerted ? "Remove alert" : "Set alert"}
                   style={{
                     background: isAlerted ? "rgba(160,120,64,0.15)" : "transparent",
-                    border: `1px solid ${isAlerted ? "#a07840" : "#2a2a33"}`,
-                    color: isAlerted ? "#a07840" : "#5c5c64",
+                    border: `1px solid ${isAlerted ? "#a07840" : "#e4e1d8"}`,
+                    color: isAlerted ? "#a07840" : "#5d5b54",
                   }}>
                   <Bell size={13} fill={isAlerted ? "#a07840" : "none"} />
                 </button>
@@ -149,7 +149,7 @@ export default function TrendsPage() {
               <div className="mb-4" style={{ height: 60 }}>
                 <SparklineChart
                   data={niche.sparkline}
-                  color={niche.growth >= 30 ? "#5eb89a" : niche.growth < 0 ? "#d4685f" : "#a07840"}
+                  color={niche.growth >= 30 ? "#3e8f72" : niche.growth < 0 ? "#d4685f" : "#a07840"}
                   height={60}
                 />
               </div>
@@ -158,12 +158,12 @@ export default function TrendsPage() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div>
-                    <p className="text-[10px]" style={{ color: "#5c5c64" }}>Search Volume</p>
-                    <p className="text-sm font-bold" style={{ color: "#f5f3ee" }}>{fmtVolume(niche.volume)}/mo</p>
+                    <p className="text-[10px]" style={{ color: "#5d5b54" }}>Search Volume</p>
+                    <p className="text-sm font-bold" style={{ color: "#23221f" }}>{fmtVolume(niche.volume)}/mo</p>
                   </div>
                   <div>
-                    <p className="text-[10px]" style={{ color: "#5c5c64" }}>Products</p>
-                    <p className="text-sm font-bold" style={{ color: "#f5f3ee" }}>{niche.products}</p>
+                    <p className="text-[10px]" style={{ color: "#5d5b54" }}>Products</p>
+                    <p className="text-sm font-bold" style={{ color: "#23221f" }}>{niche.products}</p>
                   </div>
                 </div>
                 <div className="text-right">
@@ -179,7 +179,7 @@ export default function TrendsPage() {
               </div>
 
               {isAlerted && (
-                <div className="mt-3 pt-3 flex items-center gap-1.5" style={{ borderTop: "1px solid #1d1d24" }}>
+                <div className="mt-3 pt-3 flex items-center gap-1.5" style={{ borderTop: "1px solid #f3f1ea" }}>
                   <Bell size={11} color="#a07840" fill="#a07840" />
                   <span className="text-[10px] font-medium" style={{ color: "#a07840" }}>Alert active — you&apos;ll be notified when this niche spikes</span>
                 </div>

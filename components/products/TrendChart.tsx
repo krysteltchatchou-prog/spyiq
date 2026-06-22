@@ -25,13 +25,13 @@ export function TrendChart({ monthlyBase }: Props) {
             <stop offset="95%" stopColor="#a07840" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <XAxis dataKey="date" tick={{ fill: "#5c5c64", fontSize: 10 }} tickLine={false} axisLine={false}
+        <XAxis dataKey="date" tick={{ fill: "#5d5b54", fontSize: 10 }} tickLine={false} axisLine={false}
           interval={6} />
-        <YAxis tick={{ fill: "#5c5c64", fontSize: 10 }} tickLine={false} axisLine={false} />
+        <YAxis tick={{ fill: "#5d5b54", fontSize: 10 }} tickLine={false} axisLine={false} />
         <Tooltip
-          contentStyle={{ background: "#1d1d24", border: "1px solid #2a2a33", borderRadius: 8, color: "#f5f3ee", fontSize: 12 }}
-          labelStyle={{ color: "#8a8a94" }}
-          cursor={{ stroke: "#2a2a33" }}
+          contentStyle={{ background: "#f3f1ea", border: "1px solid #e4e1d8", borderRadius: 8, color: "#23221f", fontSize: 12 }}
+          labelStyle={{ color: "#4d4b44" }}
+          cursor={{ stroke: "#e4e1d8" }}
         />
         <Area type="monotone" dataKey="sales" stroke="#a07840" strokeWidth={2} fill="url(#salesGrad)" dot={false} />
       </AreaChart>

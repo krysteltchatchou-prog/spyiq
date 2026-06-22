@@ -23,8 +23,8 @@ const MOCK_ALERTS: Alert[] = [
 ];
 
 const TYPE_STYLES = {
-  opportunity: { border: "#5eb89a", bg: "rgba(94,184,154,0.08)" },
-  warning:     { border: "#d4b572", bg: "rgba(212,181,114,0.08)" },
+  opportunity: { border: "#3e8f72", bg: "rgba(94,184,154,0.08)" },
+  warning:     { border: "#c08a2a", bg: "rgba(212,181,114,0.08)" },
   urgent:      { border: "#d4685f", bg: "rgba(212,104,95,0.08)"  },
   info:        { border: "#a07840", bg: "rgba(160,120,64,0.08)"  },
 };
@@ -52,7 +52,7 @@ export default function AlertsPage() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="font-bold" style={{ fontSize: 24, color: "#f5f3ee", letterSpacing: "-0.4px" }}>Alerts</h1>
+            <h1 className="font-bold" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>Alerts</h1>
             {unread > 0 && (
               <span className="rounded-full px-2 py-0.5 text-xs font-bold"
                 style={{ background: "#d4685f", color: "#fff" }}>
@@ -60,24 +60,24 @@ export default function AlertsPage() {
               </span>
             )}
           </div>
-          <p className="text-sm" style={{ color: "#8a8a94" }}>Trend spikes, competitor moves, and product opportunities.</p>
+          <p className="text-sm" style={{ color: "#4d4b44" }}>Trend spikes, competitor moves, and product opportunities.</p>
         </div>
         <div className="flex items-center gap-2">
           {unread > 0 && (
             <button onClick={markAllRead}
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all"
-              style={{ background: "#15151a", border: "1px solid #2a2a33", color: "#8a8a94" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = "#5eb89a"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = "#8a8a94"; }}>
+              style={{ background: "#ffffff", border: "1px solid #e4e1d8", color: "#4d4b44" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#3e8f72"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "#4d4b44"; }}>
               <Check size={12} /> Mark all read
             </button>
           )}
           <button onClick={() => setShowSettings((v) => !v)}
             className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all"
             style={{
-              background: showSettings ? "rgba(160,120,64,0.15)" : "#15151a",
-              border: `1px solid ${showSettings ? "#a07840" : "#2a2a33"}`,
-              color: showSettings ? "#c49a5a" : "#8a8a94",
+              background: showSettings ? "rgba(160,120,64,0.15)" : "#ffffff",
+              border: `1px solid ${showSettings ? "#a07840" : "#e4e1d8"}`,
+              color: showSettings ? "#8a6530" : "#4d4b44",
             }}>
             <Settings size={12} /> Settings
           </button>
@@ -86,8 +86,8 @@ export default function AlertsPage() {
 
       {/* Alert settings panel */}
       {showSettings && (
-        <div className="rounded-2xl p-6 mb-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-          <h2 className="font-semibold mb-4" style={{ color: "#f5f3ee" }}>Alert Preferences</h2>
+        <div className="rounded-2xl p-6 mb-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+          <h2 className="font-semibold mb-4" style={{ color: "#23221f" }}>Alert Preferences</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
             {[
               { label: "🚀 New Trending Products",  key: "trending",    on: true  },
@@ -98,26 +98,26 @@ export default function AlertsPage() {
               { label: "⚠️ Saturation Warnings",    key: "saturation",  on: true  },
             ].map((pref) => (
               <div key={pref.key} className="flex items-center justify-between p-3 rounded-xl"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-                <span className="text-sm" style={{ color: "#f5f3ee" }}>{pref.label}</span>
+                style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+                <span className="text-sm" style={{ color: "#23221f" }}>{pref.label}</span>
                 <div className="w-10 h-5 rounded-full cursor-pointer relative transition-colors"
-                  style={{ background: pref.on ? "#a07840" : "#3a3a42" }}>
+                  style={{ background: pref.on ? "#a07840" : "#d4cfc2" }}>
                   <div className="w-4 h-4 rounded-full absolute top-0.5 transition-all"
-                    style={{ left: pref.on ? "calc(100% - 18px)" : 2, background: "#f5f3ee" }} />
+                    style={{ left: pref.on ? "calc(100% - 18px)" : 2, background: "#23221f" }} />
                 </div>
               </div>
             ))}
           </div>
           <div>
-            <p className="text-xs font-medium mb-2" style={{ color: "#8a8a94" }}>Alert Frequency</p>
+            <p className="text-xs font-medium mb-2" style={{ color: "#4d4b44" }}>Alert Frequency</p>
             <div className="flex gap-2">
               {["Real-time", "Daily digest", "Weekly"].map((f) => (
                 <button key={f}
                   className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
                   style={{
-                    background: f === "Real-time" ? "#a07840" : "#1d1d24",
-                    border: `1px solid ${f === "Real-time" ? "#a07840" : "#2a2a33"}`,
-                    color: f === "Real-time" ? "#f5f3ee" : "#8a8a94",
+                    background: f === "Real-time" ? "#a07840" : "#f3f1ea",
+                    border: `1px solid ${f === "Real-time" ? "#a07840" : "#e4e1d8"}`,
+                    color: f === "Real-time" ? "#fdfbf6" : "#4d4b44",
                   }}>
                   {f}
                 </button>
@@ -129,9 +129,9 @@ export default function AlertsPage() {
 
       {/* Alert list */}
       {alerts.length === 0 ? (
-        <div className="text-center py-20" style={{ color: "#5c5c64" }}>
+        <div className="text-center py-20" style={{ color: "#5d5b54" }}>
           <Bell size={40} className="mx-auto mb-3 opacity-30" />
-          <p className="font-semibold" style={{ color: "#8a8a94" }}>You&apos;re all caught up!</p>
+          <p className="font-semibold" style={{ color: "#4d4b44" }}>You&apos;re all caught up!</p>
           <p className="text-sm mt-1">No new alerts right now. We&apos;ll notify you when something spikes.</p>
         </div>
       ) : (
@@ -142,8 +142,8 @@ export default function AlertsPage() {
               <div key={alert.id}
                 className="flex items-start gap-4 p-5 rounded-2xl transition-all cursor-pointer"
                 style={{
-                  background: alert.read ? "#15151a" : style.bg,
-                  border: `1px solid ${alert.read ? "#2a2a33" : style.border}`,
+                  background: alert.read ? "#ffffff" : style.bg,
+                  border: `1px solid ${alert.read ? "#e4e1d8" : style.border}`,
                   borderLeft: `3px solid ${style.border}`,
                   opacity: alert.read ? 0.7 : 1,
                 }}
@@ -152,8 +152,8 @@ export default function AlertsPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{alert.title}</p>
-                      <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#8a8a94" }}>{alert.body}</p>
+                      <p className="text-sm font-semibold" style={{ color: "#23221f" }}>{alert.title}</p>
+                      <p className="text-xs mt-0.5 leading-relaxed" style={{ color: "#4d4b44" }}>{alert.body}</p>
                     </div>
                     {!alert.read && (
                       <div className="w-2 h-2 rounded-full flex-shrink-0 mt-1.5"
@@ -163,21 +163,21 @@ export default function AlertsPage() {
                   <div className="flex items-center gap-3 mt-3">
                     {alert.action && (
                       <a href={alert.action.href}
-                        className="text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+                        className="text-xs font-semibold hover:text-[#8a6530] transition-colors"
                         style={{ color: "#a07840" }}
                         onClick={(e) => e.stopPropagation()}>
                         {alert.action.label} →
                       </a>
                     )}
-                    <span className="text-xs" style={{ color: "#5c5c64" }}>{alert.time}</span>
+                    <span className="text-xs" style={{ color: "#5d5b54" }}>{alert.time}</span>
                   </div>
                 </div>
                 <button
                   onClick={(e) => { e.stopPropagation(); dismiss(alert.id); }}
                   className="p-1.5 rounded-lg flex-shrink-0 transition-all"
-                  style={{ color: "#5c5c64" }}
+                  style={{ color: "#5d5b54" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#d4685f")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#5c5c64")}>
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#5d5b54")}>
                   <X size={13} />
                 </button>
               </div>

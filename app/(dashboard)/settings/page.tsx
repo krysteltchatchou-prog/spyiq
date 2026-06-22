@@ -105,20 +105,20 @@ export default function SettingsPage() {
   return (
     <div className="max-w-[780px]">
       <div className="mb-6">
-        <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#f5f3ee", letterSpacing: "-0.4px" }}>Settings</h1>
-        <p className="text-sm" style={{ color: "#8a8a94" }}>Manage your account, billing, and preferences.</p>
+        <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>Settings</h1>
+        <p className="text-sm" style={{ color: "#4d4b44" }}>Manage your account, billing, and preferences.</p>
       </div>
 
       {/* Tab nav */}
       <div className="flex gap-1 mb-6 p-1 rounded-xl"
-        style={{ background: "#15151a", border: "1px solid #2a2a33", width: "fit-content" }}>
+        style={{ background: "#ffffff", border: "1px solid #e4e1d8", width: "fit-content" }}>
         {TABS.map((t) => (
           <button key={t}
             onClick={() => setActiveTab(t)}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
             style={{
               background: activeTab === t ? "#a07840" : "transparent",
-              color:      activeTab === t ? "#f5f3ee" : "#8a8a94",
+              color:      activeTab === t ? "#fdfbf6" : "#4d4b44",
             }}>
             {t}
           </button>
@@ -127,10 +127,10 @@ export default function SettingsPage() {
 
       {activeTab === "Profile" && (
         <div className="space-y-5">
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
             <div className="flex items-center gap-2 mb-5">
               <User size={15} color="#a07840" />
-              <h2 className="font-semibold text-sm" style={{ color: "#f5f3ee" }}>Personal Info</h2>
+              <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>Personal Info</h2>
             </div>
             <div className="space-y-4">
               {[
@@ -138,49 +138,49 @@ export default function SettingsPage() {
                 { label: "Email Address", type: "email",    placeholder: "you@example.com",  defaultValue: "alex@example.com" },
               ].map((field) => (
                 <div key={field.label}>
-                  <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>{field.label}</label>
+                  <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>{field.label}</label>
                   <input
                     type={field.type}
                     defaultValue={field.defaultValue}
                     placeholder={field.placeholder}
                     className="w-full rounded-xl px-3.5 py-2.5 text-sm transition-colors"
-                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                    style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                     onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                    onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
+                    onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
                   />
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
             <div className="flex items-center gap-2 mb-5">
               <Shield size={15} color="#a07840" />
-              <h2 className="font-semibold text-sm" style={{ color: "#f5f3ee" }}>Security</h2>
+              <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>Security</h2>
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Current Password</label>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Current Password</label>
                 <input type="password" placeholder="••••••••"
                   className="w-full rounded-xl px-3.5 py-2.5 text-sm"
-                  style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                  style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                  onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")} />
+                  onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")} />
               </div>
               <div>
-                <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>New Password</label>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>New Password</label>
                 <input type="password" placeholder="Min. 8 characters"
                   className="w-full rounded-xl px-3.5 py-2.5 text-sm"
-                  style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                  style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                  onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")} />
+                  onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")} />
               </div>
             </div>
           </div>
 
           <button onClick={handleSave}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
-            style={{ background: saved ? "#5eb89a" : "#a07840", color: "#f5f3ee" }}>
+            style={{ background: saved ? "#3e8f72" : "#a07840", color: "#23221f" }}>
             <Save size={14} /> {saved ? "Saved!" : "Save Changes"}
           </button>
         </div>
@@ -189,16 +189,16 @@ export default function SettingsPage() {
       {activeTab === "Billing" && (
         <div className="space-y-5">
           {/* Current plan */}
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
             <div className="flex items-center gap-2 mb-5">
               <CreditCard size={15} color="#a07840" />
-              <h2 className="font-semibold text-sm" style={{ color: "#f5f3ee" }}>Current Plan</h2>
+              <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>Current Plan</h2>
             </div>
             <div className="flex items-center justify-between p-4 rounded-xl mb-4"
               style={{ background: "rgba(160,120,64,0.10)", border: "1px solid rgba(160,120,64,0.25)" }}>
               <div>
-                <p className="font-bold" style={{ color: "#f5f3ee" }}>Free Plan</p>
-                <p className="text-xs mt-0.5" style={{ color: "#8a8a94" }}>5 searches/day · 3 store analyses · No AI chat</p>
+                <p className="font-bold" style={{ color: "#23221f" }}>Free Plan</p>
+                <p className="text-xs mt-0.5" style={{ color: "#4d4b44" }}>5 searches/day · 3 store analyses · No AI chat</p>
               </div>
               <span className="text-sm font-bold" style={{ color: "#a07840" }}>$0/mo</span>
             </div>
@@ -213,22 +213,22 @@ export default function SettingsPage() {
                 <div key={plan.name}
                   className="rounded-xl p-4 relative"
                   style={{
-                    background: plan.popular ? "rgba(160,120,64,0.08)" : "#1d1d24",
-                    border: `1px solid ${plan.popular ? "#a07840" : "#2a2a33"}`,
+                    background: plan.popular ? "rgba(160,120,64,0.08)" : "#f3f1ea",
+                    border: `1px solid ${plan.popular ? "#a07840" : "#e4e1d8"}`,
                   }}>
                   {plan.popular && (
                     <div className="absolute -top-2.5 left-4">
                       <span className="rounded-full px-2 py-0.5 text-[10px] font-bold"
-                        style={{ background: "#a07840", color: "#f5f3ee" }}>
+                        style={{ background: "#a07840", color: "#fdfbf6" }}>
                         POPULAR
                       </span>
                     </div>
                   )}
-                  <p className="font-bold text-sm mb-0.5" style={{ color: "#f5f3ee" }}>{plan.name}</p>
+                  <p className="font-bold text-sm mb-0.5" style={{ color: "#23221f" }}>{plan.name}</p>
                   <p className="text-lg font-bold mb-3" style={{ color: "#a07840" }}>{plan.price}</p>
                   <ul className="space-y-1 mb-4">
                     {plan.features.map((f) => (
-                      <li key={f} className="text-xs" style={{ color: "#8a8a94" }}>✓ {f}</li>
+                      <li key={f} className="text-xs" style={{ color: "#4d4b44" }}>✓ {f}</li>
                     ))}
                   </ul>
                   <button
@@ -236,8 +236,8 @@ export default function SettingsPage() {
                     disabled={checkoutLoading}
                     className="w-full py-2 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5"
                     style={{
-                      background: plan.popular ? "#a07840" : "#2a2a33",
-                      color:      plan.popular ? "#f5f3ee" : "#8a8a94",
+                      background: plan.popular ? "#a07840" : "#e4e1d8",
+                      color:      plan.popular ? "#fdfbf6" : "#4d4b44",
                     }}>
                     {checkoutLoading && <Loader2 size={11} className="animate-spin" />}
                     Upgrade to {plan.name}
@@ -247,16 +247,16 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl p-5 flex items-center justify-between" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+          <div className="rounded-2xl p-5 flex items-center justify-between" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
             <div>
-              <p className="text-sm font-semibold mb-1" style={{ color: "#f5f3ee" }}>Billing Portal</p>
-              <p className="text-xs" style={{ color: "#8a8a94" }}>Manage payment method, invoices, and cancel subscription.</p>
+              <p className="text-sm font-semibold mb-1" style={{ color: "#23221f" }}>Billing Portal</p>
+              <p className="text-xs" style={{ color: "#4d4b44" }}>Manage payment method, invoices, and cancel subscription.</p>
             </div>
             <button
               onClick={() => openPortal(setPortalLoading)}
               disabled={portalLoading}
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold"
-              style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}>
+              style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
               {portalLoading ? <Loader2 size={12} className="animate-spin" /> : <ExternalLink size={12} />}
               Open Portal
             </button>
@@ -266,12 +266,12 @@ export default function SettingsPage() {
 
       {activeTab === "Integrations" && (
         <div className="space-y-5">
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
             <div className="flex items-center gap-2 mb-1">
               <Store size={15} color="#a07840" />
-              <h2 className="font-semibold text-sm" style={{ color: "#f5f3ee" }}>Shopify</h2>
+              <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>Shopify</h2>
             </div>
-            <p className="text-xs mb-5" style={{ color: "#8a8a94" }}>
+            <p className="text-xs mb-5" style={{ color: "#4d4b44" }}>
               Connect your Shopify store so the AI Store Builder can push generated products straight into it.
             </p>
 
@@ -280,14 +280,14 @@ export default function SettingsPage() {
                 style={{
                   background: shopifyNotice.kind === "ok" ? "rgba(94,184,154,0.10)" : "rgba(212,104,95,0.10)",
                   border: `1px solid ${shopifyNotice.kind === "ok" ? "rgba(94,184,154,0.3)" : "rgba(212,104,95,0.3)"}`,
-                  color: shopifyNotice.kind === "ok" ? "#5eb89a" : "#d4685f",
+                  color: shopifyNotice.kind === "ok" ? "#3e8f72" : "#d4685f",
                 }}>
                 {shopifyNotice.kind === "ok" ? <Check size={14} /> : <AlertCircle size={14} />} {shopifyNotice.text}
               </div>
             )}
 
             {shopify === null ? (
-              <div className="flex items-center gap-2 text-sm" style={{ color: "#5c5c64" }}>
+              <div className="flex items-center gap-2 text-sm" style={{ color: "#5d5b54" }}>
                 <Loader2 size={14} className="animate-spin" /> Checking connection…
               </div>
             ) : shopify.connected ? (
@@ -295,24 +295,24 @@ export default function SettingsPage() {
                 style={{ background: "rgba(94,184,154,0.08)", border: "1px solid rgba(94,184,154,0.25)" }}>
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: "rgba(94,184,154,0.15)" }}>
-                    <Check size={16} color="#5eb89a" />
+                    <Check size={16} color="#3e8f72" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>Connected</p>
-                    <p className="text-xs" style={{ color: "#8a8a94" }}>{shopify.shop}</p>
+                    <p className="text-sm font-semibold" style={{ color: "#23221f" }}>Connected</p>
+                    <p className="text-xs" style={{ color: "#4d4b44" }}>{shopify.shop}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShopInput("")}
-                  className="text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+                  className="text-xs font-semibold hover:text-[#8a6530] transition-colors"
                   style={{ color: "#a07840" }}>
                   Reconnect
                 </button>
               </div>
             ) : !shopify.configured ? (
               <div className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}>
-                <AlertCircle size={14} color="#d4b572" /> Shopify integration isn&apos;t configured on the server yet (API credentials missing).
+                style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
+                <AlertCircle size={14} color="#c08a2a" /> Shopify integration isn&apos;t configured on the server yet (API credentials missing).
               </div>
             ) : (
               <div className="flex gap-3">
@@ -324,9 +324,9 @@ export default function SettingsPage() {
                     onKeyDown={(e) => e.key === "Enter" && connectShopify()}
                     placeholder="your-store.myshopify.com"
                     className="w-full rounded-xl px-3.5 py-2.5 text-sm"
-                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                    style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                     onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-                    onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
+                    onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
                   />
                 </div>
                 <button
@@ -334,8 +334,8 @@ export default function SettingsPage() {
                   disabled={!shopInput.trim()}
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
                   style={{
-                    background: shopInput.trim() ? "#a07840" : "#2a2a33",
-                    color:      shopInput.trim() ? "#f5f3ee" : "#5c5c64",
+                    background: shopInput.trim() ? "#a07840" : "#e4e1d8",
+                    color:      shopInput.trim() ? "#23221f" : "#5d5b54",
                     cursor:     shopInput.trim() ? "pointer" : "not-allowed",
                   }}>
                   <Store size={14} /> Connect
@@ -344,18 +344,18 @@ export default function SettingsPage() {
             )}
 
             {/* Token-based connect — needed for full-store (theme) publishing */}
-            <div className="mt-5 pt-5" style={{ borderTop: "1px solid #2a2a33" }}>
+            <div className="mt-5 pt-5" style={{ borderTop: "1px solid #e4e1d8" }}>
               <button
                 onClick={() => setShowTokenForm((v) => !v)}
-                className="text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+                className="text-xs font-semibold hover:text-[#8a6530] transition-colors"
                 style={{ color: "#a07840" }}>
                 {showTokenForm ? "▾" : "▸"} Connect with Admin API token (enables full-store publishing)
               </button>
               {showTokenForm && (
                 <div className="mt-3 space-y-3">
-                  <p className="text-xs" style={{ color: "#8a8a94", lineHeight: 1.6 }}>
-                    In your Shopify admin: <strong style={{ color: "#c49a5a" }}>Settings → Apps and sales channels → Develop apps → Create an app</strong>.
-                    Under <strong style={{ color: "#c49a5a" }}>Admin API scopes</strong> tick <code style={{ color: "#f5f3ee" }}>read_products, write_products, read_themes, write_themes</code>, install it, then copy the <strong style={{ color: "#c49a5a" }}>Admin API access token</strong> (starts with <code style={{ color: "#f5f3ee" }}>shpat_</code>).
+                  <p className="text-xs" style={{ color: "#4d4b44", lineHeight: 1.6 }}>
+                    In your Shopify admin: <strong style={{ color: "#8a6530" }}>Settings → Apps and sales channels → Develop apps → Create an app</strong>.
+                    Under <strong style={{ color: "#8a6530" }}>Admin API scopes</strong> tick <code style={{ color: "#23221f" }}>read_products, write_products, read_themes, write_themes</code>, install it, then copy the <strong style={{ color: "#8a6530" }}>Admin API access token</strong> (starts with <code style={{ color: "#23221f" }}>shpat_</code>).
                   </p>
                   <input
                     type="text"
@@ -363,7 +363,7 @@ export default function SettingsPage() {
                     onChange={(e) => setTokenShop(e.target.value)}
                     placeholder="your-store.myshopify.com"
                     className="w-full rounded-xl px-3.5 py-2.5 text-sm"
-                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                    style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                   />
                   <input
                     type="password"
@@ -371,15 +371,15 @@ export default function SettingsPage() {
                     onChange={(e) => setTokenValue(e.target.value)}
                     placeholder="shpat_… (Admin API access token)"
                     className="w-full rounded-xl px-3.5 py-2.5 text-sm"
-                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+                    style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
                   />
                   <button
                     onClick={connectWithToken}
                     disabled={!tokenShop.trim() || !tokenValue.trim() || tokenConnecting}
                     className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
                     style={{
-                      background: tokenShop.trim() && tokenValue.trim() ? "#a07840" : "#2a2a33",
-                      color:      tokenShop.trim() && tokenValue.trim() ? "#f5f3ee" : "#5c5c64",
+                      background: tokenShop.trim() && tokenValue.trim() ? "#a07840" : "#e4e1d8",
+                      color:      tokenShop.trim() && tokenValue.trim() ? "#23221f" : "#5d5b54",
                       cursor:     tokenShop.trim() && tokenValue.trim() && !tokenConnecting ? "pointer" : "not-allowed",
                     }}>
                     {tokenConnecting ? <Loader2 size={14} className="animate-spin" /> : <Store size={14} />}
@@ -393,10 +393,10 @@ export default function SettingsPage() {
       )}
 
       {activeTab === "Notifications" && (
-        <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+        <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
           <div className="flex items-center gap-2 mb-5">
             <Bell size={15} color="#a07840" />
-            <h2 className="font-semibold text-sm" style={{ color: "#f5f3ee" }}>Notification Preferences</h2>
+            <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>Notification Preferences</h2>
           </div>
           <div className="space-y-3">
             {[
@@ -408,22 +408,22 @@ export default function SettingsPage() {
               { label: "AI credit warnings",              desc: "When 80% of credits are used",         on: true  },
             ].map((pref) => (
               <div key={pref.label} className="flex items-center justify-between p-4 rounded-xl"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
+                style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
                 <div>
-                  <p className="text-sm font-medium" style={{ color: "#f5f3ee" }}>{pref.label}</p>
-                  <p className="text-xs mt-0.5" style={{ color: "#5c5c64" }}>{pref.desc}</p>
+                  <p className="text-sm font-medium" style={{ color: "#23221f" }}>{pref.label}</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#5d5b54" }}>{pref.desc}</p>
                 </div>
                 <div className="w-10 h-5 rounded-full cursor-pointer relative"
-                  style={{ background: pref.on ? "#a07840" : "#3a3a42" }}>
+                  style={{ background: pref.on ? "#a07840" : "#d4cfc2" }}>
                   <div className="w-4 h-4 rounded-full absolute top-0.5 transition-all"
-                    style={{ left: pref.on ? "calc(100% - 18px)" : 2, background: "#f5f3ee" }} />
+                    style={{ left: pref.on ? "calc(100% - 18px)" : 2, background: "#23221f" }} />
                 </div>
               </div>
             ))}
           </div>
           <button onClick={handleSave}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all mt-5"
-            style={{ background: saved ? "#5eb89a" : "#a07840", color: "#f5f3ee" }}>
+            style={{ background: saved ? "#3e8f72" : "#a07840", color: "#23221f" }}>
             <Save size={14} /> {saved ? "Saved!" : "Save Preferences"}
           </button>
         </div>
@@ -431,47 +431,47 @@ export default function SettingsPage() {
 
       {activeTab === "API" && (
         <div className="space-y-5">
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
             <div className="flex items-center gap-2 mb-2">
               <Key size={15} color="#a07840" />
-              <h2 className="font-semibold text-sm" style={{ color: "#f5f3ee" }}>API Access</h2>
+              <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>API Access</h2>
               <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold"
-                style={{ background: "#2a2a33", color: "#5c5c64" }}>
+                style={{ background: "#e4e1d8", color: "#5d5b54" }}>
                 Agency plan only
               </span>
             </div>
-            <p className="text-xs mb-5" style={{ color: "#8a8a94" }}>
+            <p className="text-xs mb-5" style={{ color: "#4d4b44" }}>
               Use the SpyIQ API to programmatically access product data, trends, and AI analysis.
             </p>
             <div>
-              <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>API Key</label>
+              <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>API Key</label>
               <div className="relative">
                 <input
                   type={showKey ? "text" : "password"}
                   defaultValue="spyiq_sk_••••••••••••••••••••••••••••••••"
                   readOnly
                   className="w-full rounded-xl px-3.5 py-2.5 pr-10 text-sm"
-                  style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94", outline: "none" }}
+                  style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44", outline: "none" }}
                 />
                 <button
                   onClick={() => setShowKey((v) => !v)}
                   className="absolute right-3 top-1/2 -translate-y-1/2"
-                  style={{ color: "#5c5c64" }}>
+                  style={{ color: "#5d5b54" }}>
                   {showKey ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
               </div>
             </div>
-            <div className="mt-4 p-4 rounded-xl" style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
-              <p className="text-xs font-semibold mb-2" style={{ color: "#8a8a94" }}>API limits on Agency plan:</p>
+            <div className="mt-4 p-4 rounded-xl" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
+              <p className="text-xs font-semibold mb-2" style={{ color: "#4d4b44" }}>API limits on Agency plan:</p>
               <ul className="space-y-1">
                 {["10,000 product lookups/month", "1,000 store analyses/month", "Unlimited AI credits", "Webhook support"].map((l) => (
-                  <li key={l} className="text-xs" style={{ color: "#5c5c64" }}>✓ {l}</li>
+                  <li key={l} className="text-xs" style={{ color: "#5d5b54" }}>✓ {l}</li>
                 ))}
               </ul>
             </div>
             <button
               className="mt-4 px-4 py-2 rounded-xl text-xs font-semibold"
-              style={{ background: "#2a2a33", color: "#5c5c64", cursor: "not-allowed" }}>
+              style={{ background: "#e4e1d8", color: "#5d5b54", cursor: "not-allowed" }}>
               Upgrade to Agency to unlock API access
             </button>
           </div>

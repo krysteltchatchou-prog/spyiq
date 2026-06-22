@@ -51,21 +51,21 @@ export default function ProductBoard({ products }: { products: BoardProduct[] })
     return out;
   }, [products, niche, maxPrice, minMargin, minIQ, sort, search]);
 
-  const inputStyle = { background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" } as const;
+  const inputStyle = { background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" } as const;
 
   return (
     <div>
       {/* Filter bar */}
       <div className="sticky top-[66px] z-40 rounded-2xl p-4 mb-6"
-        style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+        style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
           <div className="lg:col-span-2">
-            <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Search</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Search</label>
             <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search products…"
               className="w-full rounded-xl px-3 py-2 text-sm" style={inputStyle} />
           </div>
           <div>
-            <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Niche</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Niche</label>
             <select value={niche} onChange={(e) => setNiche(e.target.value)}
               className="w-full rounded-xl px-3 py-2 text-sm" style={inputStyle}>
               <option value="All">All niches</option>
@@ -73,37 +73,37 @@ export default function ProductBoard({ products }: { products: BoardProduct[] })
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Sort by</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Sort by</label>
             <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)}
               className="w-full rounded-xl px-3 py-2 text-sm" style={inputStyle}>
               {SORTS.map((s) => <option key={s.id} value={s.id}>{s.label}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Max price: {money(maxPrice)}</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Max price: {money(maxPrice)}</label>
             <input type="range" min={10} max={100} step={5} value={maxPrice} onChange={(e) => setMaxPrice(+e.target.value)}
               className="w-full accent-[#a07840]" />
           </div>
           <div>
-            <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Min margin: {minMargin}%</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Min margin: {minMargin}%</label>
             <input type="range" min={0} max={90} step={5} value={minMargin} onChange={(e) => setMinMargin(+e.target.value)}
               className="w-full accent-[#a07840]" />
           </div>
           <div>
-            <label className="block text-xs font-medium mb-1.5" style={{ color: "#8a8a94" }}>Min IQ Score: {minIQ}</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "#4d4b44" }}>Min IQ Score: {minIQ}</label>
             <input type="range" min={0} max={100} step={5} value={minIQ} onChange={(e) => setMinIQ(+e.target.value)}
               className="w-full accent-[#a07840]" />
           </div>
         </div>
       </div>
 
-      <p className="text-sm mb-4" style={{ color: "#8a8a94" }}>
+      <p className="text-sm mb-4" style={{ color: "#4d4b44" }}>
         {filtered.length} product{filtered.length === 1 ? "" : "s"}
       </p>
 
       {filtered.length === 0 ? (
-        <div className="rounded-2xl p-12 text-center" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-          <p className="text-sm" style={{ color: "#8a8a94" }}>No products match your filters.</p>
+        <div className="rounded-2xl p-12 text-center" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+          <p className="text-sm" style={{ color: "#4d4b44" }}>No products match your filters.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -112,14 +112,14 @@ export default function ProductBoard({ products }: { products: BoardProduct[] })
             return (
               <Link key={p.product_id} href={`/resources/top-products/${p.product_id}`}
                 className="rounded-2xl p-5 transition-all block"
-                style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+                style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center justify-center w-12 h-12 rounded-xl text-2xl"
-                    style={{ background: "#1d1d24" }}>{p.emoji}</div>
+                    style={{ background: "#f3f1ea" }}>{p.emoji}</div>
                   <div className="flex items-center gap-1.5">
                     {p.is_featured && (
                       <span className="rounded-full px-2 py-0.5 text-[10px] font-bold"
-                        style={{ background: "rgba(160,120,64,0.15)", color: "#c49a5a" }}>★ Featured</span>
+                        style={{ background: "rgba(160,120,64,0.15)", color: "#8a6530" }}>★ Featured</span>
                     )}
                     <span className="rounded-full px-2 py-0.5 text-[10px] font-bold"
                       style={{ background: `${band.color}22`, color: band.color }}>
@@ -127,8 +127,8 @@ export default function ProductBoard({ products }: { products: BoardProduct[] })
                     </span>
                   </div>
                 </div>
-                <h3 className="font-bold text-sm mb-1" style={{ color: "#f5f3ee" }}>{p.name}</h3>
-                <p className="text-xs mb-4" style={{ color: "#8a8a94" }}>
+                <h3 className="font-bold text-sm mb-1" style={{ color: "#23221f" }}>{p.name}</h3>
+                <p className="text-xs mb-4" style={{ color: "#4d4b44" }}>
                   {p.niche} · {TREND_ICON[p.trend_direction]} {p.search_growth > 0 ? "+" : ""}{p.search_growth}%
                 </p>
                 <div className="grid grid-cols-3 gap-2 text-center">
@@ -137,9 +137,9 @@ export default function ProductBoard({ products }: { products: BoardProduct[] })
                     { label: "Margin", value: `${p.margin_pct}%` },
                     { label: "Sales/mo", value: p.monthly_sales_est.toLocaleString() },
                   ].map((s) => (
-                    <div key={s.label} className="rounded-xl py-2" style={{ background: "#1d1d24" }}>
-                      <p className="font-bold text-xs" style={{ color: "#f5f3ee" }}>{s.value}</p>
-                      <p className="text-[10px] mt-0.5" style={{ color: "#5c5c64" }}>{s.label}</p>
+                    <div key={s.label} className="rounded-xl py-2" style={{ background: "#f3f1ea" }}>
+                      <p className="font-bold text-xs" style={{ color: "#23221f" }}>{s.value}</p>
+                      <p className="text-[10px] mt-0.5" style={{ color: "#5d5b54" }}>{s.label}</p>
                     </div>
                   ))}
                 </div>

@@ -60,9 +60,9 @@ export default function StoreDetailPage({ params }: Props) {
 
   const trafficSources = [
     { label: "Paid Search",  pct: 38, color: "#a07840" },
-    { label: "Organic",      pct: 24, color: "#5eb89a" },
+    { label: "Organic",      pct: 24, color: "#3e8f72" },
     { label: "Paid Social",  pct: 22, color: "#8b8da0" },
-    { label: "Direct",       pct: 10, color: "#d4b572" },
+    { label: "Direct",       pct: 10, color: "#c08a2a" },
     { label: "Referral",     pct:  6, color: "#d4685f" },
   ];
 
@@ -78,13 +78,13 @@ export default function StoreDetailPage({ params }: Props) {
   const sparkData = [40, 44, 41, 52, 58, 61, 68, 64, 72, 78, 75, 82];
 
   const statsGrid = [
-    { label: "Monthly Revenue",  value: fmtCurrency(store.revenue),  color: "#5eb89a" },
-    { label: "Monthly Traffic",  value: fmt(store.traffic),           color: "#f5f3ee" },
-    { label: "Products",         value: fmt(store.products),          color: "#f5f3ee" },
+    { label: "Monthly Revenue",  value: fmtCurrency(store.revenue),  color: "#3e8f72" },
+    { label: "Monthly Traffic",  value: fmt(store.traffic),           color: "#23221f" },
+    { label: "Products",         value: fmt(store.products),          color: "#23221f" },
     { label: "Avg Order Value",  value: `$${store.aov}`,              color: "#a07840" },
     { label: "Ad Spend/mo",      value: fmtCurrency(store.adSpend),   color: "#d4685f" },
-    { label: "Founded",          value: String(store.year),           color: "#f5f3ee" },
-    { label: "Conversion Rate",  value: `${store.convRate}%`,         color: "#5eb89a" },
+    { label: "Founded",          value: String(store.year),           color: "#23221f" },
+    { label: "Conversion Rate",  value: `${store.convRate}%`,         color: "#3e8f72" },
     { label: "Social Following", value: fmt(Math.round(store.traffic * 0.12)), color: "#8b8da0" },
   ];
 
@@ -92,34 +92,34 @@ export default function StoreDetailPage({ params }: Props) {
     <div className="max-w-[1100px]">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 mb-6">
-        <Link href="/store-spy" className="flex items-center gap-1.5 text-sm hover:text-[#c49a5a] transition-colors"
-          style={{ color: "#8a8a94" }}>
+        <Link href="/store-spy" className="flex items-center gap-1.5 text-sm hover:text-[#8a6530] transition-colors"
+          style={{ color: "#4d4b44" }}>
           <ArrowLeft size={14} /> Store Spy
         </Link>
-        <span style={{ color: "#3a3a42" }}>/</span>
-        <span className="text-sm" style={{ color: "#f5f3ee" }}>{domain}</span>
+        <span style={{ color: "#d4cfc2" }}>/</span>
+        <span className="text-sm" style={{ color: "#23221f" }}>{domain}</span>
       </div>
 
       {/* Store header */}
       <div className="flex items-start justify-between gap-6 mb-6">
         <div className="flex items-center gap-4">
           <div className="flex items-center justify-center w-14 h-14 rounded-2xl text-3xl flex-shrink-0"
-            style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
+            style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
             {store.emoji}
           </div>
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <h1 className="font-bold" style={{ fontSize: 22, color: "#f5f3ee", letterSpacing: "-0.3px" }}>
+              <h1 className="font-bold" style={{ fontSize: 22, color: "#23221f", letterSpacing: "-0.3px" }}>
                 {store.name}
               </h1>
               <a href={`https://${domain}`} target="_blank" rel="noreferrer">
-                <ExternalLink size={14} color="#5c5c64" />
+                <ExternalLink size={14} color="#5d5b54" />
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm" style={{ color: "#5c5c64" }}>{domain}</span>
+              <span className="text-sm" style={{ color: "#5d5b54" }}>{domain}</span>
               <span className="rounded-full px-2 py-0.5 text-[10px] font-medium"
-                style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}>
+                style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
                 {store.niche}
               </span>
             </div>
@@ -129,23 +129,23 @@ export default function StoreDetailPage({ params }: Props) {
           onClick={() => setSaved((v) => !v)}
           className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all"
           style={{
-            background: saved ? "rgba(160,120,64,0.15)" : "#1d1d24",
-            border: `1px solid ${saved ? "#a07840" : "#2a2a33"}`,
-            color: saved ? "#c49a5a" : "#8a8a94",
+            background: saved ? "rgba(160,120,64,0.15)" : "#f3f1ea",
+            border: `1px solid ${saved ? "#a07840" : "#e4e1d8"}`,
+            color: saved ? "#8a6530" : "#4d4b44",
           }}>
           <Bookmark size={14} fill={saved ? "#a07840" : "none"} /> {saved ? "Tracking" : "Track Store"}
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 p-1 rounded-xl" style={{ background: "#15151a", border: "1px solid #2a2a33", width: "fit-content" }}>
+      <div className="flex gap-1 mb-6 p-1 rounded-xl" style={{ background: "#ffffff", border: "1px solid #e4e1d8", width: "fit-content" }}>
         {TABS.map((t) => (
           <button key={t}
             onClick={() => setActiveTab(t)}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
             style={{
               background: activeTab === t ? "#a07840" : "transparent",
-              color:      activeTab === t ? "#f5f3ee" : "#8a8a94",
+              color:      activeTab === t ? "#fdfbf6" : "#4d4b44",
             }}>
             {t}
           </button>
@@ -157,18 +157,18 @@ export default function StoreDetailPage({ params }: Props) {
         <div className="space-y-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {statsGrid.map((s) => (
-              <div key={s.label} className="rounded-2xl p-4" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-                <p className="text-xs mb-1" style={{ color: "#8a8a94" }}>{s.label}</p>
+              <div key={s.label} className="rounded-2xl p-4" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+                <p className="text-xs mb-1" style={{ color: "#4d4b44" }}>{s.label}</p>
                 <p className="font-bold text-xl" style={{ color: s.color, letterSpacing: "-0.5px" }}>{s.value}</p>
               </div>
             ))}
           </div>
 
           {/* Revenue trend */}
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold" style={{ color: "#f5f3ee" }}>Revenue Trend</h2>
-              <span className="text-sm font-bold" style={{ color: "#5eb89a" }}>▲ 24% last 12mo</span>
+              <h2 className="font-semibold" style={{ color: "#23221f" }}>Revenue Trend</h2>
+              <span className="text-sm font-bold" style={{ color: "#3e8f72" }}>▲ 24% last 12mo</span>
             </div>
             <div style={{ height: 120 }}>
               <SparklineChart data={sparkData.map((v) => v * (store.revenue / 82_000))} color="#a07840" height={120} />
@@ -178,13 +178,13 @@ export default function StoreDetailPage({ params }: Props) {
       )}
 
       {activeTab === "Products" && (
-        <div className="rounded-2xl overflow-hidden" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+        <div className="rounded-2xl overflow-hidden" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
           <table className="w-full">
             <thead>
-              <tr style={{ borderBottom: "1px solid #2a2a33" }}>
+              <tr style={{ borderBottom: "1px solid #e4e1d8" }}>
                 {["Product", "Est. Sales/mo", "Price", "Margin %", ""].map((h) => (
                   <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider"
-                    style={{ color: "#5c5c64" }}>
+                    style={{ color: "#5d5b54" }}>
                     {h}
                   </th>
                 ))}
@@ -192,18 +192,18 @@ export default function StoreDetailPage({ params }: Props) {
             </thead>
             <tbody>
               {topProducts.map((p, i) => (
-                <tr key={i} style={{ borderBottom: i < topProducts.length - 1 ? "1px solid #1d1d24" : undefined }}>
+                <tr key={i} style={{ borderBottom: i < topProducts.length - 1 ? "1px solid #f3f1ea" : undefined }}>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <span>{p.emoji}</span>
-                      <span className="text-sm font-medium" style={{ color: "#f5f3ee" }}>{p.name}</span>
+                      <span className="text-sm font-medium" style={{ color: "#23221f" }}>{p.name}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm font-bold" style={{ color: "#5eb89a" }}>{fmt(p.sales)}</td>
-                  <td className="px-4 py-3 text-sm" style={{ color: "#f5f3ee" }}>${p.price}</td>
+                  <td className="px-4 py-3 text-sm font-bold" style={{ color: "#3e8f72" }}>{fmt(p.sales)}</td>
+                  <td className="px-4 py-3 text-sm" style={{ color: "#23221f" }}>${p.price}</td>
                   <td className="px-4 py-3 text-sm font-semibold" style={{ color: "#a07840" }}>{p.margin}%</td>
                   <td className="px-4 py-3">
-                    <Link href="/products" className="text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+                    <Link href="/products" className="text-xs font-semibold hover:text-[#8a6530] transition-colors"
                       style={{ color: "#a07840" }}>
                       Spy →
                     </Link>
@@ -218,37 +218,37 @@ export default function StoreDetailPage({ params }: Props) {
       {activeTab === "Ads" && (
         <div className="space-y-4">
           {ads.map((ad) => (
-            <div key={ad.id} className="rounded-2xl p-5" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+            <div key={ad.id} className="rounded-2xl p-5" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-3">
                   <span className="text-2xl">{ad.emoji}</span>
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{ad.product}</span>
+                      <span className="text-sm font-semibold" style={{ color: "#23221f" }}>{ad.product}</span>
                       <span className="rounded-full px-2 py-0.5 text-[10px] font-medium"
-                        style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}>
+                        style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
                         {ad.platform}
                       </span>
                     </div>
-                    <p className="text-sm italic" style={{ color: "#8a8a94" }}>&ldquo;{ad.hook}&rdquo;</p>
+                    <p className="text-sm italic" style={{ color: "#4d4b44" }}>&ldquo;{ad.hook}&rdquo;</p>
                   </div>
                 </div>
                 <button
                   onClick={() => copyHook(ad.id, ad.hook)}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold flex-shrink-0 transition-all"
                   style={{
-                    background: copiedId === ad.id ? "rgba(94,184,154,0.12)" : "#1d1d24",
-                    border: `1px solid ${copiedId === ad.id ? "rgba(94,184,154,0.3)" : "#2a2a33"}`,
-                    color: copiedId === ad.id ? "#5eb89a" : "#8a8a94",
+                    background: copiedId === ad.id ? "rgba(94,184,154,0.12)" : "#f3f1ea",
+                    border: `1px solid ${copiedId === ad.id ? "rgba(94,184,154,0.3)" : "#e4e1d8"}`,
+                    color: copiedId === ad.id ? "#3e8f72" : "#4d4b44",
                   }}>
                   {copiedId === ad.id ? <Check size={11} /> : <Copy size={11} />}
                   {copiedId === ad.id ? "Copied!" : "Copy Hook"}
                 </button>
               </div>
-              <div className="flex items-center gap-6 mt-4 pt-4" style={{ borderTop: "1px solid #1d1d24" }}>
-                <div><p className="text-xs" style={{ color: "#5c5c64" }}>Engagement</p><p className="text-sm font-bold" style={{ color: "#5eb89a" }}>{ad.engagement}%</p></div>
-                <div><p className="text-xs" style={{ color: "#5c5c64" }}>Days Running</p><p className="text-sm font-bold" style={{ color: "#f5f3ee" }}>{ad.days}</p></div>
-                <div><p className="text-xs" style={{ color: "#5c5c64" }}>Est. Spend</p><p className="text-sm font-bold" style={{ color: "#a07840" }}>{fmtCurrency(ad.spend)}</p></div>
+              <div className="flex items-center gap-6 mt-4 pt-4" style={{ borderTop: "1px solid #f3f1ea" }}>
+                <div><p className="text-xs" style={{ color: "#5d5b54" }}>Engagement</p><p className="text-sm font-bold" style={{ color: "#3e8f72" }}>{ad.engagement}%</p></div>
+                <div><p className="text-xs" style={{ color: "#5d5b54" }}>Days Running</p><p className="text-sm font-bold" style={{ color: "#23221f" }}>{ad.days}</p></div>
+                <div><p className="text-xs" style={{ color: "#5d5b54" }}>Est. Spend</p><p className="text-sm font-bold" style={{ color: "#a07840" }}>{fmtCurrency(ad.spend)}</p></div>
               </div>
             </div>
           ))}
@@ -257,16 +257,16 @@ export default function StoreDetailPage({ params }: Props) {
 
       {activeTab === "Traffic" && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-            <h2 className="font-semibold mb-5" style={{ color: "#f5f3ee" }}>Traffic Sources</h2>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+            <h2 className="font-semibold mb-5" style={{ color: "#23221f" }}>Traffic Sources</h2>
             <div className="space-y-4">
               {trafficSources.map((s) => (
                 <div key={s.label}>
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-sm font-medium" style={{ color: "#f5f3ee" }}>{s.label}</span>
+                    <span className="text-sm font-medium" style={{ color: "#23221f" }}>{s.label}</span>
                     <span className="text-sm font-bold" style={{ color: s.color }}>{s.pct}%</span>
                   </div>
-                  <div className="w-full rounded-full h-1.5" style={{ background: "#2a2a33" }}>
+                  <div className="w-full rounded-full h-1.5" style={{ background: "#e4e1d8" }}>
                     <div className="rounded-full h-1.5" style={{ width: `${s.pct}%`, background: s.color }} />
                   </div>
                 </div>
@@ -274,8 +274,8 @@ export default function StoreDetailPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-            <h2 className="font-semibold mb-5" style={{ color: "#f5f3ee" }}>Top Countries</h2>
+          <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+            <h2 className="font-semibold mb-5" style={{ color: "#23221f" }}>Top Countries</h2>
             <div className="space-y-3">
               {[
                 { flag: "🇺🇸", country: "United States", pct: 52 },
@@ -288,10 +288,10 @@ export default function StoreDetailPage({ params }: Props) {
                   <span className="text-lg">{c.flag}</span>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-medium" style={{ color: "#f5f3ee" }}>{c.country}</span>
-                      <span className="text-xs font-bold" style={{ color: "#8a8a94" }}>{c.pct}%</span>
+                      <span className="text-xs font-medium" style={{ color: "#23221f" }}>{c.country}</span>
+                      <span className="text-xs font-bold" style={{ color: "#4d4b44" }}>{c.pct}%</span>
                     </div>
-                    <div className="w-full rounded-full h-1" style={{ background: "#2a2a33" }}>
+                    <div className="w-full rounded-full h-1" style={{ background: "#e4e1d8" }}>
                       <div className="rounded-full h-1" style={{ width: `${c.pct}%`, background: "#a07840" }} />
                     </div>
                   </div>
@@ -303,25 +303,25 @@ export default function StoreDetailPage({ params }: Props) {
       )}
 
       {activeTab === "Apps" && (
-        <div className="rounded-2xl overflow-hidden" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+        <div className="rounded-2xl overflow-hidden" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
           {apps.map((app, i) => (
             <div key={app.name}
               className="flex items-center gap-4 px-5 py-4"
-              style={{ borderBottom: i < apps.length - 1 ? "1px solid #1d1d24" : undefined }}>
+              style={{ borderBottom: i < apps.length - 1 ? "1px solid #f3f1ea" : undefined }}>
               <span className="text-2xl">{app.emoji}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{app.name}</span>
+                  <span className="text-sm font-semibold" style={{ color: "#23221f" }}>{app.name}</span>
                   <span className="rounded-full px-2 py-0.5 text-[10px] font-medium"
-                    style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}>
+                    style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
                     {app.category}
                   </span>
                 </div>
-                <p className="text-xs" style={{ color: "#5c5c64" }}>{app.desc}</p>
+                <p className="text-xs" style={{ color: "#5d5b54" }}>{app.desc}</p>
               </div>
               <div className="text-right flex-shrink-0" style={{ width: 120 }}>
                 <div className="text-xs font-bold mb-1" style={{ color: "#a07840" }}>{app.pct}% of top stores</div>
-                <div className="w-full rounded-full h-1.5" style={{ background: "#2a2a33" }}>
+                <div className="w-full rounded-full h-1.5" style={{ background: "#e4e1d8" }}>
                   <div className="rounded-full h-1.5" style={{ width: `${app.pct}%`, background: "linear-gradient(90deg,#8a6530,#a07840)" }} />
                 </div>
               </div>
@@ -331,17 +331,17 @@ export default function StoreDetailPage({ params }: Props) {
       )}
 
       {activeTab === "AI Verdict" && (
-        <div className="rounded-2xl p-6" style={{ background: "#15151a", border: "1px solid #2a2a33", borderLeft: "2px solid #a07840" }}>
+        <div className="rounded-2xl p-6" style={{ background: "#ffffff", border: "1px solid #e4e1d8", borderLeft: "2px solid #a07840" }}>
           <div className="flex items-center gap-2 mb-4">
             <span>🤖</span>
             <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#a07840" }}>AI Verdict</span>
           </div>
-          <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#8a8a94" }}>
+          <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#4d4b44" }}>
             <p>
-              <strong style={{ color: "#f5f3ee" }}>{store.name}</strong> is scaling aggressively in the{" "}
-              <strong style={{ color: "#c49a5a" }}>{store.niche}</strong> niche with an estimated{" "}
-              <strong style={{ color: "#5eb89a" }}>{fmtCurrency(store.revenue)}/month</strong> in revenue.
-              Their primary traffic driver is <strong style={{ color: "#f5f3ee" }}>paid search ({trafficSources[0].pct}%)</strong>, suggesting heavy
+              <strong style={{ color: "#23221f" }}>{store.name}</strong> is scaling aggressively in the{" "}
+              <strong style={{ color: "#8a6530" }}>{store.niche}</strong> niche with an estimated{" "}
+              <strong style={{ color: "#3e8f72" }}>{fmtCurrency(store.revenue)}/month</strong> in revenue.
+              Their primary traffic driver is <strong style={{ color: "#23221f" }}>paid search ({trafficSources[0].pct}%)</strong>, suggesting heavy
               investment in Google Shopping and branded keywords.
             </p>
             <p>
@@ -350,17 +350,17 @@ export default function StoreDetailPage({ params }: Props) {
               post-purchase upsell flows (ReConvert or similar) effectively.
             </p>
             <p>
-              <strong style={{ color: "#d4b572" }}>Key vulnerability:</strong> Heavy reliance on paid channels ({trafficSources[0].pct + trafficSources[2].pct}% paid) means
+              <strong style={{ color: "#c08a2a" }}>Key vulnerability:</strong> Heavy reliance on paid channels ({trafficSources[0].pct + trafficSources[2].pct}% paid) means
               high CAC sensitivity to ad costs. A competitor with stronger organic SEO or influencer presence could
               undercut their margins significantly.
             </p>
             <p>
-              <strong style={{ color: "#5eb89a" }}>Opportunity:</strong> Their organic share is only {trafficSources[1].pct}% — a new entrant with strong
+              <strong style={{ color: "#3e8f72" }}>Opportunity:</strong> Their organic share is only {trafficSources[1].pct}% — a new entrant with strong
               content marketing in the {store.niche} niche could capture significant market share within 6–12 months.
             </p>
           </div>
           <Link href="/ai-analyzer"
-            className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold hover:text-[#c49a5a] transition-colors"
+            className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold hover:text-[#8a6530] transition-colors"
             style={{ color: "#a07840" }}>
             Ask AI more about this store →
           </Link>

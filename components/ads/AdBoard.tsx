@@ -67,9 +67,9 @@ export default function AdBoard() {
           <button key={t.id} onClick={() => setTab(t.id)}
             className="flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-all"
             style={{
-              background: tab === t.id ? "#a07840" : "#15151a",
-              border: `1px solid ${tab === t.id ? "#a07840" : "#2a2a33"}`,
-              color: tab === t.id ? "#f5f3ee" : "#8a8a94",
+              background: tab === t.id ? "#a07840" : "#ffffff",
+              border: `1px solid ${tab === t.id ? "#a07840" : "#e4e1d8"}`,
+              color: tab === t.id ? "#fdfbf6" : "#4d4b44",
             }}>
             <span>{t.icon}</span>{t.label}
           </button>
@@ -80,33 +80,33 @@ export default function AdBoard() {
       <input value={keyword} onChange={(e) => setKeyword(e.target.value)}
         placeholder="Search by product, niche or hook…"
         className="w-full rounded-xl px-4 py-2.5 text-sm mb-6"
-        style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }} />
+        style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }} />
 
       {loading ? (
-        <div className="rounded-2xl p-12 text-center" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-          <p className="text-sm" style={{ color: "#8a8a94" }}>Loading ads…</p>
+        <div className="rounded-2xl p-12 text-center" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+          <p className="text-sm" style={{ color: "#4d4b44" }}>Loading ads…</p>
         </div>
       ) : ads.length === 0 ? (
-        <div className="rounded-2xl p-12 text-center" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
-          <p className="text-sm" style={{ color: "#8a8a94" }}>No ads match your search.</p>
+        <div className="rounded-2xl p-12 text-center" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
+          <p className="text-sm" style={{ color: "#4d4b44" }}>No ads match your search.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {ads.map((ad) => (
-            <div key={ad.ad_id} className="rounded-2xl p-5 flex flex-col" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+            <div key={ad.ad_id} className="rounded-2xl p-5 flex flex-col" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
               <div className="flex items-center justify-between mb-3">
                 <span className="flex items-center gap-1.5 text-xs font-semibold rounded-full px-2.5 py-1"
-                  style={{ background: "#1d1d24", color: "#f5f3ee" }}>
+                  style={{ background: "#f3f1ea", color: "#23221f" }}>
                   {PLATFORM_ICON[ad.platform]} {ad.platform}
                 </span>
                 <span className="text-xs rounded-full px-2 py-0.5"
-                  style={{ background: ad.is_active ? "rgba(94,184,154,0.12)" : "#1d1d24", color: ad.is_active ? "#5eb89a" : "#5c5c64" }}>
+                  style={{ background: ad.is_active ? "rgba(94,184,154,0.12)" : "#f3f1ea", color: ad.is_active ? "#3e8f72" : "#5d5b54" }}>
                   {ad.is_active ? "● Active" : "Paused"}
                 </span>
               </div>
 
-              <p className="font-bold text-sm" style={{ color: "#f5f3ee" }}>{ad.product_name}</p>
-              <p className="text-xs mb-3" style={{ color: "#8a8a94" }}>{ad.niche} · {ad.shop_url} · {ad.country}</p>
+              <p className="font-bold text-sm" style={{ color: "#23221f" }}>{ad.product_name}</p>
+              <p className="text-xs mb-3" style={{ color: "#4d4b44" }}>{ad.niche} · {ad.shop_url} · {ad.country}</p>
 
               <p className="text-sm italic leading-relaxed mb-4 flex-1" style={{ color: "#c9c7c0" }}>
                 &ldquo;{ad.hook_text}&rdquo;
@@ -119,9 +119,9 @@ export default function AdBoard() {
                   { label: "Days", value: daysAgo(ad.first_seen).toString() },
                   { label: "Spend", value: money(ad.ad_spend_est) },
                 ].map((s) => (
-                  <div key={s.label} className="rounded-lg py-1.5" style={{ background: "#1d1d24" }}>
-                    <p className="font-bold text-[11px]" style={{ color: "#f5f3ee" }}>{s.value}</p>
-                    <p className="text-[9px]" style={{ color: "#5c5c64" }}>{s.label}</p>
+                  <div key={s.label} className="rounded-lg py-1.5" style={{ background: "#f3f1ea" }}>
+                    <p className="font-bold text-[11px]" style={{ color: "#23221f" }}>{s.value}</p>
+                    <p className="text-[9px]" style={{ color: "#5d5b54" }}>{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -133,9 +133,9 @@ export default function AdBoard() {
               <button onClick={() => copyHook(ad)}
                 className="w-full rounded-xl py-2 text-xs font-bold transition-all"
                 style={{
-                  background: copied === ad.ad_id ? "rgba(94,184,154,0.15)" : "#1d1d24",
-                  border: "1px solid #2a2a33",
-                  color: copied === ad.ad_id ? "#5eb89a" : "#c49a5a",
+                  background: copied === ad.ad_id ? "rgba(94,184,154,0.15)" : "#f3f1ea",
+                  border: "1px solid #e4e1d8",
+                  color: copied === ad.ad_id ? "#3e8f72" : "#8a6530",
                 }}>
                 {copied === ad.ad_id ? "✓ Copied!" : "📋 Copy Hook"}
               </button>

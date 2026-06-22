@@ -53,32 +53,32 @@ export function ProductFilters({ filters, onChange }: Props) {
   return (
     <div
       className="rounded-xl p-4 space-y-3 sticky top-[58px] z-20"
-      style={{ background: "#15151a", border: "1px solid #2a2a33" }}
+      style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}
     >
       {/* Row 1: search + sort + clear */}
       <div className="flex items-center gap-2 flex-wrap">
         {/* Search */}
         <div className="relative flex-1 min-w-[180px]">
-          <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2" color="#5c5c64" />
+          <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2" color="#5d5b54" />
           <input
             value={filters.search}
             onChange={(e) => set("search", e.target.value)}
             placeholder="Search products…"
             className="w-full rounded-lg pl-8 pr-3 py-2 text-[13px] transition-colors"
-            style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+            style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
             onFocus={(e) => (e.currentTarget.style.borderColor = "#a07840")}
-            onBlur={(e)  => (e.currentTarget.style.borderColor = "#2a2a33")}
+            onBlur={(e)  => (e.currentTarget.style.borderColor = "#e4e1d8")}
           />
         </div>
 
         {/* Sort */}
         <div className="flex items-center gap-1.5">
-          <SlidersHorizontal size={13} color="#8a8a94" />
+          <SlidersHorizontal size={13} color="#4d4b44" />
           <select
             value={filters.sort}
             onChange={(e) => set("sort", e.target.value as SortKey)}
             className="rounded-lg px-2.5 py-2 text-[12px] font-medium appearance-none cursor-pointer"
-            style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#f5f3ee", outline: "none" }}
+            style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#23221f", outline: "none" }}
           >
             {SORT_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>{o.label}</option>
@@ -88,15 +88,15 @@ export function ProductFilters({ filters, onChange }: Props) {
 
         {/* Platform filter */}
         <div className="flex items-center gap-1 rounded-lg overflow-hidden"
-          style={{ border: "1px solid #2a2a33", background: "#1d1d24" }}>
+          style={{ border: "1px solid #e4e1d8", background: "#f3f1ea" }}>
           {PLATFORMS.map((p) => (
             <button
               key={p}
               onClick={() => set("platform", p)}
               className="px-2.5 py-1.5 text-[11px] font-medium transition-colors"
               style={filters.platform === p
-                ? { background: "#a07840", color: "#f5f3ee" }
-                : { color: "#8a8a94" }}
+                ? { background: "#a07840", color: "#fdfbf6" }
+                : { color: "#4d4b44" }}
             >
               {p}
             </button>
@@ -108,8 +108,8 @@ export function ProductFilters({ filters, onChange }: Props) {
           onClick={() => set("trending", !filters.trending)}
           className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[12px] font-medium transition-all"
           style={filters.trending
-            ? { background: "rgba(94,184,154,0.12)", border: "1px solid rgba(94,184,154,0.3)", color: "#5eb89a" }
-            : { background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}
+            ? { background: "rgba(94,184,154,0.12)", border: "1px solid rgba(94,184,154,0.3)", color: "#3e8f72" }
+            : { background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}
         >
           🔥 Trending
         </button>
@@ -119,8 +119,8 @@ export function ProductFilters({ filters, onChange }: Props) {
           onClick={() => set("supplier", !filters.supplier)}
           className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-[12px] font-medium transition-all"
           style={filters.supplier
-            ? { background: "rgba(160,120,64,0.12)", border: "1px solid rgba(160,120,64,0.3)", color: "#c49a5a" }
-            : { background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}
+            ? { background: "rgba(160,120,64,0.12)", border: "1px solid rgba(160,120,64,0.3)", color: "#8a6530" }
+            : { background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}
         >
           📦 Supplier
         </button>
@@ -147,8 +147,8 @@ export function ProductFilters({ filters, onChange }: Props) {
               onClick={() => toggleNiche(n)}
               className="rounded-full px-2.5 py-1 text-[11px] font-medium transition-all"
               style={active
-                ? { background: "#a07840", color: "#f5f3ee" }
-                : { background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}
+                ? { background: "#a07840", color: "#fdfbf6" }
+                : { background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}
             >
               {n}
             </button>
@@ -158,12 +158,12 @@ export function ProductFilters({ filters, onChange }: Props) {
 
       {/* Row 3: IQ Score range */}
       <div className="flex items-center gap-3">
-        <span className="text-[11px] font-medium shrink-0" style={{ color: "#8a8a94" }}>IQ Score</span>
+        <span className="text-[11px] font-medium shrink-0" style={{ color: "#4d4b44" }}>IQ Score</span>
         <div className="flex items-center gap-2 flex-1">
           <input type="range" min={0} max={100} value={filters.iq_min}
             onChange={(e) => set("iq_min", +e.target.value)}
             className="flex-1 accent-[#a07840]" style={{ accentColor: "#a07840" }} />
-          <span className="text-[11px] font-bold shrink-0 tabular-nums" style={{ color: "#c49a5a", minWidth: 24 }}>
+          <span className="text-[11px] font-bold shrink-0 tabular-nums" style={{ color: "#8a6530", minWidth: 24 }}>
             {filters.iq_min}+
           </span>
         </div>

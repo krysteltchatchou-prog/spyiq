@@ -98,13 +98,13 @@ const SECTIONS: Section[] = [
   {
     h: "15. Governing Law",
     node: (
-      <p className="text-sm leading-relaxed" style={{ color: "#8a8a94" }}>
+      <p className="text-sm leading-relaxed" style={{ color: "#4d4b44" }}>
         These Terms are governed by the laws of{" "}
         <mark
           className="rounded px-1.5 py-0.5 font-semibold"
           style={{
             background: "rgba(212,181,114,0.16)",
-            color: "#d4b572",
+            color: "#c08a2a",
             border: "1px solid rgba(212,181,114,0.35)",
           }}
         >
@@ -122,7 +122,7 @@ const SECTIONS: Section[] = [
 
 export default function TermsPage() {
   return (
-    <div style={{ background: "#0c0c0e", color: "#f5f3ee", fontFamily: "Inter, sans-serif" }}>
+    <div style={{ background: "#f4f2ec", color: "#23221f", fontFamily: "Inter, sans-serif" }}>
       <PublicHeader />
 
       {/* ── Draft banner ─────────────────────── */}
@@ -132,7 +132,7 @@ export default function TermsPage() {
           style={{
             background: "rgba(212,181,114,0.10)",
             border: "1px solid rgba(212,181,114,0.30)",
-            color: "#d4b572",
+            color: "#c08a2a",
           }}
         >
           ⚠️ Draft for review — not yet reviewed by legal counsel. Replace before public launch.
@@ -145,26 +145,26 @@ export default function TermsPage() {
           <h1 className="font-bold mb-2" style={{ fontSize: 32, letterSpacing: "-1px" }}>
             Terms of Service
           </h1>
-          <p className="text-sm mb-10" style={{ color: "#8a8a94" }}>
+          <p className="text-sm mb-10" style={{ color: "#4d4b44" }}>
             Last updated: June 2026
           </p>
 
           <div className="space-y-8">
             {SECTIONS.map((s) => (
               <section key={s.h}>
-                <h2 className="font-semibold mb-2" style={{ fontSize: 17, color: "#f5f3ee" }}>
+                <h2 className="font-semibold mb-2" style={{ fontSize: 17, color: "#23221f" }}>
                   {s.h}
                 </h2>
                 {s.node}
                 {s.intro && (
-                  <p className="text-sm leading-relaxed" style={{ color: "#8a8a94" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "#4d4b44" }}>
                     {s.intro}
                   </p>
                 )}
                 {s.bullets && (
                   <ul className="mt-2 space-y-2">
                     {s.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: "#8a8a94" }}>
+                      <li key={b} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: "#4d4b44" }}>
                         <span style={{ color: "#a07840", flexShrink: 0 }}>•</span>
                         <span>{b}</span>
                       </li>
@@ -172,7 +172,7 @@ export default function TermsPage() {
                   </ul>
                 )}
                 {s.outro && (
-                  <p className="text-sm leading-relaxed mt-3" style={{ color: "#8a8a94" }}>
+                  <p className="text-sm leading-relaxed mt-3" style={{ color: "#4d4b44" }}>
                     {s.outro}
                   </p>
                 )}
@@ -182,12 +182,12 @@ export default function TermsPage() {
 
           <div
             className="mt-12 pt-6 flex items-center gap-5 text-sm"
-            style={{ borderTop: "1px solid #2a2a33" }}
+            style={{ borderTop: "1px solid #e4e1d8" }}
           >
-            <Link href="/" className="transition-colors hover:text-[#c49a5a]" style={{ color: "#8a8a94" }}>
+            <Link href="/" className="transition-colors hover:text-[#8a6530]" style={{ color: "#4d4b44" }}>
               ← Back home
             </Link>
-            <Link href="/privacy" className="transition-colors hover:text-[#c49a5a]" style={{ color: "#8a8a94" }}>
+            <Link href="/privacy" className="transition-colors hover:text-[#8a6530]" style={{ color: "#4d4b44" }}>
               Privacy Policy
             </Link>
           </div>
@@ -195,15 +195,15 @@ export default function TermsPage() {
       </main>
 
       {/* ── Footer (matches landing) ─────────── */}
-      <footer className="px-6 py-8" style={{ borderTop: "1px solid #2a2a33" }}>
+      <footer className="px-6 py-8" style={{ borderTop: "1px solid #e4e1d8" }}>
         <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <Image src="/SpyIQ_Logo.png" alt="SpyIQ" width={80} height={28} style={{ height: "auto" }} />
-          <p className="text-xs" style={{ color: "#5c5c64" }}>
+          <p className="text-xs" style={{ color: "#5d5b54" }}>
             © 2026 SpyIQ · Built with Claude Sonnet 4.6
           </p>
-          <div className="flex items-center gap-5 text-xs" style={{ color: "#5c5c64" }}>
-            <Link href="/login" className="hover:text-[#8a8a94] transition-colors">Sign In</Link>
-            <Link href="/signup" className="hover:text-[#8a8a94] transition-colors">Sign Up</Link>
+          <div className="flex items-center gap-5 text-xs" style={{ color: "#5d5b54" }}>
+            <Link href="/login" className="hover:text-[#4d4b44] transition-colors">Sign In</Link>
+            <Link href="/signup" className="hover:text-[#4d4b44] transition-colors">Sign Up</Link>
           </div>
         </div>
       </footer>

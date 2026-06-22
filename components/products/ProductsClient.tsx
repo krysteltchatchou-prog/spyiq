@@ -59,7 +59,7 @@ export function ProductsClient() {
       {/* Results header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <p className="text-sm font-medium" style={{ color: "#f5f3ee" }}>
+          <p className="text-sm font-medium" style={{ color: "#23221f" }}>
             {formatNumber(filtered.length)} products
           </p>
           {filtered.length < MOCK_PRODUCTS.length && (
@@ -74,24 +74,24 @@ export function ProductsClient() {
           {/* Export */}
           <button
             className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors"
-            style={{ background: "#15151a", border: "1px solid #2a2a33", color: "#8a8a94" }}
+            style={{ background: "#ffffff", border: "1px solid #e4e1d8", color: "#4d4b44" }}
           >
             <Download size={12} /> Export CSV
           </button>
 
           {/* View toggle */}
-          <div className="flex rounded-lg overflow-hidden" style={{ border: "1px solid #2a2a33", background: "#15151a" }}>
+          <div className="flex rounded-lg overflow-hidden" style={{ border: "1px solid #e4e1d8", background: "#ffffff" }}>
             <button
               onClick={() => setView("table")}
               className="p-2 transition-colors"
-              style={view === "table" ? { background: "#a07840", color: "#f5f3ee" } : { color: "#8a8a94" }}
+              style={view === "table" ? { background: "#a07840", color: "#fdfbf6" } : { color: "#4d4b44" }}
             >
               <List size={14} />
             </button>
             <button
               onClick={() => setView("grid")}
               className="p-2 transition-colors"
-              style={view === "grid" ? { background: "#a07840", color: "#f5f3ee" } : { color: "#8a8a94" }}
+              style={view === "grid" ? { background: "#a07840", color: "#fdfbf6" } : { color: "#4d4b44" }}
             >
               <LayoutGrid size={14} />
             </button>
@@ -106,10 +106,10 @@ export function ProductsClient() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filtered.length === 0 ? (
             <div className="col-span-full rounded-xl flex flex-col items-center justify-center py-20"
-              style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+              style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
               <p style={{ fontSize: 32 }}>🔍</p>
-              <p className="mt-3 font-semibold" style={{ color: "#f5f3ee" }}>No products match your filters</p>
-              <p className="text-sm mt-1" style={{ color: "#8a8a94" }}>Try adjusting or clearing the filters above</p>
+              <p className="mt-3 font-semibold" style={{ color: "#23221f" }}>No products match your filters</p>
+              <p className="text-sm mt-1" style={{ color: "#4d4b44" }}>Try adjusting or clearing the filters above</p>
             </div>
           ) : (
             filtered.map((p) => <ProductCard key={p.id} product={p} />)
