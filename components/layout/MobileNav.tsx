@@ -23,8 +23,8 @@ export function MobileNav() {
     <nav
       className="fixed bottom-0 left-0 right-0 z-50 flex md:hidden"
       style={{
-        background: "#0c0c0e",
-        borderTop: "1px solid #2a2a33",
+        background: "#e7e2d7",
+        borderTop: "1px solid #ddd8cc",
         height: 60,
         paddingBottom: "env(safe-area-inset-bottom)",
       }}
@@ -36,7 +36,7 @@ export function MobileNav() {
             key={href}
             href={href}
             className="flex flex-1 flex-col items-center justify-center gap-1 transition-colors"
-            style={{ color: active ? "#a07840" : "#5c5c64" }}
+            style={{ color: active ? "#a07840" : "#73716a" }}
           >
             <Icon size={20} />
             <span style={{ fontSize: 10, fontWeight: active ? 600 : 400 }}>{label}</span>

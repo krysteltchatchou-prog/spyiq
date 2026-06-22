@@ -20,12 +20,12 @@ export function AiEstimateBadge({ variant = "inline", className }: Props) {
     return (
       <div
         className={cn("flex items-center gap-2 rounded-lg px-3 py-2 text-[11px] leading-snug", className)}
-        style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}
+        style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#73716a" }}
       >
         <Info size={12} style={{ flexShrink: 0 }} />
         <span>
           <span className="font-semibold uppercase tracking-wider">{LABEL}</span>
-          <span style={{ color: "#5c5c64" }}> — {DISCLAIMER}</span>
+          <span style={{ color: "#8f8b80" }}> — {DISCLAIMER}</span>
         </span>
       </div>
     );
@@ -40,7 +40,7 @@ export function AiEstimateBadge({ variant = "inline", className }: Props) {
               "inline-flex items-center gap-1 align-middle cursor-help select-none text-[10px] font-semibold uppercase tracking-wider",
               className
             )}
-            style={{ color: "#8a8a94" }}
+            style={{ color: "#73716a" }}
           >
             <Info size={11} />
             {LABEL}

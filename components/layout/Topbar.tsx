@@ -66,14 +66,14 @@ export function Topbar() {
         left: 240,
         height: 58,
         padding: "0 28px",
-        background: "#0c0c0e",
-        borderBottom: "1px solid #2a2a33",
+        background: "#e7e2d7",
+        borderBottom: "1px solid #ddd8cc",
       }}
     >
       {/* ── Page title ───────────────────────────────────────────────────── */}
       <h1
         style={{
-          color: "#f5f3ee",
+          color: "#23221f",
           fontWeight: 700,
           fontSize: 15,
           letterSpacing: "-0.3px",
@@ -90,7 +90,7 @@ export function Topbar() {
         {showDateFilter && (
           <div
             className="flex items-center rounded-lg overflow-hidden"
-            style={{ border: "1px solid #2a2a33", background: "#15151a" }}
+            style={{ border: "1px solid #e4e1d8", background: "#ffffff" }}
           >
             {DATE_OPTIONS.map((period) => (
               <button
@@ -100,7 +100,7 @@ export function Topbar() {
                 style={{
                   padding: "5px 12px",
                   background: range === period ? "#a07840" : "transparent",
-                  color:      range === period ? "#f5f3ee"  : "#8a8a94",
+                  color:      range === period ? "#fdfbf6"  : "#4d4b44",
                 }}
               >
                 {period}
@@ -114,12 +114,12 @@ export function Topbar() {
           className="flex items-center gap-1.5 rounded-lg text-xs font-medium transition-colors"
           style={{
             padding: "5px 11px",
-            background: "#15151a",
-            border: "1px solid #2a2a33",
-            color: "#8a8a94",
+            background: "#ffffff",
+            border: "1px solid #e4e1d8",
+            color: "#4d4b44",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3a3a42")}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a2a33")}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#d4cfc2")}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#e4e1d8")}
         >
           <Search size={12} />
           <span>Search</span>
@@ -128,11 +128,11 @@ export function Topbar() {
             style={{
               marginLeft: 4,
               padding: "1px 4px",
-              background: "#2a2a33",
-              color: "#5c5c64",
+              background: "#e4e1d8",
+              color: "#73716a",
               fontSize: 9,
               fontFamily: "inherit",
-              border: "1px solid #3a3a42",
+              border: "1px solid #d4cfc2",
             }}
           >
             ⌘K
@@ -143,9 +143,9 @@ export function Topbar() {
         <Link
           href="/alerts"
           className="relative flex items-center justify-center rounded-lg transition-colors"
-          style={{ width: 34, height: 34, background: "#15151a", border: "1px solid #2a2a33" }}
+          style={{ width: 34, height: 34, background: "#ffffff", border: "1px solid #e4e1d8" }}
         >
-          <Bell size={14} color="#8a8a94" />
+          <Bell size={14} color="#4d4b44" />
           {/* Unread dot */}
           <span
             className="absolute rounded-full"
@@ -155,7 +155,7 @@ export function Topbar() {
               top: 7,
               right: 7,
               background: "#d4685f",
-              border: "1.5px solid #0c0c0e",
+              border: "1.5px solid #f4f2ec",
             }}
           />
         </Link>
@@ -167,29 +167,29 @@ export function Topbar() {
             className="flex items-center gap-2 rounded-lg transition-colors"
             style={{
               padding: "4px 8px",
-              background: userOpen ? "#15151a" : "#0f0f12",
-              border: "1px solid #2a2a33",
+              background: userOpen ? "#ffffff" : "#efece4",
+              border: "1px solid #e4e1d8",
             }}
           >
             {/* Avatar */}
             <div
               className="rounded-full flex items-center justify-center font-bold shrink-0"
-              style={{ width: 26, height: 26, background: "#a07840", color: "#f5f3ee", fontSize: 11 }}
+              style={{ width: 26, height: 26, background: "#a07840", color: "#fdfbf6", fontSize: 11 }}
             >
               {initials}
             </div>
             {/* Name + plan (hidden on narrow screens) */}
             <div className="hidden sm:block text-left">
-              <p style={{ color: "#f5f3ee", fontSize: 12, fontWeight: 600, lineHeight: 1.2 }}>
+              <p style={{ color: "#23221f", fontSize: 12, fontWeight: 600, lineHeight: 1.2 }}>
                 {profile?.full_name?.split(" ")[0] ?? "Account"}
               </p>
-              <p style={{ color: "#8a8a94", fontSize: 10, lineHeight: 1.2 }}>
+              <p style={{ color: "#4d4b44", fontSize: 10, lineHeight: 1.2 }}>
                 {profile?.plan ?? "free"} plan
               </p>
             </div>
             <ChevronDown
               size={12}
-              color="#8a8a94"
+              color="#4d4b44"
               className="transition-transform"
               style={{ transform: userOpen ? "rotate(180deg)" : "rotate(0deg)" }}
             />
@@ -201,18 +201,18 @@ export function Topbar() {
               className="absolute right-0 mt-1.5 rounded-xl overflow-hidden"
               style={{
                 width: 220,
-                background: "#15151a",
-                border: "1px solid #2a2a33",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                background: "#ffffff",
+                border: "1px solid #e4e1d8",
+                boxShadow: "0 16px 40px -16px rgba(60,50,30,0.3)",
                 zIndex: 50,
               }}
             >
               {/* Profile header */}
-              <div className="px-4 py-3" style={{ borderBottom: "1px solid #2a2a33" }}>
-                <p style={{ color: "#f5f3ee", fontSize: 13, fontWeight: 600 }}>
+              <div className="px-4 py-3" style={{ borderBottom: "1px solid #e4e1d8" }}>
+                <p style={{ color: "#23221f", fontSize: 13, fontWeight: 600 }}>
                   {profile?.full_name ?? "User"}
                 </p>
-                <p style={{ color: "#8a8a94", fontSize: 11 }}>{profile?.email ?? ""}</p>
+                <p style={{ color: "#4d4b44", fontSize: 11 }}>{profile?.email ?? ""}</p>
               </div>
 
               {/* Menu items */}
@@ -227,18 +227,18 @@ export function Topbar() {
                     href={href}
                     onClick={() => setUserOpen(false)}
                     className="flex items-center gap-3 px-4 py-2 transition-colors text-[13px]"
-                    style={{ color: "#d4cfc7" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = "#1d1d24")}
+                    style={{ color: "#23221f" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "#f3f1ea")}
                     onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                   >
-                    <Icon size={14} color="#8a8a94" />
+                    <Icon size={14} color="#4d4b44" />
                     {label}
                   </Link>
                 ))}
               </div>
 
               {/* Sign out */}
-              <div style={{ borderTop: "1px solid #2a2a33" }} className="py-1">
+              <div style={{ borderTop: "1px solid #e4e1d8" }} className="py-1">
                 <button
                   onClick={handleSignOut}
                   className="w-full flex items-center gap-3 px-4 py-2 transition-colors text-[13px]"

@@ -13,7 +13,7 @@ type Tab = typeof TABS[number];
 
 const METRICS = [
   { key: "revenue",  label: "Gross Revenue", color: "#a07840" },
-  { key: "profit",   label: "Net Profit",    color: "#5eb89a" },
+  { key: "profit",   label: "Net Profit",    color: "#3e8f72" },
   { key: "orders",   label: "Orders",        color: "#8b8da0" },
 ] as const;
 
@@ -27,17 +27,17 @@ function ChartTooltip({ active, payload, label }: {
   return (
     <div
       className="rounded-xl px-3 py-2.5 text-xs"
-      style={{ background: "#1d1d24", border: "1px solid #2a2a33", boxShadow: "0 8px 24px rgba(0,0,0,0.5)" }}
+      style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", boxShadow: "0 8px 24px rgba(0,0,0,0.5)" }}
     >
-      <p className="font-semibold mb-1.5" style={{ color: "#f5f3ee" }}>{label}</p>
+      <p className="font-semibold mb-1.5" style={{ color: "#23221f" }}>{label}</p>
       {payload.map((p) => (
         <div key={p.dataKey} className="flex items-center gap-2">
           <span className="rounded-full" style={{ width: 6, height: 6, background: p.color, display:"inline-block" }} />
-          <span style={{ color: "#8a8a94" }}>
+          <span style={{ color: "#4d4b44" }}>
             {p.dataKey.startsWith("prev") ? "Prev " : ""}
             {p.dataKey.includes("orders") ? "Orders" : p.dataKey.includes("profit") ? "Profit" : "Revenue"}:
           </span>
-          <span style={{ color: "#f5f3ee", fontWeight: 600 }}>
+          <span style={{ color: "#23221f", fontWeight: 600 }}>
             {p.dataKey.includes("orders") ? formatNumber(p.value) : formatCurrency(p.value)}
           </span>
         </div>
@@ -74,35 +74,35 @@ export function RevenueChart() {
   return (
     <div
       className="rounded-xl"
-      style={{ background: "#15151a", border: "1px solid #2a2a33" }}
+      style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}
     >
       {/* Header */}
       <div
         className="flex items-start justify-between px-5 pt-5 pb-4"
-        style={{ borderBottom: "1px solid #2a2a33" }}
+        style={{ borderBottom: "1px solid #e4e1d8" }}
       >
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider mb-1" style={{ color: "#5c5c64", letterSpacing: "0.5px" }}>
+          <p className="text-xs font-medium uppercase tracking-wider mb-1" style={{ color: "#73716a", letterSpacing: "0.5px" }}>
             {tab}
           </p>
-          <p className="font-bold" style={{ fontSize: 26, color: "#f5f3ee", letterSpacing: "-1px" }}>
+          <p className="font-bold" style={{ fontSize: 26, color: "#23221f", letterSpacing: "-1px" }}>
             {formatCurrency(total)}
           </p>
-          <p className="text-xs mt-0.5" style={{ color: up ? "#5eb89a" : "#d4685f" }}>
+          <p className="text-xs mt-0.5" style={{ color: up ? "#3e8f72" : "#d4685f" }}>
             {up ? "▲" : "▼"} {Math.abs(Number(deltaPct))}% vs previous period
           </p>
         </div>
 
         {/* Tab switcher */}
-        <div className="flex items-center gap-1 rounded-lg p-1" style={{ background: "#1d1d24", border: "1px solid #2a2a33" }}>
+        <div className="flex items-center gap-1 rounded-lg p-1" style={{ background: "#f3f1ea", border: "1px solid #e4e1d8" }}>
           {TABS.map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
               className="rounded-md px-3 py-1 text-xs font-medium transition-all"
               style={tab === t
-                ? { background: "#a07840", color: "#f5f3ee" }
-                : { color: "#8a8a94" }}
+                ? { background: "#a07840", color: "#23221f" }
+                : { color: "#4d4b44" }}
             >
               {t}
             </button>
@@ -120,7 +120,7 @@ export function RevenueChart() {
             style={{ opacity: activeMetrics.has(m.key) ? 1 : 0.35 }}
           >
             <span className="rounded-sm" style={{ width: 10, height: 10, background: m.color, display:"inline-block" }} />
-            <span style={{ color: "#d4cfc7" }}>{m.label}</span>
+            <span style={{ color: "#23221f" }}>{m.label}</span>
           </button>
         ))}
         <div className="ml-auto flex items-center gap-1.5">
@@ -133,7 +133,7 @@ export function RevenueChart() {
             <svg width={16} height={8}>
               <line x1="0" y1="4" x2="16" y2="4" stroke="#8b8da0" strokeWidth={1.5} strokeDasharray="3 2" />
             </svg>
-            <span style={{ color: "#8a8a94" }}>Previous period</span>
+            <span style={{ color: "#4d4b44" }}>Previous period</span>
           </button>
         </div>
       </div>
@@ -148,26 +148,26 @@ export function RevenueChart() {
                 <stop offset="95%" stopColor="#a07840" stopOpacity={0}   />
               </linearGradient>
               <linearGradient id="gradProfit" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%"  stopColor="#5eb89a" stopOpacity={0.15} />
-                <stop offset="95%" stopColor="#5eb89a" stopOpacity={0}    />
+                <stop offset="5%"  stopColor="#3e8f72" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="#3e8f72" stopOpacity={0}    />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1d1d24" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f3f1ea" vertical={false} />
             <XAxis
               dataKey="date"
-              tick={{ fill: "#5c5c64", fontSize: 10 }}
+              tick={{ fill: "#73716a", fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               interval={Math.floor(data.length / 6)}
             />
             <YAxis
-              tick={{ fill: "#5c5c64", fontSize: 10 }}
+              tick={{ fill: "#73716a", fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
               width={42}
             />
-            <Tooltip content={<ChartTooltip />} cursor={{ stroke: "#2a2a33", strokeWidth: 1 }} />
+            <Tooltip content={<ChartTooltip />} cursor={{ stroke: "#e4e1d8", strokeWidth: 1 }} />
 
             {/* Previous period — dotted */}
             {showPrev && (
@@ -192,18 +192,18 @@ export function RevenueChart() {
                 strokeWidth={2}
                 fill="url(#gradRevenue)"
                 dot={false}
-                activeDot={{ r: 4, fill: "#a07840", stroke: "#0c0c0e", strokeWidth: 2 }}
+                activeDot={{ r: 4, fill: "#a07840", stroke: "#f4f2ec", strokeWidth: 2 }}
               />
             )}
             {activeMetrics.has("profit") && (
               <Area
                 type="monotone"
                 dataKey="profit"
-                stroke="#5eb89a"
+                stroke="#3e8f72"
                 strokeWidth={2}
                 fill="url(#gradProfit)"
                 dot={false}
-                activeDot={{ r: 4, fill: "#5eb89a", stroke: "#0c0c0e", strokeWidth: 2 }}
+                activeDot={{ r: 4, fill: "#3e8f72", stroke: "#f4f2ec", strokeWidth: 2 }}
               />
             )}
           </AreaChart>

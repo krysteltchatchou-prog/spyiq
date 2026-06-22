@@ -20,20 +20,20 @@ export function HotProductsCard({ products }: { products?: HotProduct[] }) {
   return (
     <div
       className="rounded-xl flex flex-col"
-      style={{ background: "#15151a", border: "1px solid #2a2a33" }}
+      style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}
     >
       {/* Header */}
       <div
         className="flex items-center justify-between px-5 py-4"
-        style={{ borderBottom: "1px solid #2a2a33" }}
+        style={{ borderBottom: "1px solid #e4e1d8" }}
       >
         <div className="flex items-center gap-2">
           <span style={{ fontSize: 16 }}>🔥</span>
-          <span style={{ color: "#f5f3ee", fontWeight: 600, fontSize: 13 }}>Hot Products Now</span>
+          <span style={{ color: "#23221f", fontWeight: 600, fontSize: 13 }}>Hot Products Now</span>
         </div>
         <Link
           href="/resources/top-products"
-          className="flex items-center gap-1 text-xs font-medium transition-colors hover:text-[#c49a5a]"
+          className="flex items-center gap-1 text-xs font-medium transition-colors hover:text-[#8a6530]"
           style={{ color: "#a07840" }}
         >
           View all <ArrowRight size={12} />
@@ -50,7 +50,7 @@ export function HotProductsCard({ products }: { products?: HotProduct[] }) {
             style={{
               borderBottom: i < items.length - 1 ? "1px solid #1a1a20" : undefined,
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#1d1d24")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#f3f1ea")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
             {/* Rank */}
@@ -59,7 +59,7 @@ export function HotProductsCard({ products }: { products?: HotProduct[] }) {
               style={{
                 width: 18,
                 fontSize: 11,
-                color: i === 0 ? "#a07840" : "#3a3a42",
+                color: i === 0 ? "#a07840" : "#d4cfc2",
               }}
             >
               {i + 1}
@@ -68,7 +68,7 @@ export function HotProductsCard({ products }: { products?: HotProduct[] }) {
             {/* Emoji thumb */}
             <div
               className="shrink-0 flex items-center justify-center rounded-lg text-base"
-              style={{ width: 34, height: 34, background: "#1d1d24", border: "1px solid #2a2a33" }}
+              style={{ width: 34, height: 34, background: "#f3f1ea", border: "1px solid #e4e1d8" }}
             >
               {product.emoji}
             </div>
@@ -76,8 +76,8 @@ export function HotProductsCard({ products }: { products?: HotProduct[] }) {
             {/* Name + niche */}
             <div className="flex-1 min-w-0">
               <p
-                className="font-medium truncate text-[13px] transition-colors group-hover:text-[#f5f3ee]"
-                style={{ color: "#d4cfc7" }}
+                className="font-medium truncate text-[13px] transition-colors group-hover:text-[#23221f]"
+                style={{ color: "#23221f" }}
               >
                 {product.name}
               </p>
@@ -95,10 +95,10 @@ export function HotProductsCard({ products }: { products?: HotProduct[] }) {
 
             {/* Stats */}
             <div className="shrink-0 text-right">
-              <p className="text-xs font-semibold" style={{ color: "#5eb89a" }}>
+              <p className="text-xs font-semibold" style={{ color: "#3e8f72" }}>
                 {formatNumber(product.daily_sales)}/day
               </p>
-              <p className="text-[10px]" style={{ color: "#8a8a94" }}>
+              <p className="text-[10px]" style={{ color: "#4d4b44" }}>
                 {product.margin_pct}% margin
               </p>
             </div>
@@ -110,9 +110,9 @@ export function HotProductsCard({ products }: { products?: HotProduct[] }) {
             <button
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
               className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg p-1.5"
-              style={{ color: "#8a8a94" }}
+              style={{ color: "#4d4b44" }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#a07840"; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#8a8a94"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#4d4b44"; }}
             >
               <Bookmark size={13} />
             </button>

@@ -13,15 +13,15 @@ export function IQScoreBadge({ score, size = 40, strokeWidth = 3, showLabel = tr
   const fill = circ * (score / 100);
 
   const color =
-    score >= 85 ? "#5eb89a" :
+    score >= 85 ? "#3e8f72" :
     score >= 70 ? "#a07840" :
-    score >= 55 ? "#d4b572" : "#d4685f";
+    score >= 55 ? "#c08a2a" : "#d4685f";
 
   return (
     <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
       <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
         {/* Track */}
-        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#2a2a33" strokeWidth={strokeWidth} />
+        <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e4e1d8" strokeWidth={strokeWidth} />
         {/* Progress */}
         <circle
           cx={size/2} cy={size/2} r={r}

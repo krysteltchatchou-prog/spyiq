@@ -7,9 +7,9 @@ import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
 type InsightType = "Opportunity" | "Warning" | "Insight" | "Alert";
 
 const TYPE_COLORS: Record<InsightType, { border: string; badge: string; text: string }> = {
-  Opportunity: { border: "#5eb89a", badge: "rgba(94,184,154,0.12)",  text: "#5eb89a" },
-  Warning:     { border: "#d4b572", badge: "rgba(212,181,114,0.12)", text: "#d4b572" },
-  Insight:     { border: "#a07840", badge: "rgba(160,120,64,0.12)",  text: "#c49a5a" },
+  Opportunity: { border: "#3e8f72", badge: "rgba(94,184,154,0.12)",  text: "#3e8f72" },
+  Warning:     { border: "#c08a2a", badge: "rgba(212,181,114,0.12)", text: "#c08a2a" },
+  Insight:     { border: "#a07840", badge: "rgba(160,120,64,0.12)",  text: "#8a6530" },
   Alert:       { border: "#d4685f", badge: "rgba(212,104,95,0.12)",  text: "#d4685f" },
 };
 
@@ -24,16 +24,16 @@ export function InsightsFeed() {
   return (
     <div
       className="rounded-xl"
-      style={{ background: "#15151a", border: "1px solid #2a2a33" }}
+      style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}
     >
       {/* Header */}
       <div
         className="flex items-center justify-between px-5 py-4"
-        style={{ borderBottom: "1px solid #2a2a33" }}
+        style={{ borderBottom: "1px solid #e4e1d8" }}
       >
         <div className="flex items-center gap-2">
           <span style={{ fontSize: 16 }}>🤖</span>
-          <span style={{ color: "#f5f3ee", fontWeight: 600, fontSize: 13 }}>AI Insights</span>
+          <span style={{ color: "#23221f", fontWeight: 600, fontSize: 13 }}>AI Insights</span>
           <span
             className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full"
             style={{ background: "rgba(160,120,64,0.12)", color: "#a07840", border: "1px solid rgba(160,120,64,0.2)" }}
@@ -44,7 +44,7 @@ export function InsightsFeed() {
         <button
           onClick={handleRefresh}
           className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors"
-          style={{ background: "#1d1d24", border: "1px solid #2a2a33", color: "#8a8a94" }}
+          style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}
         >
           <RefreshCw
             size={11}
@@ -64,8 +64,8 @@ export function InsightsFeed() {
               key={insight.id}
               className="rounded-xl p-4 transition-shadow hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
               style={{
-                background: "#0c0c0e",
-                border: "1px solid #2a2a33",
+                background: "#f4f2ec",
+                border: "1px solid #e4e1d8",
                 borderLeft: `3px solid ${colors.border}`,
               }}
             >
@@ -80,12 +80,12 @@ export function InsightsFeed() {
                       {insight.type}
                     </span>
                   </div>
-                  <p className="text-[13px] font-semibold leading-snug" style={{ color: "#f5f3ee" }}>
+                  <p className="text-[13px] font-semibold leading-snug" style={{ color: "#23221f" }}>
                     {insight.title}
                   </p>
                 </div>
               </div>
-              <p className="text-[12px] leading-relaxed" style={{ color: "#8a8a94" }}>
+              <p className="text-[12px] leading-relaxed" style={{ color: "#4d4b44" }}>
                 {insight.body}
               </p>
             </div>

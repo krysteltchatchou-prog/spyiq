@@ -20,7 +20,7 @@ const CARDS = [
     key: "winning_products",
     label: "Winning Products",
     icon: Trophy,
-    iconColor: "#5eb89a",
+    iconColor: "#3e8f72",
     iconBg: "rgba(94,184,154,0.12)",
     tooltip: "Products with IQ Score ≥ 80 that are currently trending.",
     value: (s: typeof DASHBOARD_STATS) => formatNumber(s.winning_products),
@@ -40,7 +40,7 @@ const CARDS = [
     key: "ai_credits",
     label: "AI Credits Used",
     icon: Zap,
-    iconColor: "#d4b572",
+    iconColor: "#c08a2a",
     iconBg: "rgba(212,181,114,0.12)",
     tooltip: "AI analysis credits consumed this month. Resets on your billing date.",
     value: (s: typeof DASHBOARD_STATS) => `${s.ai_credits_used} / ${s.ai_credits_limit}`,
@@ -67,8 +67,8 @@ export function StatsGrid() {
               key={card.key}
               className="rounded-xl p-5 transition-shadow hover:shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
               style={{
-                background: "#15151a",
-                border: "1px solid #2a2a33",
+                background: "#ffffff",
+                border: "1px solid #e4e1d8",
                 borderTop: `2px solid ${card.iconColor}`,
               }}
             >
@@ -83,7 +83,7 @@ export function StatsGrid() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button className="opacity-40 hover:opacity-70 transition-opacity">
-                      <Info size={13} color="#8a8a94" />
+                      <Info size={13} color="#4d4b44" />
                     </button>
                   </TooltipTrigger>
                   <TooltipContent>{card.tooltip}</TooltipContent>
@@ -93,25 +93,25 @@ export function StatsGrid() {
               {/* Value */}
               <p
                 className="font-bold tracking-tight"
-                style={{ fontSize: 26, color: "#f5f3ee", letterSpacing: "-1px", lineHeight: 1 }}
+                style={{ fontSize: 26, color: "#23221f", letterSpacing: "-1px", lineHeight: 1 }}
               >
                 {card.value(stats)}
               </p>
 
               {/* Label */}
-              <p className="mt-1 text-xs" style={{ color: "#8a8a94" }}>{card.label}</p>
+              <p className="mt-1 text-xs" style={{ color: "#4d4b44" }}>{card.label}</p>
 
               {/* Credit bar */}
               {"isCredit" in card && card.isCredit && (
                 <div
                   className="mt-3 rounded-full overflow-hidden"
-                  style={{ height: 3, background: "#2a2a33" }}
+                  style={{ height: 3, background: "#e4e1d8" }}
                 >
                   <div
                     className="h-full rounded-full"
                     style={{
                       width: `${(stats.ai_credits_used / stats.ai_credits_limit) * 100}%`,
-                      background: stats.ai_credits_used / stats.ai_credits_limit > 0.85 ? "#d4685f" : "#d4b572",
+                      background: stats.ai_credits_used / stats.ai_credits_limit > 0.85 ? "#d4685f" : "#c08a2a",
                     }}
                   />
                 </div>
@@ -119,7 +119,7 @@ export function StatsGrid() {
 
               {/* Delta */}
               {!("isCredit" in card && card.isCredit) && (
-                <p className="mt-2 text-xs font-medium" style={{ color: up ? "#5eb89a" : "#d4685f" }}>
+                <p className="mt-2 text-xs font-medium" style={{ color: up ? "#3e8f72" : "#d4685f" }}>
                   {up ? "▲" : "▼"} {pct}% vs last {range}
                 </p>
               )}

@@ -11,7 +11,7 @@ const PLATFORM_ICONS: Record<string, string> = {
   TikTok: "🎵", Facebook: "📘", Instagram: "📸", YouTube: "▶️", Google: "🔵",
 };
 const PLATFORM_COLORS: Record<string, string> = {
-  TikTok: "#5eb89a", Facebook: "#4a7fc1", Instagram: "#c49a5a",
+  TikTok: "#3e8f72", Facebook: "#4a7fc1", Instagram: "#8a6530",
   YouTube: "#d4685f", Google: "#8b8da0",
 };
 const NICHE_EMOJI: Record<string, string> = {
@@ -60,14 +60,14 @@ export function TrendingAdsWidget() {
   }
 
   return (
-    <div className="rounded-xl flex flex-col" style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+    <div className="rounded-xl flex flex-col" style={{ background: "#ffffff", border: "1px solid #e4e1d8" }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: "1px solid #2a2a33" }}>
+      <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: "1px solid #e4e1d8" }}>
         <div className="flex items-center gap-2">
           <span style={{ fontSize: 16 }}>📣</span>
-          <span style={{ color: "#f5f3ee", fontWeight: 600, fontSize: 13 }}>Trending Ads Now</span>
+          <span style={{ color: "#23221f", fontWeight: 600, fontSize: 13 }}>Trending Ads Now</span>
         </div>
-        <Link href="/ad-spy" className="flex items-center gap-1 text-xs font-medium hover:text-[#c49a5a] transition-colors" style={{ color: "#a07840" }}>
+        <Link href="/ad-spy" className="flex items-center gap-1 text-xs font-medium hover:text-[#8a6530] transition-colors" style={{ color: "#a07840" }}>
           View all <ArrowRight size={12} />
         </Link>
       </div>
@@ -80,8 +80,8 @@ export function TrendingAdsWidget() {
             onClick={() => setPlatform(p)}
             className="shrink-0 rounded-full text-[11px] font-medium transition-all px-2.5 py-1"
             style={platform === p
-              ? { background: "#a07840", color: "#f5f3ee" }
-              : { background: "transparent", color: "#8a8a94" }}
+              ? { background: "#a07840", color: "#23221f" }
+              : { background: "transparent", color: "#4d4b44" }}
           >
             {p !== "All" && PLATFORM_ICONS[p]} {p}
           </button>
@@ -95,13 +95,13 @@ export function TrendingAdsWidget() {
             key={ad.id}
             className="flex items-start gap-3 px-5 py-3 group transition-colors"
             style={{ borderBottom: i < ads.length - 1 ? "1px solid #1a1a20" : undefined }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#1d1d24")}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#f3f1ea")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
             {/* Platform icon */}
             <div
               className="shrink-0 flex items-center justify-center rounded-lg text-sm mt-0.5"
-              style={{ width: 32, height: 32, background: "#1d1d24", border: "1px solid #2a2a33" }}
+              style={{ width: 32, height: 32, background: "#f3f1ea", border: "1px solid #e4e1d8" }}
             >
               {PLATFORM_ICONS[ad.platform]}
             </div>
@@ -109,7 +109,7 @@ export function TrendingAdsWidget() {
             {/* Content */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-[11px] font-semibold" style={{ color: "#f5f3ee" }}>
+                <span className="text-[11px] font-semibold" style={{ color: "#23221f" }}>
                   {ad.emoji} {ad.product}
                 </span>
                 <span
@@ -123,13 +123,13 @@ export function TrendingAdsWidget() {
                   {ad.platform}
                 </span>
               </div>
-              <p className="text-[12px] leading-snug italic line-clamp-2" style={{ color: "#8a8a94" }}>
+              <p className="text-[12px] leading-snug italic line-clamp-2" style={{ color: "#4d4b44" }}>
                 &ldquo;{ad.hook}&rdquo;
               </p>
               <div className="flex items-center gap-3 mt-1.5">
-                <span className="text-[10px]" style={{ color: "#5eb89a" }}>{ad.engagement}% eng.</span>
-                <span className="text-[10px]" style={{ color: "#8a8a94" }}>{ad.days}d running</span>
-                <span className="text-[10px]" style={{ color: "#8a8a94" }}>
+                <span className="text-[10px]" style={{ color: "#3e8f72" }}>{ad.engagement}% eng.</span>
+                <span className="text-[10px]" style={{ color: "#4d4b44" }}>{ad.days}d running</span>
+                <span className="text-[10px]" style={{ color: "#4d4b44" }}>
                   ${(ad.est_spend / 1000).toFixed(1)}k spend
                 </span>
               </div>
@@ -140,9 +140,9 @@ export function TrendingAdsWidget() {
               onClick={() => copyHook(ad.id, ad.hook)}
               className="shrink-0 flex items-center gap-1 rounded-lg px-2 py-1.5 text-[10px] font-medium transition-all opacity-0 group-hover:opacity-100"
               style={{
-                background: copied === ad.id ? "rgba(94,184,154,0.12)" : "#1d1d24",
-                border: `1px solid ${copied === ad.id ? "rgba(94,184,154,0.3)" : "#2a2a33"}`,
-                color: copied === ad.id ? "#5eb89a" : "#8a8a94",
+                background: copied === ad.id ? "rgba(94,184,154,0.12)" : "#f3f1ea",
+                border: `1px solid ${copied === ad.id ? "rgba(94,184,154,0.3)" : "#e4e1d8"}`,
+                color: copied === ad.id ? "#3e8f72" : "#4d4b44",
               }}
             >
               {copied === ad.id ? <Check size={10} /> : <Copy size={10} />}

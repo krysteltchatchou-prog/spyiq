@@ -68,10 +68,10 @@ const NAV: NavSection[] = [
 
 // Plan display config
 const PLAN_LABELS: Record<string, { label: string; color: string }> = {
-  free:    { label: "Free Plan",    color: "#8a8a94" },
-  starter: { label: "Starter",      color: "#c49a5a" },
+  free:    { label: "Free Plan",    color: "#4d4b44" },
+  starter: { label: "Starter",      color: "#8a6530" },
   pro:     { label: "Pro",          color: "#a07840" },
-  agency:  { label: "Agency",       color: "#5eb89a" },
+  agency:  { label: "Agency",       color: "#3e8f72" },
 };
 
 // ─── Component ─────────────────────────────────────────────────────────────
@@ -102,12 +102,12 @@ export function Sidebar() {
   return (
     <aside
       className="fixed left-0 top-0 bottom-0 z-40 flex flex-col select-none"
-      style={{ width: 240, background: "#0c0c0e", borderRight: "1px solid #2a2a33" }}
+      style={{ width: 240, background: "#e7e2d7", borderRight: "1px solid #ddd8cc" }}
     >
       {/* ── Logo ──────────────────────────────────────────────────────────── */}
       <div
         className="flex items-center px-4 shrink-0"
-        style={{ height: 58, background: "#0c0c0e", borderBottom: "1px solid #2a2a33" }}
+        style={{ height: 58, background: "#e7e2d7", borderBottom: "1px solid #ddd8cc" }}
       >
         <Link href="/dashboard">
           <Image
@@ -131,7 +131,7 @@ export function Sidebar() {
               style={{
                 fontSize: 10,
                 fontWeight: 600,
-                color: "#3a3a42",
+                color: "#8f8b80",
                 textTransform: "uppercase",
                 letterSpacing: "0.8px",
               }}
@@ -153,8 +153,8 @@ export function Sidebar() {
                         "flex items-center gap-2.5 rounded-lg transition-all duration-150",
                         "text-[13px] font-medium",
                         active
-                          ? "text-[#f5f3ee]"
-                          : "text-[#8a8a94] hover:text-[#d4cfc7] hover:bg-[#15151a]"
+                          ? "text-[#23221f]"
+                          : "text-[#4d4b44] hover:text-[#23221f] hover:bg-[#ffffff]"
                       )}
                       style={
                         active
@@ -172,7 +172,7 @@ export function Sidebar() {
                       {/* Icon */}
                       <Icon
                         size={14}
-                        className={active ? "text-[#c49a5a]" : ""}
+                        className={active ? "text-[#8a6530]" : ""}
                       />
 
                       {/* Label */}
@@ -186,7 +186,7 @@ export function Sidebar() {
                             fontSize: 9,
                             padding: "2px 5px",
                             background: "rgba(94,184,154,0.15)",
-                            color: "#5eb89a",
+                            color: "#3e8f72",
                             border: "1px solid rgba(94,184,154,0.3)",
                             letterSpacing: "0.3px",
                           }}
@@ -222,7 +222,7 @@ export function Sidebar() {
       </nav>
 
       {/* ── Plan widget ───────────────────────────────────────────────────── */}
-      <div className="px-3 pb-3 shrink-0 space-y-2" style={{ borderTop: "1px solid #2a2a33", paddingTop: 12 }}>
+      <div className="px-3 pb-3 shrink-0 space-y-2" style={{ borderTop: "1px solid #e4e1d8", paddingTop: 12 }}>
         {/* Plan card */}
         <div
           className="rounded-lg px-3 py-2.5"
@@ -238,7 +238,7 @@ export function Sidebar() {
             {planKey !== "agency" && (
               <Link
                 href="/settings#billing"
-                className="transition-colors hover:text-[#c49a5a]"
+                className="transition-colors hover:text-[#8a6530]"
                 style={{ color: "#a07840", fontSize: 10, fontWeight: 600 }}
               >
                 Upgrade →
@@ -249,13 +249,13 @@ export function Sidebar() {
           {/* AI credits bar (shown when limit > 0) */}
           {profile && profile.ai_credits_limit > 0 && (
             <>
-              <p style={{ color: "#8a8a94", fontSize: 10 }}>
+              <p style={{ color: "#4d4b44", fontSize: 10 }}>
                 {profile.ai_credits_used.toLocaleString()} /{" "}
                 {profile.ai_credits_limit.toLocaleString()} AI credits
               </p>
               <div
                 className="mt-1.5 rounded-full overflow-hidden"
-                style={{ height: 3, background: "#2a2a33" }}
+                style={{ height: 3, background: "#e4e1d8" }}
               >
                 <div
                   className="h-full rounded-full transition-all"
@@ -270,7 +270,7 @@ export function Sidebar() {
 
           {/* Free plan — searches remaining */}
           {planKey === "free" && !profile && (
-            <p style={{ color: "#8a8a94", fontSize: 10 }}>5 searches / day</p>
+            <p style={{ color: "#4d4b44", fontSize: 10 }}>5 searches / day</p>
           )}
         </div>
 
@@ -278,13 +278,13 @@ export function Sidebar() {
         <button
           onClick={handleSignOut}
           className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg transition-colors text-[12px] font-medium"
-          style={{ color: "#5c5c64" }}
+          style={{ color: "#73716a" }}
           onMouseEnter={(e) => {
             e.currentTarget.style.color = "#d4685f";
             e.currentTarget.style.background = "rgba(212,104,95,0.07)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "#5c5c64";
+            e.currentTarget.style.color = "#73716a";
             e.currentTarget.style.background = "transparent";
           }}
         >
