@@ -102,11 +102,11 @@ export function StoreBuilderWidget() {
               className="shrink-0 flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all"
               style={{
                 background: url.trim() ? "#a07840" : "#e4e1d8",
-                color: url.trim() ? "#fdfbf6" : "#73716a",
+                color: url.trim() ? "#fdfbf6" : "#5d5b54",
                 cursor: url.trim() ? "pointer" : "not-allowed",
               }}
             >
-              <Zap size={13} fill={url.trim() ? "#fdfbf6" : "#73716a"} />
+              <Zap size={13} fill={url.trim() ? "#fdfbf6" : "#5d5b54"} />
               Generate Store
             </button>
           </div>

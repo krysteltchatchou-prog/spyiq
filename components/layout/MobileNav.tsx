@@ -36,7 +36,7 @@ export function MobileNav() {
             key={href}
             href={href}
             className="flex flex-1 flex-col items-center justify-center gap-1 transition-colors"
-            style={{ color: active ? "#a07840" : "#73716a" }}
+            style={{ color: active ? "#a07840" : "#5d5b54" }}
           >
             <Icon size={20} />
             <span style={{ fontSize: 10, fontWeight: active ? 600 : 400 }}>{label}</span>

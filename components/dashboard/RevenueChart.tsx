@@ -82,7 +82,7 @@ export function RevenueChart() {
         style={{ borderBottom: "1px solid #e4e1d8" }}
       >
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider mb-1" style={{ color: "#73716a", letterSpacing: "0.5px" }}>
+          <p className="text-xs font-medium uppercase tracking-wider mb-1" style={{ color: "#5d5b54", letterSpacing: "0.5px" }}>
             {tab}
           </p>
           <p className="font-bold" style={{ fontSize: 26, color: "#23221f", letterSpacing: "-1px" }}>
@@ -101,7 +101,7 @@ export function RevenueChart() {
               onClick={() => setTab(t)}
               className="rounded-md px-3 py-1 text-xs font-medium transition-all"
               style={tab === t
-                ? { background: "#a07840", color: "#23221f" }
+                ? { background: "#a07840", color: "#fdfbf6" }
                 : { color: "#4d4b44" }}
             >
               {t}
@@ -155,13 +155,13 @@ export function RevenueChart() {
             <CartesianGrid strokeDasharray="3 3" stroke="#f3f1ea" vertical={false} />
             <XAxis
               dataKey="date"
-              tick={{ fill: "#73716a", fontSize: 10 }}
+              tick={{ fill: "#5d5b54", fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               interval={Math.floor(data.length / 6)}
             />
             <YAxis
-              tick={{ fill: "#73716a", fontSize: 10 }}
+              tick={{ fill: "#5d5b54", fontSize: 10 }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}

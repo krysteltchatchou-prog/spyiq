@@ -80,7 +80,7 @@ export function TrendingAdsWidget() {
             onClick={() => setPlatform(p)}
             className="shrink-0 rounded-full text-[11px] font-medium transition-all px-2.5 py-1"
             style={platform === p
-              ? { background: "#a07840", color: "#23221f" }
+              ? { background: "#a07840", color: "#fdfbf6" }
               : { background: "transparent", color: "#4d4b44" }}
           >
             {p !== "All" && PLATFORM_ICONS[p]} {p}

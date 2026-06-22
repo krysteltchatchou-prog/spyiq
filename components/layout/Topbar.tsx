@@ -129,7 +129,7 @@ export function Topbar() {
               marginLeft: 4,
               padding: "1px 4px",
               background: "#e4e1d8",
-              color: "#73716a",
+              color: "#5d5b54",
               fontSize: 9,
               fontFamily: "inherit",
               border: "1px solid #d4cfc2",

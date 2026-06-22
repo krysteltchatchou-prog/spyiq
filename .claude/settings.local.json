@@ -59,7 +59,8 @@
       "Bash(curl -s -o /dev/null -w \"store-builder: HTTP %{http_code}\\\\n\" --max-time 40 -L http://localhost:3000/store-builder)",
       "Bash(echo \"TSC EXIT: $?\")",
       "Bash(curl -s -o /dev/null -w \"publish-store API: HTTP %{http_code}\\\\n\" --max-time 30 -X POST -H \"Content-Type: application/json\" -d '{}' http://localhost:3000/api/shopify/publish-store)",
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(perl -pi -e 's/background: \"#a07840\", color: \"#23221f\"/background: \"#a07840\", color: \"#fdfbf6\"/g' components/dashboard/TrendingAdsWidget.tsx components/dashboard/RevenueChart.tsx)"
     ]
   }
 }

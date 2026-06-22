@@ -131,7 +131,7 @@ export function Sidebar() {
               style={{
                 fontSize: 10,
                 fontWeight: 600,
-                color: "#8f8b80",
+                color: "#6e6a60",
                 textTransform: "uppercase",
                 letterSpacing: "0.8px",
               }}
@@ -255,7 +255,7 @@ export function Sidebar() {
               </p>
               <div
                 className="mt-1.5 rounded-full overflow-hidden"
-                style={{ height: 3, background: "#e4e1d8" }}
+                style={{ height: 6, background: "#d6cfc0" }}
               >
                 <div
                   className="h-full rounded-full transition-all"
@@ -278,13 +278,13 @@ export function Sidebar() {
         <button
           onClick={handleSignOut}
           className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg transition-colors text-[12px] font-medium"
-          style={{ color: "#73716a" }}
+          style={{ color: "#5d5b54" }}
           onMouseEnter={(e) => {
             e.currentTarget.style.color = "#d4685f";
             e.currentTarget.style.background = "rgba(212,104,95,0.07)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = "#73716a";
+            e.currentTarget.style.color = "#5d5b54";
             e.currentTarget.style.background = "transparent";
           }}
         >
