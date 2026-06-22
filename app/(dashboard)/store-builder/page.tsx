@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FocusEvent, type ReactNode } from "react";
+import { useState, useEffect, type FocusEvent, type ReactNode } from "react";
 import { Search, Zap, Check, ChevronRight, Copy, Download, Loader2, AlertCircle, Store } from "lucide-react";
 import { toast } from "sonner";
 import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
@@ -161,6 +161,14 @@ export default function StoreBuilderPage() {
   const [error, setError] = useState("");
   const [pushing, setPushing] = useState(false);
   const [publishingStore, setPublishingStore] = useState(false);
+
+  // Pre-fill the product link when arriving from the landing CTA / signup
+  // (e.g. /store-builder?url=…), so a new user's first store builds from the
+  // product they pasted on the marketing page.
+  useEffect(() => {
+    const u = new URLSearchParams(window.location.search).get("url");
+    if (u) setProductInput(u);
+  }, []);
 
   // Publishes the whole store: creates the product AND writes the generated
   // homepage into the connected Shopify store's live theme.
