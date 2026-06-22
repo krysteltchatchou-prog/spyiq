@@ -69,9 +69,18 @@ main prompt again. Everything important lives in PROGRESS.md, so clearing costs 
 
 ## 🎯 Right Now
 
-- **Currently on step:** All build steps complete (1–20 + 12.5 ✅). Active workstream (Session #7) = **premium quality/design pass across the product.** Landing page is done & verified. Next: apply the same motion + polish bar to the dashboard, AI Store Builder editor, Store Spy / Ad Intelligence, and auth pages. Prior workstream (full-store theme publishing) is built/typecheck-clean but still **NOT live-verified** (needs theme-scope Shopify connection).
-- **Next concrete task:** **Live-verify full-store publish.** The user must first grant **theme** access to Shopify — easiest path built this session: **custom-app token connect** (Settings → Integrations → "Connect with Admin API token"). Their existing OAuth connection only has `write_products`, so `POST /api/shopify/publish-store` returns `needsReconnect` (403) until they reconnect with `read_themes,write_themes`. Once connected: generate → Export → "🚀 Publish store" → confirm the live storefront homepage becomes the design. Then handle edge cases (vintage/non-OS2.0 themes won't pick up `templates/index.json`).
-- **Blocked by / waiting on:** User to create a store custom app (scopes incl. `write_themes`) and paste the `shpat_…` token into Settings, OR re-do OAuth after adding theme scopes to the Partner app (Partner app config screen is a locked version snapshot — couldn't edit scopes there, which is why the token path was built). Recommend the user **duplicate their theme** before publishing (the takeover overwrites `templates/index.json`).
+- **Currently on step:** All build steps complete (1–20 + 12.5 ✅). Session #7 = **full premium design pass + light-theme migration**, now essentially done:
+  - ✅ Landing page rebuilt premium (live store-build demo, before/after, motion) — **light**
+  - ✅ Auth flow (signup/login/forgot) rebuilt on a split-screen shell — **light** + product-URL funnel continuity
+  - ✅ Funnel wired: landing CTA → signup (carries url) → `/store-builder?url=` pre-fills the product
+  - ✅ App polish: wider sidebar (210→240px), card hover utilities (`.sq-row`/`.sq-tile`)
+  - ✅ **Whole app + public pages relit to LIGHT** (dashboard, all feature pages/components, public resources/solutions/privacy/terms, PublicHeader). White cards on warm `#f4f2ec` base, darker greige chrome `#e7e2d7`, gold accent, white text on gold. Verified live across all loadable pages; `tsc` clean.
+- **Next concrete tasks (pick up here):**
+  1. **Fix the pre-existing `/products/[id]` crash** — `use(params)` at `app/(dashboard)/products/[id]/page.tsx:15` throws "unsupported type passed to use()" (params is a plain object here, not a Promise). NOT a theme bug. Likely fix: drop `use()` and read `params` directly (and adjust the `Props` type), or make it an async server component. Verify with a real product id from `MOCK_PRODUCTS`.
+  2. **Live-verify `/store-spy/[domain]`** in the light theme — skipped this session because it runs a paid Claude scan; colors are flipped + tsc-clean but not eyeballed.
+  3. **(Carried) Live-verify full-store Shopify publish** — still needs a theme-scoped connection (custom-app `shpat_…` token via Settings → Integrations, scopes incl. `write_themes`; OAuth conn is `write_products`-only → `publish-store` returns 403 `needsReconnect`). Duplicate the theme before publishing (takeover overwrites `templates/index.json`).
+- **Open question for user:** cards are currently **white** on the light base (landing pattern). User hasn't objected after seeing the dashboard, so treating "white cards" as accepted. If they want darker panels instead, it's a follow-up sweep.
+- **Housekeeping:** test account `spyiq.polish.test@gmail.com` left in Supabase Auth (harmless; delete from dashboard when convenient).
 
 ---
 
