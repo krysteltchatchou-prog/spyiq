@@ -98,7 +98,9 @@ main prompt again. Everything important lives in PROGRESS.md, so clearing costs 
 - **Funnel continuity:** the landing "Build my store" URL input routes to `/signup?url=…`; signup now shows a "Ready to build from <url>" chip, stores it in signUp metadata (`pending_product_url`), and Google OAuth `next` deep-links to `/store-builder?url=…` when a URL is present.
 
 **🟡 Not done / next quality passes (same premium bar, not yet applied):**
-- Dashboard shell + widgets, AI Store Builder visual editor, Store Spy / Ad Intelligence — all functional but still at the old DARK polish level. **Open decision:** the public funnel (landing + auth) is now light; the logged-in app is still dark. Either keep the split (marketing light / app dark) or relight the app — confirm with user before the dashboard pass. Note: `pending_product_url` is captured at signup but the dashboard/store-builder doesn't yet auto-consume it — wire that during the dashboard pass.
+- **Theme decision MADE:** keep the split — marketing/auth light, **logged-in app stays dark** (user chose "keep app dark"). Recorded.
+- **App polish review (logged in via throwaway `spyiq.polish.test@gmail.com` — Supabase project is awake, signup autoconfirms):** the dashboard, AI Store Builder, sidebar/topbar are **already well-built and on-spec** in dark — KPI cards w/ accent bars + deltas, revenue chart renders, store-builder wizard clean. They do NOT need the rescue the landing did. Future polish here is incremental, not a rebuild.
+- **Funnel completed:** `/store-builder?url=…` now pre-fills the product input on load (verified live — input populated, "Next" active). OAuth signup deep-links here with the url. **Remaining bit:** email-signup path lands on `/dashboard` after confirm and doesn't yet consume `pending_product_url` from user metadata — wire dashboard→store-builder handoff later. Test account `spyiq.polish.test@gmail.com` left in Supabase Auth (harmless).
 
 **⚠️ Remember / decisions made:**
 - User asked me to **stop asking permission / stop delegating tasks back to them** and work as a senior who makes judgment calls and shows working results. Saved to memory.
