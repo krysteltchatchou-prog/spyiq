@@ -70,8 +70,7 @@ export default function SavedPage() {
         ) : (
           <div className="space-y-3">
             {SAVED_PRODUCTS.map((p) => (
-              <div key={p.id} className="flex items-center gap-4 p-4 rounded-2xl"
-                style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+              <div key={p.id} className="flex items-center gap-4 p-4 rounded-2xl sq-row">
                 <span className="text-3xl">{p.emoji}</span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
@@ -131,8 +130,7 @@ export default function SavedPage() {
       {activeTab === "Saved Stores" && (
         <div className="space-y-3">
           {SAVED_STORES.map((s) => (
-            <div key={s.domain} className="flex items-center gap-4 p-4 rounded-2xl"
-              style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+            <div key={s.domain} className="flex items-center gap-4 p-4 rounded-2xl sq-row">
               <span className="text-3xl">{s.emoji}</span>
               <div className="flex-1">
                 <p className="text-sm font-semibold" style={{ color: "#f5f3ee" }}>{s.name}</p>
@@ -163,8 +161,7 @@ export default function SavedPage() {
       {activeTab === "Saved Ads" && (
         <div className="space-y-3">
           {SAVED_ADS.map((ad) => (
-            <div key={ad.id} className="flex items-start gap-4 p-4 rounded-2xl"
-              style={{ background: "#15151a", border: "1px solid #2a2a33" }}>
+            <div key={ad.id} className="flex items-start gap-4 p-4 rounded-2xl sq-row">
               <span className="text-3xl">{ad.emoji}</span>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-1">

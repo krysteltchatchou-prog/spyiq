@@ -63,7 +63,7 @@ export function Topbar() {
     <header
       className="fixed top-0 right-0 z-30 flex items-center justify-between"
       style={{
-        left: 210,
+        left: 240,
         height: 58,
         padding: "0 28px",
         background: "#0c0c0e",

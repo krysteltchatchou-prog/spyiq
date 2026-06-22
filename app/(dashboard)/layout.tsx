@@ -21,7 +21,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
       {/* Page content */}
       <main
-        className="md:ml-[210px]"
+        className="md:ml-[240px]"
         style={{ paddingTop: 58, minHeight: "100vh" }}
       >
         {/* 28px gutter, max 1400px, extra bottom pad on mobile for tab bar */}

@@ -167,10 +167,7 @@ export default function AdSpyPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {filtered.map((ad) => (
             <div key={ad.id}
-              className="rounded-2xl p-5 cursor-pointer transition-all"
-              style={{ background: "#15151a", border: "1px solid #2a2a33" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3a3a42")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a2a33")}
+              className="rounded-2xl p-5 cursor-pointer sq-tile"
               onClick={() => setDrawer(ad)}>
 
               {/* Card header */}

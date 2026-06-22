@@ -102,7 +102,7 @@ export function Sidebar() {
   return (
     <aside
       className="fixed left-0 top-0 bottom-0 z-40 flex flex-col select-none"
-      style={{ width: 210, background: "#0c0c0e", borderRight: "1px solid #2a2a33" }}
+      style={{ width: 240, background: "#0c0c0e", borderRight: "1px solid #2a2a33" }}
     >
       {/* ── Logo ──────────────────────────────────────────────────────────── */}
       <div

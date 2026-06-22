@@ -112,10 +112,7 @@ export default function StoreSpyPage() {
           {FEATURED_STORES.map((s) => (
             <button key={s.domain}
               onClick={() => handleAnalyze(s.domain)}
-              className="text-left p-4 rounded-2xl transition-all"
-              style={{ background: "#15151a", border: "1px solid #2a2a33" }}
-              onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#3a3a42")}
-              onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#2a2a33")}>
+              className="text-left p-4 rounded-2xl sq-tile">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-2xl">{s.emoji}</span>
                 <div>
