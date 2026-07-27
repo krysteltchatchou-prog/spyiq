@@ -103,7 +103,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="max-w-[780px]">
+    <div className="max-w-[780px] mx-auto">
       <div className="mb-6">
         <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>Settings</h1>
         <p className="text-sm" style={{ color: "#4d4b44" }}>Manage your account, billing, and preferences.</p>
@@ -180,7 +180,7 @@ export default function SettingsPage() {
 
           <button onClick={handleSave}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
-            style={{ background: saved ? "#3e8f72" : "#a07840", color: "#23221f" }}>
+            style={{ background: saved ? "#3e8f72" : "#a07840", color: "#fdfbf6" }}>
             <Save size={14} /> {saved ? "Saved!" : "Save Changes"}
           </button>
         </div>
@@ -211,7 +211,7 @@ export default function SettingsPage() {
                 { name: "Agency",  price: "$199/mo", features: ["Everything unlimited", "5 team seats", "API access", "White-label"] },
               ].map((plan) => (
                 <div key={plan.name}
-                  className="rounded-xl p-4 relative"
+                  className="rounded-xl p-4 relative flex flex-col"
                   style={{
                     background: plan.popular ? "rgba(160,120,64,0.08)" : "#f3f1ea",
                     border: `1px solid ${plan.popular ? "#a07840" : "#e4e1d8"}`,
@@ -226,7 +226,7 @@ export default function SettingsPage() {
                   )}
                   <p className="font-bold text-sm mb-0.5" style={{ color: "#23221f" }}>{plan.name}</p>
                   <p className="text-lg font-bold mb-3" style={{ color: "#a07840" }}>{plan.price}</p>
-                  <ul className="space-y-1 mb-4">
+                  <ul className="space-y-1 mb-4 flex-1">
                     {plan.features.map((f) => (
                       <li key={f} className="text-xs" style={{ color: "#4d4b44" }}>✓ {f}</li>
                     ))}
@@ -303,7 +303,7 @@ export default function SettingsPage() {
                   </div>
                 </div>
                 <button
-                  onClick={() => setShopInput("")}
+                  onClick={() => { if (shopify.shop) window.location.href = `/api/shopify/install?shop=${encodeURIComponent(shopify.shop)}`; }}
                   className="text-xs font-semibold hover:text-[#8a6530] transition-colors"
                   style={{ color: "#a07840" }}>
                   Reconnect
@@ -335,7 +335,7 @@ export default function SettingsPage() {
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
                   style={{
                     background: shopInput.trim() ? "#a07840" : "#e4e1d8",
-                    color:      shopInput.trim() ? "#23221f" : "#5d5b54",
+                    color:      shopInput.trim() ? "#fdfbf6" : "#5d5b54",
                     cursor:     shopInput.trim() ? "pointer" : "not-allowed",
                   }}>
                   <Store size={14} /> Connect
@@ -379,7 +379,7 @@ export default function SettingsPage() {
                     className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
                     style={{
                       background: tokenShop.trim() && tokenValue.trim() ? "#a07840" : "#e4e1d8",
-                      color:      tokenShop.trim() && tokenValue.trim() ? "#23221f" : "#5d5b54",
+                      color:      tokenShop.trim() && tokenValue.trim() ? "#fdfbf6" : "#5d5b54",
                       cursor:     tokenShop.trim() && tokenValue.trim() && !tokenConnecting ? "pointer" : "not-allowed",
                     }}>
                     {tokenConnecting ? <Loader2 size={14} className="animate-spin" /> : <Store size={14} />}
@@ -416,14 +416,14 @@ export default function SettingsPage() {
                 <div className="w-10 h-5 rounded-full cursor-pointer relative"
                   style={{ background: pref.on ? "#a07840" : "#d4cfc2" }}>
                   <div className="w-4 h-4 rounded-full absolute top-0.5 transition-all"
-                    style={{ left: pref.on ? "calc(100% - 18px)" : 2, background: "#23221f" }} />
+                    style={{ left: pref.on ? "calc(100% - 18px)" : 2, background: pref.on ? "#fdfbf6" : "#ffffff" }} />
                 </div>
               </div>
             ))}
           </div>
           <button onClick={handleSave}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all mt-5"
-            style={{ background: saved ? "#3e8f72" : "#a07840", color: "#23221f" }}>
+            style={{ background: saved ? "#3e8f72" : "#a07840", color: "#fdfbf6" }}>
             <Save size={14} /> {saved ? "Saved!" : "Save Preferences"}
           </button>
         </div>

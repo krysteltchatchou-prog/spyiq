@@ -7,6 +7,7 @@ import Reveal from "@/components/landing/Reveal";
 import StoreBuilderDemo from "@/components/landing/StoreBuilderDemo";
 import BeforeAfter from "@/components/landing/BeforeAfter";
 import FaqAccordion from "@/components/landing/FaqAccordion";
+import ScrollToTop from "@/components/landing/ScrollToTop";
 
 const FEATURES = [
   { emoji: "⚡", title: "AI Store Generation", desc: "Paste any product link and get a complete, branded store — homepage, product page, and theme — generated in under a minute." },
@@ -571,7 +572,12 @@ export default function LandingPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-8 md:gap-6">
             <div className="col-span-2">
-              <Image src="/SpyIQ_Logo.png" alt="SpyIQ" width={135} height={46} style={{ height: "auto" }} />
+              {/* Logo source is a 1:1 square with padding; crop to a compact
+                  wordmark so its top sits on the same line as the column headings. */}
+              <div className="overflow-hidden" style={{ height: 44, width: 135 }}>
+                <Image src="/SpyIQ_Logo.png" alt="SpyIQ" width={135} height={135}
+                  style={{ width: 135, height: 135, marginTop: -46, display: "block" }} />
+              </div>
               <p className="text-sm mt-4 max-w-[260px] leading-relaxed" style={{ color: "#4d4b44" }}>
                 SpyIQ turns any product link into a store that sells — and shows you exactly what&apos;s working in your market.
               </p>
@@ -593,8 +599,9 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <div className="mt-12 pt-8 flex flex-col items-center gap-4"
+          <div className="mt-12 pt-8 flex flex-col items-center gap-5 text-center md:flex-row md:justify-center md:gap-8"
             style={{ borderTop: "1px solid #d8d3c7" }}>
+            <p className="text-xs" style={{ color: "#73716a" }}>© 2026 SpyIQ. All rights reserved.</p>
             <div className="flex items-center gap-3">
               <a href="#" aria-label="SpyIQ on Instagram"
                 className="w-9 h-9 rounded-lg flex items-center justify-center bg-[#ffffff] border border-[#e4e1d8] text-[#4d4b44] transition-colors hover:text-[#8a6530] hover:border-[#d4cfc2]">
@@ -605,11 +612,12 @@ export default function LandingPage() {
                 <TikTokIcon />
               </a>
             </div>
-            <p className="text-xs" style={{ color: "#73716a" }}>© 2026 SpyIQ. All rights reserved.</p>
             <FooterLangSwitcher />
           </div>
         </div>
       </footer>
+
+      <ScrollToTop />
     </div>
   );
 }

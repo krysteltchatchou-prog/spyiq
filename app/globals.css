@@ -58,14 +58,14 @@
   }
 
   html {
-    background-color: #0c0c0e;
-    color: #f5f3ee;
+    background-color: #f4f2ec;
+    color: #23221f;
     scroll-behavior: smooth;
   }
 
   body {
-    background-color: #0c0c0e;
-    color: #f5f3ee;
+    background-color: #f4f2ec;
+    color: #23221f;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 14px;
     line-height: 1.6;
@@ -73,9 +73,9 @@
   }
 
   ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #15151a; }
-  ::-webkit-scrollbar-thumb { background: #2a2a33; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #8b8da0; }
+  ::-webkit-scrollbar-track { background: #e7e2d7; }
+  ::-webkit-scrollbar-thumb { background: #d4cfc2; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #a07840; }
 }
 
 @layer utilities {
@@ -211,23 +211,23 @@
    inline background/border so these own the base + :hover state.
    ────────────────────────────────────────────── */
 .sq-row {
-  background: #15151a;
-  border: 1px solid #2a2a33;
+  background: #ffffff;
+  border: 1px solid #e4e1d8;
   transition: border-color 0.18s ease, background-color 0.18s ease;
 }
 .sq-row:hover {
-  border-color: #3a3a42;
-  background: #17171d;
+  border-color: #d4cfc2;
+  background: #faf8f3;
 }
 .sq-tile {
-  background: #15151a;
-  border: 1px solid #2a2a33;
+  background: #ffffff;
+  border: 1px solid #e4e1d8;
   transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
 .sq-tile:hover {
   border-color: rgba(160, 120, 64, 0.55);
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px -22px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 16px 36px -22px rgba(120, 100, 70, 0.22);
 }
 @media (prefers-reduced-motion: reduce) {
   .sq-tile:hover { transform: none; }

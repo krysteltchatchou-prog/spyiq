@@ -24,7 +24,7 @@ export default function ComingSoon({
         <div className="flex items-center gap-3 flex-wrap justify-center">
           <Link href="/signup"
             className="px-6 py-3 rounded-xl text-sm font-bold transition-all"
-            style={{ background: "#a07840", color: "#23221f" }}>
+            style={{ background: "#a07840", color: "#fdfbf6" }}>
             ⚡ Start for Free
           </Link>
           <Link href="/"

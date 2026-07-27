@@ -55,7 +55,9 @@ export async function POST(req: Request) {
     // 1) Create the product so the store has something to sell.
     let productUrl: string | null = null;
     try {
-      const product = await createProduct(conn.shop_domain, conn.access_token, store);
+      // Full-store publish goes live, so the product should be active (visible)
+      // — unlike the standalone "push product" path, which stays a draft.
+      const product = await createProduct(conn.shop_domain, conn.access_token, store, { status: "active" });
       productUrl = product.adminUrl;
     } catch (e) {
       console.error("[publish-store] product create failed:", e);

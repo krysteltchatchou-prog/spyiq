@@ -344,7 +344,7 @@ export default function StoreBuilderPage() {
   }
 
   return (
-    <div className={step === 4 ? "max-w-[1200px]" : "max-w-[900px]"}>
+    <div className={step === 4 ? "max-w-[1200px] mx-auto" : "max-w-[900px] mx-auto"}>
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>AI Store Builder</h1>
@@ -390,7 +390,7 @@ export default function StoreBuilderPage() {
           {([1, 2] as const).map((s) => (
             <div key={s} className="flex items-center gap-2">
               <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
-                style={{ background: step >= s ? "#a07840" : "#e4e1d8", color: step >= s ? "#23221f" : "#5d5b54" }}>
+                style={{ background: step >= s ? "#a07840" : "#e4e1d8", color: step >= s ? "#fdfbf6" : "#5d5b54" }}>
                 {s}
               </div>
               <span className="text-xs font-medium" style={{ color: step === s ? "#23221f" : "#5d5b54" }}>
@@ -459,7 +459,7 @@ export default function StoreBuilderPage() {
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all"
               style={{
                 background: productInput.trim() ? "#a07840" : "#e4e1d8",
-                color:      productInput.trim() ? "#23221f" : "#5d5b54",
+                color:      productInput.trim() ? "#fdfbf6" : "#5d5b54",
                 cursor:     productInput.trim() ? "pointer" : "not-allowed",
               }}>
               Next: Choose Style <ChevronRight size={14} />

@@ -40,6 +40,56 @@ function TypingIndicator() {
   );
 }
 
+// Lightweight markdown → HTML for chat answers.
+// Supports ## / ### headings, --- separators, bullet & numbered lists,
+// **bold** (key terms only) and `code`. Designed so distinct sections of an
+// answer are visually separated and bold no longer drowns everything out.
+function mdToHtml(src: string): string {
+  const esc = (s: string) =>
+    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const inline = (s: string) =>
+    esc(s)
+      .replace(/\*\*(.+?)\*\*/g, "<strong style='font-weight:700;color:#23221f'>$1</strong>")
+      .replace(/\*([^*\n]+?)\*/g, "<em>$1</em>")
+      .replace(/`(.+?)`/g, "<code style='background:#e9e5dc;padding:1px 5px;border-radius:4px;font-size:12px'>$1</code>");
+
+  const lines = src.split("\n");
+  let html = "";
+  let inList = false;
+  const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
+
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (/^###\s+/.test(line)) {
+      closeList();
+      html += `<div style='font-weight:700;font-size:13px;color:#23221f;margin:14px 0 4px'>${inline(line.replace(/^###\s+/, ""))}</div>`;
+    } else if (/^##\s+/.test(line)) {
+      closeList();
+      html += `<div style='font-weight:700;font-size:14px;color:#8a6530;margin:16px 0 6px'>${inline(line.replace(/^##\s+/, ""))}</div>`;
+    } else if (/^#\s+/.test(line)) {
+      closeList();
+      html += `<div style='font-weight:700;font-size:15px;color:#23221f;margin:16px 0 6px'>${inline(line.replace(/^#\s+/, ""))}</div>`;
+    } else if (/^(---|___|\*\*\*)$/.test(line)) {
+      closeList();
+      html += "<hr style='border:none;border-top:1px solid #e4e1d8;margin:14px 0'/>";
+    } else if (/^[-*]\s+/.test(line)) {
+      if (!inList) { html += "<ul style='margin:4px 0;padding-left:18px;list-style:disc'>"; inList = true; }
+      html += `<li style='margin:3px 0'>${inline(line.replace(/^[-*]\s+/, ""))}</li>`;
+    } else if (/^\d+\.\s+/.test(line)) {
+      closeList();
+      html += `<div style='margin:3px 0 3px 4px'>${inline(line)}</div>`;
+    } else if (line === "") {
+      closeList();
+      html += "<div style='height:8px'></div>";
+    } else {
+      closeList();
+      html += `<p style='margin:4px 0'>${inline(line)}</p>`;
+    }
+  }
+  closeList();
+  return html;
+}
+
 function MessageBubble({ msg }: { msg: Message }) {
   const isUser = msg.role === "user";
   return (
@@ -53,18 +103,11 @@ function MessageBubble({ msg }: { msg: Message }) {
       <div className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed`}
         style={{
           background: isUser ? "#a07840" : "#f3f1ea",
-          color: isUser ? "#23221f" : "#23221f",
+          color: isUser ? "#fdfbf6" : "#23221f",
           borderRadius: isUser ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
           border: isUser ? "none" : "1px solid #e4e1d8",
         }}>
-        {/* Simple markdown: bold, bullets */}
-        <div dangerouslySetInnerHTML={{
-          __html: msg.content
-            .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-            .replace(/\*\*(.*?)\*\*/g, "<strong style='color:#23221f'>$1</strong>")
-            .replace(/^- (.+)$/gm, "<li style='margin-left:12px;list-style-type:disc'>$1</li>")
-            .replace(/\n/g, "<br/>")
-        }} />
+        <div dangerouslySetInnerHTML={{ __html: mdToHtml(msg.content) }} />
       </div>
     </div>
   );
@@ -103,7 +146,15 @@ export default function AIAnalyzerPage() {
         }),
       });
 
-      if (!res.ok) throw new Error("API error");
+      if (!res.ok) {
+        let serverMsg = "Sorry, I ran into an error. Please try again.";
+        try { const j = await res.json(); if (j?.error) serverMsg = j.error; } catch {}
+        setMessages([...newMessages, { role: "assistant", content: serverMsg }]);
+        toast.error(serverMsg);
+        setStreamingText("");
+        setLoading(false);
+        return;
+      }
       const reader = res.body!.getReader();
       const decoder = new TextDecoder();
       let accumulated = "";
@@ -240,7 +291,7 @@ export default function AIAnalyzerPage() {
               className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all"
               style={{
                 background: input.trim() && !loading ? "#a07840" : "#e4e1d8",
-                color:      input.trim() && !loading ? "#23221f" : "#5d5b54",
+                color:      input.trim() && !loading ? "#fdfbf6" : "#5d5b54",
               }}>
               {loading ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
             </button>

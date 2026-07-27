@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Search, Download, TrendingUp, TrendingDown, Minus, Plus, Loader2 } from "lucide-react";
 import { SparklineChart } from "@/components/charts/SparklineChart";
+import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
 
 type Competition = "low" | "medium" | "high";
 type Trend = "up" | "down" | "stable";
@@ -108,7 +109,7 @@ export default function KeywordResearchPage() {
   const canSearch = !!inputValue.trim() && !loading;
 
   return (
-    <div className="max-w-[1100px]">
+    <div className="max-w-[1100px] mx-auto">
       {/* Header */}
       <div className="mb-6">
         <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>Keyword Research</h1>
@@ -138,7 +139,7 @@ export default function KeywordResearchPage() {
             className="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold transition-all"
             style={{
               background: canSearch ? "#a07840" : "#e4e1d8",
-              color:      canSearch ? "#23221f" : "#5d5b54",
+              color:      canSearch ? "#fdfbf6" : "#5d5b54",
               cursor:     canSearch ? "pointer" : "not-allowed",
             }}>
             {loading ? <Loader2 size={15} className="animate-spin" /> : <Search size={15} />}
@@ -183,6 +184,7 @@ export default function KeywordResearchPage() {
         </div>
       ) : (
         <div className="space-y-6" style={{ opacity: loading ? 0.5 : 1, transition: "opacity 0.2s" }}>
+          <AiEstimateBadge variant="banner" />
           {/* Main keyword stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[

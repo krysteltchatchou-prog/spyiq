@@ -35,7 +35,7 @@ export default function SavedPage() {
   const [editingNote, setEditingNote] = useState<string | null>(null);
 
   return (
-    <div className="max-w-[1000px]">
+    <div className="max-w-[1000px] mx-auto">
       <div className="mb-6">
         <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>Saved Items</h1>
         <p className="text-sm" style={{ color: "#4d4b44" }}>Your bookmarked products, stores, ads, and keywords.</p>

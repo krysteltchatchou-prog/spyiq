@@ -6,6 +6,7 @@ import { InsightsFeed }        from "@/components/dashboard/InsightsFeed";
 import { StoreBuilderWidget }  from "@/components/dashboard/StoreBuilderWidget";
 import { TrendingAdsWidget }   from "@/components/dashboard/TrendingAdsWidget";
 import { TopAppsWidget }       from "@/components/dashboard/TopAppsWidget";
+import { AiEstimateBadge }      from "@/components/ui/AiEstimateBadge";
 import { getBoardProducts }    from "@/lib/board-data";
 
 export const dynamic = "force-dynamic";
@@ -25,6 +26,7 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <StatsGrid />
+      <AiEstimateBadge variant="banner" />
       <RevenueChart />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <HotProductsCard products={hotProducts} />

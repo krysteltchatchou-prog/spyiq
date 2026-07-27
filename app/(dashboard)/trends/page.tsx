@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Bell } from "lucide-react";
 import { SparklineChart } from "@/components/charts/SparklineChart";
+import { AiEstimateBadge } from "@/components/ui/AiEstimateBadge";
 
 const CATEGORIES = ["All", "Fashion", "Electronics", "Home", "Beauty", "Fitness", "Pets", "Seasonal"] as const;
 type Category = typeof CATEGORIES[number];
@@ -68,8 +69,10 @@ export default function TrendsPage() {
             LIVE
           </span>
         </div>
-        <p className="text-sm" style={{ color: "#4d4b44" }}>Real-time niche momentum. Set alerts to catch the next spike before everyone else.</p>
+        <p className="text-sm" style={{ color: "#4d4b44" }}>Niche momentum at a glance. Set alerts to catch the next spike before everyone else.</p>
       </div>
+
+      <AiEstimateBadge variant="banner" className="mb-6" />
 
       {/* Filter bar */}
       <div className="sticky top-[58px] z-20 -mx-7 px-7 py-3 mb-6"

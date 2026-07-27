@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { cacheGet, cacheSet } from "@/lib/redis";
+import { extractProductImages } from "@/lib/extractProductImages";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -131,6 +132,25 @@ Return ONLY valid JSON (no markdown, no code fences):
         const lastBrace = jsonText.lastIndexOf("}");
         if (firstBrace !== -1 && lastBrace !== -1) jsonText = jsonText.slice(firstBrace, lastBrace + 1);
         const parsed = JSON.parse(jsonText);
+
+        // Auto-import the real product photos when the input was a product URL,
+        // so the generated store (and Shopify publish) carries images, not just
+        // copy. Best-effort: if extraction finds nothing, the user can still
+        // upload images manually in the editor.
+        try {
+          const images = await extractProductImages(String(product ?? ""));
+          if (images.length) {
+            parsed.product_page = parsed.product_page ?? {};
+            if (!Array.isArray(parsed.product_page.images) || parsed.product_page.images.length === 0) {
+              parsed.product_page.images = images;
+            }
+            parsed.home_page = parsed.home_page ?? {};
+            if (!parsed.home_page.hero_image) parsed.home_page.hero_image = images[0];
+          }
+        } catch {
+          /* image import is best-effort — never block store generation */
+        }
+
         await cacheSet(cacheKey, parsed, STORE_CACHE_TTL);
         sendResult(parsed);
       } catch (err) {

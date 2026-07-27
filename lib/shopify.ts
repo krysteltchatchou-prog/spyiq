@@ -89,15 +89,19 @@ interface StoreForProduct {
   };
 }
 
-// Turns the builder's uploaded data-URL images into Shopify image payloads.
-// Shopify accepts base64 image data via the `attachment` field (no data: prefix).
-function buildImages(store: StoreForProduct): { attachment: string }[] {
+// Turns the builder's images into Shopify image payloads. Handles both
+// uploaded data-URLs (sent as base64 via `attachment`) and ordinary image
+// URLs (sent via `src` for Shopify to fetch). Anything else is skipped.
+type ShopifyImage = { attachment: string } | { src: string };
+function buildImages(store: StoreForProduct): ShopifyImage[] {
   return (store.product_page?.images ?? [])
-    .map((src) => {
+    .map((src): ShopifyImage | null => {
       const m = /^data:image\/[^;]+;base64,(.+)$/.exec(src);
-      return m ? { attachment: m[1] } : null;
+      if (m) return { attachment: m[1] };
+      if (/^https?:\/\//i.test(src)) return { src };
+      return null;
     })
-    .filter((x): x is { attachment: string } => x !== null);
+    .filter((x): x is ShopifyImage => x !== null);
 }
 
 function escapeHtml(s: string): string {
@@ -128,7 +132,8 @@ function buildBodyHtml(store: StoreForProduct): string {
 export async function createProduct(
   shop: string,
   accessToken: string,
-  store: StoreForProduct
+  store: StoreForProduct,
+  opts: { status?: "draft" | "active" } = {}
 ): Promise<{ id: number; adminUrl: string }> {
   const title =
     store.product_page?.headline ||
@@ -150,7 +155,7 @@ export async function createProduct(
       title,
       body_html: buildBodyHtml(store),
       vendor: store.brand?.store_name || "SpyIQ",
-      status: "draft" as const,
+      status: opts.status ?? "draft",
       variants: [variant],
       ...(images.length > 0 ? { images } : {}),
     },

@@ -48,7 +48,7 @@ export default function AlertsPage() {
   }
 
   return (
-    <div className="max-w-[820px]">
+    <div className="max-w-[820px] mx-auto">
       <div className="flex items-center justify-between mb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">

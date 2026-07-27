@@ -63,7 +63,17 @@
       "Bash(perl -pi -e 's/background: \"#a07840\", color: \"#23221f\"/background: \"#a07840\", color: \"#fdfbf6\"/g' components/dashboard/TrendingAdsWidget.tsx components/dashboard/RevenueChart.tsx)",
       "Bash(perl -pi -e 's/hover:shadow-\\\\[0_4px_24px_rgba\\\\\\(0,0,0,0\\\\.5\\\\\\)\\\\]/hover:shadow-[0_8px_28px_rgba\\(60,50,30,0.16\\)]/g; s/background: \"rgba\\\\\\(12,12,14,0\\\\.8\\\\\\)\"/background: \"rgba\\(255,255,255,0.92\\)\"/g' components/products/ProductCard.tsx)",
       "Bash(perl -pi -e 's/#1a1a20/#efece4/g' components/products/ProductTable.tsx)",
-      "Bash(perl -pi -e 's/background: \"rgba\\\\\\(12,12,14,0\\\\.7\\\\\\)\", color: \"#23221f\"/background: \"rgba\\(12,12,14,0.7\\)\", color: \"#fdfbf6\"/g' components/viral/VideoBoard.tsx)"
+      "Bash(perl -pi -e 's/background: \"rgba\\\\\\(12,12,14,0\\\\.7\\\\\\)\", color: \"#23221f\"/background: \"rgba\\(12,12,14,0.7\\)\", color: \"#fdfbf6\"/g' components/viral/VideoBoard.tsx)",
+      "Bash(node -e \"const fs=require\\('fs'\\);const b=fs.readFileSync\\('public/SpyIQ_Logo.png'\\);const w=b.readUInt32BE\\(16\\),h=b.readUInt32BE\\(20\\);console.log\\('PNG natural size:',w+'x'+h,'aspect\\(w/h\\):',\\(w/h\\).toFixed\\(2\\)\\)\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(node -e ' *)",
+      "Bash(cd /Users/krystel/Documents/spyiq; npx tsc --noEmit > /tmp/tsc4.txt 2>&1; echo \"exit: $?\"; head -20 /tmp/tsc4.txt)",
+      "Bash(curl -s -N -X POST http://localhost:3000/api/ai/store-builder -H 'Content-Type: application/json' -d '{\"product\":\"https://www.allbirds.com/products/womens-tree-dasher-relay-natural-black-twilight-teal\",\"style\":\"Minimalist\",\"storeName\":\"\",\"language\":\"English\"}' --max-time 120)",
+      "Bash(echo \"curl exit: $?\")",
+      "Bash(gh auth *)",
+      "Read(//Users/krystel/**)",
+      "Bash(command -v brew)",
+      "Bash(git fetch *)"
     ]
   }
 }

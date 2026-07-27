@@ -3,19 +3,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Loader2, Clock, TrendingUp } from "lucide-react";
 
-const RECENT_SEARCHES = [
-  { domain: "gymshark.com",      niche: "Fitness",  revenue: "$12M/mo" },
-  { domain: "petsuppliesplus.com",niche: "Pets",    revenue: "$4.2M/mo" },
-  { domain: "beardbrand.com",    niche: "Grooming", revenue: "$890k/mo" },
-];
-
-const FEATURED_STORES = [
-  { domain: "gymshark.com",        emoji: "🏋️", name: "Gymshark",          niche: "Fitness",  revenue: "$12M/mo",   traffic: "8.4M/mo" },
-  { domain: "chubbiesshorts.com",  emoji: "🩳", name: "Chubbies",          niche: "Fashion",  revenue: "$3.1M/mo",  traffic: "1.2M/mo" },
-  { domain: "beardbrand.com",      emoji: "🧔", name: "Beardbrand",        niche: "Grooming", revenue: "$890k/mo",  traffic: "420k/mo" },
-  { domain: "tentree.com",         emoji: "🌳", name: "Tentree",           niche: "Eco",      revenue: "$2.4M/mo",  traffic: "980k/mo" },
-  { domain: "blendjet.com",        emoji: "🥤", name: "BlendJet",          niche: "Kitchen",  revenue: "$5.8M/mo",  traffic: "3.1M/mo" },
-  { domain: "brooklinen.com",      emoji: "🛏️", name: "Brooklinen",        niche: "Home",     revenue: "$7.2M/mo",  traffic: "2.8M/mo" },
+const EXAMPLE_STORES = [
+  { domain: "gymshark.com",        emoji: "🏋️", name: "Gymshark",          niche: "Fitness"  },
+  { domain: "chubbiesshorts.com",  emoji: "🩳", name: "Chubbies",          niche: "Fashion"  },
+  { domain: "beardbrand.com",      emoji: "🧔", name: "Beardbrand",        niche: "Grooming" },
+  { domain: "tentree.com",         emoji: "🌳", name: "Tentree",           niche: "Eco"      },
+  { domain: "blendjet.com",        emoji: "🥤", name: "BlendJet",          niche: "Kitchen"  },
+  { domain: "brooklinen.com",      emoji: "🛏️", name: "Brooklinen",        niche: "Home"     },
 ];
 
 export default function StoreSpyPage() {
@@ -32,7 +26,7 @@ export default function StoreSpyPage() {
   }
 
   return (
-    <div className="max-w-[900px]">
+    <div className="max-w-[900px] mx-auto">
       {/* Page header */}
       <div className="mb-8">
         <h1 className="font-bold mb-1" style={{ fontSize: 24, color: "#23221f", letterSpacing: "-0.4px" }}>
@@ -74,14 +68,14 @@ export default function StoreSpyPage() {
           </button>
         </div>
 
-        {/* Recent searches */}
-        {RECENT_SEARCHES.length > 0 && (
+        {/* Quick examples */}
+        {EXAMPLE_STORES.length > 0 && (
           <div className="mt-4">
             <p className="text-xs font-medium mb-2 flex items-center gap-1.5" style={{ color: "#5d5b54" }}>
-              <Clock size={11} /> Recent searches
+              <Clock size={11} /> Try an example
             </p>
             <div className="flex flex-wrap gap-2">
-              {RECENT_SEARCHES.map((r) => (
+              {EXAMPLE_STORES.slice(0, 3).map((r) => (
                 <button key={r.domain}
                   onClick={() => handleAnalyze(r.domain)}
                   className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-all"
@@ -90,7 +84,7 @@ export default function StoreSpyPage() {
                   onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#e4e1d8"; e.currentTarget.style.color = "#4d4b44"; }}>
                   {r.domain}
                   <span style={{ color: "#5d5b54" }}>·</span>
-                  <span style={{ color: "#3e8f72" }}>{r.revenue}</span>
+                  <span style={{ color: "#5d5b54" }}>{r.niche}</span>
                 </button>
               ))}
             </div>
@@ -98,42 +92,31 @@ export default function StoreSpyPage() {
         )}
       </div>
 
-      {/* Featured stores */}
+      {/* Example stores to analyze */}
       <div>
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-center gap-2 mb-1">
           <TrendingUp size={15} color="#a07840" />
-          <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>Top Performing Stores</h2>
-          <span className="rounded-full px-2 py-0.5 text-[10px] font-medium"
-            style={{ background: "rgba(94,184,154,0.12)", border: "1px solid rgba(94,184,154,0.25)", color: "#3e8f72" }}>
-            LIVE
-          </span>
+          <h2 className="font-semibold text-sm" style={{ color: "#23221f" }}>Popular stores to analyze</h2>
         </div>
+        <p className="text-xs mb-4" style={{ color: "#5d5b54" }}>
+          Pick one to run a live scan — real catalog, apps and modeled traffic & revenue estimates.
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {FEATURED_STORES.map((s) => (
+          {EXAMPLE_STORES.map((s) => (
             <button key={s.domain}
               onClick={() => handleAnalyze(s.domain)}
-              className="text-left p-4 rounded-2xl sq-tile">
-              <div className="flex items-center gap-3 mb-3">
+              className="text-left p-4 rounded-2xl sq-tile flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 min-w-0">
                 <span className="text-2xl">{s.emoji}</span>
-                <div>
-                  <p className="text-sm font-semibold" style={{ color: "#23221f" }}>{s.name}</p>
-                  <p className="text-xs" style={{ color: "#5d5b54" }}>{s.domain}</p>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold truncate" style={{ color: "#23221f" }}>{s.name}</p>
+                  <p className="text-xs truncate" style={{ color: "#5d5b54" }}>{s.domain}</p>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-bold" style={{ color: "#3e8f72" }}>{s.revenue}</p>
-                  <p className="text-xs" style={{ color: "#5d5b54" }}>revenue</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-bold" style={{ color: "#23221f" }}>{s.traffic}</p>
-                  <p className="text-xs" style={{ color: "#5d5b54" }}>visitors</p>
-                </div>
-                <span className="rounded-full px-2 py-0.5 text-[10px] font-medium"
-                  style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
-                  {s.niche}
-                </span>
-              </div>
+              <span className="rounded-full px-2 py-0.5 text-[10px] font-medium flex-shrink-0"
+                style={{ background: "#f3f1ea", border: "1px solid #e4e1d8", color: "#4d4b44" }}>
+                {s.niche}
+              </span>
             </button>
           ))}
         </div>
